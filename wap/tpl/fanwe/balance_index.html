@@ -1,0 +1,33 @@
+{include file="./inc/header.html"}
+<section class="balance_box">
+   <section class="top_yue">
+       <ul>
+           <li>当前余额<i>{$data.money}元</i><a href="{wap_url a="index" r="charge_money#index"}">充值</a></li>
+       </ul>
+   </section>
+    <section class="Detailed">
+<!--        <p>交易明细<i>清空记录</i></p>-->
+        <ul>
+            {foreach from=$data.incharge_list item=incharge}
+            <!--<li>{$incharge.create_time}   充值{$incharge.pay_amount}元<em class="dianj">删除</em> </li>-->
+            <li>{$incharge.create_time}   充值{$incharge.pay_amount}元</li>
+            {foreachelse}
+            <li>无充值记录</li>
+            {/foreach}
+        </ul>
+    </section>
+</section>
+<!--各种弹窗-->
+<!--<section class="queren" style="display:none">
+    <ul>
+        <li class="step" style="display:none">
+            <p>确定要删除本条信息吗？</p>
+            <i class="zhan">确定</i><i class="guan">取消</i>
+        </li>
+        <li class="complete" style="display:none">
+            <span>删除成功</span>
+            <p class="guan_2">确定</p>
+        </li>
+    </ul>
+</section>-->
+{include file="./inc/footer.html"} 
