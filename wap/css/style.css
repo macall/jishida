@@ -457,6 +457,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 .rich_box{background:#fff;box-sizing: border-box;overflow: hidden; margin-bottom:10px;}
 .rich_box ul > p{line-height:30px; border-bottom:1px solid #d0d0d0; padding-left:10px; font-size:16px; color:#333333; margin-bottom:15px; }
+.rich_box ul.jiner{margin: 10px 0;  padding: 10px;border-bottom: 10px solid #F1F1F1;}
+.rich_box ul.jiner li span{font-size:14px;}
+.rich_box ul.jiner li input{border:0}
 .rich_box ul.zhifu{padding: 10px}
 .rich_box ul.zhifu li a img{ width:87px;}
 .rich_box ul.zhifu li a img.addclass{border:2px solid #ff6401;width:78px;}
