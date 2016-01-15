@@ -1,0 +1,24 @@
+{include file="./inc/header.html"}
+<div class="criteria">
+   <ul class="search_criteria">
+   	     <li {if $data.status eq 0} class="this" {/if}  ref = 0 onclick = "javascript:location.href='{wap_url a="index" r="couponlist#index" p="tag=0"}'">全部</li>
+   	     <li {if $data.status eq 2} class="this" {/if}　ref = 2 onclick = "javascript:location.href='{wap_url a="index" r="couponlist#index" p="tag=2"}'">未使用</li>					   	     
+		 <li {if $data.status eq 1} class="this" {/if}　ref = 1 onclick = "javascript:location.href='{wap_url a="index" r="couponlist#index" p="tag=1"}'">即将过期</li>
+		 <li {if $data.status eq 3} class="this" {/if}　ref = 3 onclick = "javascript:location.href='{wap_url a="index" r="couponlist#index" p="tag=3"}'">已使用/失效</li>
+   </ul>
+</div>
+{foreach from=$data.item item=couponlist key=k1}
+<div class="collection">
+    <a href='javascript:location.href="{wap_url a="index" r="my_order_detail#index" p="id=$couponlist.order_id"}"'class="dl">
+        <img src="{$couponlist.qrcode}" alt="图片载入中…">
+        <ul>
+        	<li class="dl-title break-word">密码:{$couponlist.couponPw}</li>
+            <li class="dl-brand break-word" style="line-height: 30px;height: 30px;overflow:hidden;">{function name="msubstr" v=$couponlist.dealName b=0 e=17}</li>                  
+            <li class="dl-price">
+               	 过期时间：<span>{$couponlist.endTime}</span>
+            </li>
+        </ul>
+    </a>
+</div>
+{/foreach}
+{include file="./inc/footer.html"} 

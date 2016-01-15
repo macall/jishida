@@ -1,0 +1,174 @@
+{include file="./inc/header.html"} 
+<?php
+	$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/activity_details.css";
+		
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+<div class="content">
+    <div class="activity_d_block back-white">
+        <div class="goods_intro">
+            <h4>{$data.item.name}</h4>
+            <p>
+                {$data.item.brief}
+            </p>
+        </div>
+    </div>
+    {if $data.item.content}
+    <div class="activity_d_block">
+        <div class="prompt_block">
+            {$data.item.content}
+        </div>
+    </div>
+    {/if}
+    {if $data.item.event_fields}
+    <div class="activity_d_block">
+        <form name="event_submit_form">
+            {foreach from=$data.item.event_fields item=field}
+            <div class="event_submit_row">
+                <div class="tx_select" style="display:-webkit-box;display:-moz-box;display:box; width:100%;">
+                    <span style="display:inline-block;">{$field.field_show_name}</span>： 
+                    {if $field.field_type eq 0}
+                    <div style="-webkit-box-flex:1;-moz-box-flex:1;">
+                        <input type="text" size="30" name="bm[{$field.id}]" class="f-input" value="{$field.result}" />
+                    </div>
+                	{else}
+                	<select name="bm[{$field.id}]" style="border: 1px solid #d5d5d5; color:#575757;height:42px;background:#fff;">
+	                    {foreach from=$field.value_scope item=val}
+	                    {if trim($val) neq ''}
+						<option value="{$val}" {if $field.result  eq $val}selected="selected"{/if} >{$val}  </option>
+	                    {/if}
+	                    {/foreach}
+               		</select>
+               		{/if}
+            </div>
+            {/foreach}
+        </form>
+    </div>
+    {/if}
+</div>
+<div class="buttom_block">
+    <ul>
+        <li class="i_apply">
+            <div class="back-main font-main">
+                <!--input type="hidden" value="{$data.item.id}" id="event_id">
+				{if $is_login eq 1}
+				<input type="button" class="btn btn-block2 " value="我要报名" onclick="check(this);">
+				{else}
+				<input type="button" value="登陆后报名" onclick="location.href='{wap_url a="index" r="login#index"}'">
+                {/if}
+				-->
+				<input type="hidden" value="{$data.item.id}" id="event_id">
+				{if $data.item.is_submit eq 1}<!--已报名-->
+					{if $data.item.is_verify eq 0}
+						<input type="button" class="btn btn-block2 " value="修改报名" onclick="check(this);">
+					{elseif $data.item.is_verify eq 1}
+						<input type="button" class="btn btn-block2 " style="background:#757575;cursor:not-allowed;" value="已报名" disabled="disabled">
+					{else}
+						<input type="button" class="btn btn-block2 " style="background:#757575;cursor:not-allowed;" value="报名未通过" disabled="disabled">
+					{/if}
+				{else}
+					<input type="button" value="马上报名" onclick="check(this);">
+                {/if}
+            </div>
+        </li>
+        <li class="i_comment">
+            <div>
+                {if $is_login eq 1}
+					<input type="button" value="我要评论" onclick="location.href='{wap_url a="index" r="dp_list#index" p="id=$data.item.id&type=event"}'">
+				{else}
+					<input type="button" value="登陆后评论" onclick="location.href='{wap_url a="index" r="login#index"}'">
+                {/if}
+
+            </div>
+        </li>
+    </ul>
+</div> 
+{if $data.message_list}
+<div class="critical_list">
+    <ul>
+        {foreach from=$data.message_list item=comment }
+        <li>
+            <div class="pic">
+                <img src="{$comment.user_avatar}" width="64" height="64">
+            </div>
+            <div class="txt">
+                <div class="name_time">
+                    <h5>{$comment.user_name}</h5>
+                    <span>{$comment.time}</span>
+                </div>
+                <p>
+                    {$comment.content} 
+                </p>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+</div>
+{/if}
+<!--div id="light" class="white_content" style="display:none;">
+    <div id="deal-terms" class="box-style deal-terms">
+        <h2>我要点评</h2>
+        <div class="textarea">
+            <textarea name="content" id="content">
+            </textarea>
+        </div>
+        <div class="ft-account">
+            <input type="hidden" value="{$data.item.id}" id="add">
+            <button type="button" onclick ="javascript:event_dp();" class="but_go">
+               	 提交
+            </button>
+            <button class="but_black" type="button" value="取消" onclick="document.getElementById('light').style.display='none';">
+               	 取消
+            </button>
+        </div>
+    </div>
+</div-->
+</div>
+</div>
+<script type="text/javascript">
+function e_field(obj){
+	$("#event_submit_form").css("display","none");
+	$("input[type=text]").val("");
+}
+function  check(obj){	
+	var  event_id=$("#event_id").val();
+
+	var submit_rows = $(".event_submit_row");
+	for(var i=0;i<submit_rows.length;i++)
+	{
+		var row = $(submit_rows[i]);
+		if($(row).find("input").val()=='')
+		{
+			var info=$(row).find("span").html();  
+			alert("请输入你的"+info);
+			$(row).find("input").focus();
+			return false;;
+		}
+	}
+	
+	var from_name=$("form[name='event_submit_form']").serialize();
+	
+	var post_url = '{wap_url a="index" r="eventdetail&act_2=bm" p="event_id=$data.item.id&post_type=json"}';  
+
+	 $.ajax({
+		 	url:post_url,
+			dataType:"json",
+			data:from_name,
+			type:"POST",
+			success:function(data){
+				if(data.return==1){
+					alert(data.info);
+					window.location.href="{wap_url a="index" r="eventdetail#index" p="event_id=$data.item.id"}";
+				}else{
+					alert(data.info);
+				}
+			},error:function(){
+				//alert("请求服务器失败");
+			}
+		});
+	return false;
+}
+	
+          
+</script>
+{include file="./inc/footer.html"} 

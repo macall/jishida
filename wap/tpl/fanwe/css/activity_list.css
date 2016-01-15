@@ -1,0 +1,10 @@
+.activity_ul .tuan_li .info .tuan_price {
+   display: block;
+   color: #575757;
+   font-size: 12px;
+   line-height: 20px;
+}
+
+.enter_num{
+	color:@font_style;
+}

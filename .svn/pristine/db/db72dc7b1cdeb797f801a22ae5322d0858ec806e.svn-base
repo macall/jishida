@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<labels>
+  <scopri>
+    <it><![CDATA[Scopri]]></it>
+    <en><![CDATA[Discover]]></en>
+  </scopri>
+  <vai>
+    <it><![CDATA[vai]]></it>
+    <en><![CDATA[go]]></en>
+  </vai>
+  <chiudi>
+    <it><![CDATA[Chiudi]]></it>
+    <en><![CDATA[Close]]></en>
+  </chiudi>
+  <scegliCategoria>
+     <it><![CDATA[Le categorie disponibili per questo ambiente:]]></it>
+    <en><![CDATA[Categories available for this environment:]]></en>
+  </scegliCategoria>
+  <scegliCategoriaAutore>
+     <it><![CDATA[Le categorie disponibili per questo autore:]]></it>
+    <en><![CDATA[Categories available for this designer:]]></en>
+  </scegliCategoriaAutore>  
+  <loading>
+     <it><![CDATA[Loading...]]></it>
+     <en><![CDATA[Loading...]]></en>
+  </loading>
+  <prodottiSingolare>
+    <it><![CDATA[Prodotto]]></it>
+    <en><![CDATA[Product]]></en>
+  </prodottiSingolare>
+  <prodottiPlurale>
+    <it><![CDATA[Prodotti]]></it>
+    <en><![CDATA[Products]]></en>
+  </prodottiPlurale>
+  <brands>
+    <oAlessi>
+      <it><![CDATA[Arte e poesia]]></it>
+      <en><![CDATA[Art and poetry]]></en>
+    </oAlessi>
+    <alessi>
+      <it><![CDATA[La fabbrica dei sogni]]></it>
+      <en><![CDATA[La fabbrica dei sogni]]></en>
+    </alessi>
+    <aAlessi>
+      <it><![CDATA[Top Design, Pop Price]]></it>
+      <en><![CDATA[Top Design, Pop Price]]></en>
+    </aAlessi>
+  </brands>
+</labels>

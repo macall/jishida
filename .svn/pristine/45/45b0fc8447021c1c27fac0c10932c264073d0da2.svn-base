@@ -1,0 +1,5 @@
+.pub_upload_img_box span{display: inline-block;width: 50px;height: 50px;overflow:hidden;float: left;margin-right: 5px;position: relative;padding: 1px;border: #ddd 1px solid;}
+.pub_upload_img_box span img{width:50px;}
+.pub_upload_img_box span a:hover {display: block;width: 50px;height: 50px;position: absolute;left: 1px;bottom: 1px;background: url(../images/css_bg/del_img.png) no-repeat 0 bottom;z-index: 10;filter: alpha(opacity=70);-moz-opacity: 0.7;opacity: 0.7;-moz-transition: all 0.2s;-webkit-transition: all 0.2s;transition: all 0.2s;}
+.pub_upload_img_box span a {display: block;width: 50px;height: 50px;position: absolute;left: 1px;bottom: 1px;background: url(../images/css_bg/del_img.png) no-repeat 0 bottom;z-index: 10;filter: alpha(opacity=0);-moz-opacity: 0;opacity: 0;-moz-transition: all 0.2s;-webkit-transition: all 0.2s;transition: all 0.2s;}
+.pub_upload_img_box span div.loader {width: 50px;height: 50px;position: absolute;left: 1px;top: 1px;z-index: 0;display: inline-block;background: url(../images/css_bg/loading.gif) no-repeat center center;}

@@ -1,0 +1,123 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/bind.css";	
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+		{if $data.is_binding eq 1}
+        <div class="explain">
+    		重新绑定后，原手机号码将不能作为登录凭证
+    	</div> 
+		{/if} 
+		<div class="login">
+		     <div id="mb_register">
+		     	{if $data.is_binding eq 1}
+				<input class="logininput border" id="old_mobile" name="old_mobile" type="text" placeholder="请输入之前绑定的手机号码">
+				{/if}
+				<input class="logininput_getcode border" id="new_mobile" name="new_mobile" type="text" placeholder="请输入要绑定的手机号码">
+				<input class="ui-button_getcode" id="getcode"  type="button" value="获取验证码" id ="btn_send" onclick = "javascript:do_send()">
+				<input class="logininput border" id="code" name="code" type="text" placeholder="请输入验证码">
+				<input class="ui-button_login button_bg" type="button"  value="确认提交" onclick = "javascript:mobile_binding()">
+		    </div>
+		</div>  
+<script type="text/javascript">
+var left_time_act = null;
+var left_time = 0;
+function setTab(name,cursel,n){
+	 for(i=1;i<=n;i++){
+	  var menu=document.getElementById(name+i);
+	  var con=document.getElementById("con_"+name+"_"+i);
+	  menu.className=i==cursel?"hover":"";
+	  con.style.display=i==cursel?"block":"none";
+	 }
+	}
+function left_time_func(){
+	clearTimeout(left_time_act);
+	if(left_time > 0){
+		$("#btn_send").val(left_time + "秒后重新发送" );
+		$("#btn_send").addClass("dis");
+		$("#btn_send").css({"color":"#999","border":"1px solid #999"});
+		left_time --;
+		left_time_act = setTimeout(left_time_func,1000);
+	}
+	else{
+		$("#btn_send").css({"color":"#fc8600","border":"1px solid #fc8600"});
+		$("#btn_send").removeClass("dis");
+		$("#btn_send").val("重新发送" );
+	}
+}	
+function  do_send(){
+	if($("#btn_send").hasClass("dis")) return false;
+	var mobile=$("#new_mobile").val();
+	if(!mobile){
+		alert("请填写手机号码");
+		return false;	
+	}
+	
+	//alert(mobile.length);
+	if(mobile.length != 11){
+		alert("请填写正确的手机号码");
+		return false;	
+	}
+	//http://o2o.fanwe.net/sjmapi/index.php?act=register_verify_phone&mobile=13559110609&is_login=1&r_type=2
+	var query = new Object();
+	query.is_login = 1;
+	query.mobile = mobile;
+	//query.r_type = 1;
+	query.post_type = "json";
+	var ajaxurl = '{wap_url a="index" r="register_verify_phone"}';
+	//alert(ajaxurl);
+	
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			alert(data.info);
+			
+			if(data.status == 1){
+				left_time = 60;
+				left_time_func();
+				//location.replace(document.referrer);
+				//window.location.href = "{url a="index" r="index#index"}";
+			}else{
+				
+			}
+		}
+		,error:function(){
+			alert("服务器提交错误");
+		}
+	});
+}
+
+function  mobile_binding(){	
+	var mobile=$("#new_mobile").val();
+	var code=$("#code").val();
+	var query = new Object();
+	query.new_mobile = mobile;
+	query.code = code;
+	query.post_type = "json";
+	var ajaxurl = '{wap_url a="index" r="do_binding_mobile"}';
+	//alert(ajaxurl);
+	
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			alert(data.info);
+			if(data.status == 1){
+				window.location.href = "{wap_url a="index" r="postcart#index"}";
+			}
+		}
+		,error:function(){
+			//alert("服务器提交错误");
+		}
+	});
+	return false;
+}
+    
+</script>
+
+{include file="./inc/footer.html"} 

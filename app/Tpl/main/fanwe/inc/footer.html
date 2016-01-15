@@ -1,0 +1,70 @@
+<div class="footer_box">
+<div class="footer_inner_box">
+
+<div class="{function name="load_wrap" t=$wrap_type} clearfix">
+	<div class="help_row f_l">
+		{foreach from=$deal_help item=help}
+		<span>
+		<dl>
+			<dt>{if $help.iconfont neq ''}<i class="diyfont">{$help.iconfont}</i>&nbsp;{/if}{$help.title}</dt>
+			<dd>
+				<ul>
+					{foreach from=$help.help_list item=help_item}
+					<li><b></b><a href="{$help_item.url}">{$help_item.title}</a></li>
+					{/foreach}
+				</ul>
+			</dd>
+		</dl>
+		</span>
+		{/foreach}
+		
+	</div>
+	<div class="foot_logo f_r">
+		<a class="link" href="{$APP_ROOT}/">
+		<?php
+			$this->_var['foot_logo_image'] = app_conf("FOOTER_LOGO");
+		?>
+		{function name="load_page_png" v=$foot_logo_image}
+		</a>
+	</div>
+	<div class="blank"></div>
+	{if $links}
+	<div class="friend_link">
+		<ul>
+			{foreach from=$links item=link}
+			<li><a href="http://{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a></li>
+			{/foreach}
+		</ul>
+	</div><!--friend_link-->
+	<div class="blank"></div>
+	{/if}
+	<div class="foot_info">
+		{if app_conf("SHOP_TEL") neq ''}
+				{$LANG.TEL}：{function name="app_conf" value="SHOP_TEL"} {function name="app_conf" value="ONLINE_TIME"}  
+				&nbsp;&nbsp;
+				{/if}				
+				{function name="app_conf" value="ICP_LICENSE"}&nbsp;&nbsp;
+				{function name="app_conf" value="COUNT_CODE"}
+				{function name="app_conf" value="SHOP_FOOTER"} 			
+				{if app_conf("ONLINE_QQ") neq ''}
+				<div class="qq_div">
+					<div class="qq_div_in">
+						{foreach from=$online_qq item=qq}
+						{if $qq neq ''}
+						<a class="qq_bg" href="http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes" target=_blank></a>
+						{/if}
+						{/foreach}					
+					</div>					
+				</div>		
+				<div class="blank"></div>
+				{/if}
+	</div>
+	
+</div><!--end foot_wrap-->
+		
+</div>
+</div>
+<div class="blank"></div>
+<a id="go_top" href="javascript:void(0);"></a>
+</body>
+</html>

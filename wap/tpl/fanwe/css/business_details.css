@@ -1,0 +1,270 @@
+.bor_bottom_none{
+	border-bottom:none;
+}
+
+.downloader{
+	margin-top:10px;
+	text-align:right;
+	line-height:12px;
+}
+
+.evaluate_title{
+	padding:0 0 0 10px;
+	font-size:16px;
+	line-height:44px;
+	color:#3f3f3f;
+	border-bottom:1px solid #f5f5f5;
+}
+
+.assess_detail{
+	display: -webkit-box;
+	
+}
+
+.a_d_right{
+	text-align:right;
+}
+
+.a_d_left{
+	display:-webkit-box;
+	-webkit-box-flex: 1;
+}
+
+.five_star_orange{
+	display:inline-block;
+	width:90px;
+	line-height:20px;
+	overflow:hidden;
+	position:relative;
+	
+	
+}
+
+.five_star_grey{
+	height:20px;
+	width:50%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	white-space:nowrap;
+	overflow: hidden;
+}
+
+
+.five_star_orange .orange{
+	color:#e2e2e2;
+	margin:0px 2px;
+	font-size:15px;
+}
+
+.five_star_grey .grey{
+	color:#f59436;
+	margin:0px 2px;
+	font-size:15px;
+}
+
+.assess_detail span{
+	color:#848484;
+	line-height:20px;
+}
+
+.s_d_name{
+	display: -webkit-box;
+}
+
+.assess_list li{
+	padding:9px 9px 0 9px;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+
+.assess_list li p{
+	color:#424242;
+	font-size:14px;
+	line-height:21px;
+	padding:6px 0 12px 0;
+}
+.business_info{
+	display:-moz-box;
+    display:-webkit-box;
+    display:box;
+	width:100%;
+	padding:14px 10px;
+	border-top:1px solid #f5f5f5;
+	margin-top: -1px;
+}
+
+.business_info .business_address{
+	-webkit-box-flex: 1;
+	-moz-box-flex:1;
+}
+
+.business_info .business_phone{
+	width:70px;
+	height:60px;
+	border-left:1px solid #f5f5f5;
+	color:@font_style;
+}
+
+.business_phone i{
+	font-size:35px;
+	color:@font_style;
+	margin:12px 0 0 30px;
+	
+}
+
+.business_address h3{
+	color:#272727;
+	font-size:15px;
+	line-height:25px;
+}
+
+.business_address span{
+	color:#a3a3a3;
+	font-size:13px;
+	line-height:20px;
+	padding:7px 0;
+}
+
+.whole_grade{
+	display:-webkit-box;
+	border-bottom:1px solid #f5f5f5;
+	padding:10px;
+}
+
+.grade{
+	display:-webkit-box;
+	padding-top:5px;
+	-webkit-box-flex: 1;
+}
+
+.grade span{
+	display: inline-block;
+	color:#828282;
+	display: -webkit-box;
+	font-size:15px;
+	
+}
+
+.grade b{
+	color:#f49332;
+	margin-left:9px;
+	font-size:13px;
+	display: -webkit-box;
+    height:20px;
+	line-height:20px;
+	
+}
+
+.whole_grade .grade_num .grade b{
+	line-height:24px;
+	
+}
+
+.grade_num{
+	-webkit-box-flex: 1;
+	padding-left:7px;
+}
+
+.grade_num h3{
+	font-size:16px;
+	color:#585858;
+	line-height:26px;
+}
+
+.g_pic{
+	display:inline-block;
+}
+
+.grade .five_star_orange .orange{
+	font-size:19px;
+}
+.grade .five_star_grey .grey{
+	font-size:19px;
+}
+
+.grade .five_star_orange {
+	width:110px;
+}
+
+
+
+.evaluate .grade .five_star_orange{
+	line-height: 20px;
+}
+
+.assess_detail .five_star_orange{
+	line-height: 22px;
+}
+
+.good_deta .five_star_orange{
+	line-height:20px;
+}
+
+
+
+.comment_list_star .grade b{
+	font-size:14px;
+}
+
+
+.business_ul .grade b{
+	font-size:12px;
+	line-height:23px;
+}
+
+
+.list-view ol{
+	padding:6px 0 6px 13px;
+	
+}
+.list-view ol li{
+	color:#c4c4c4;
+	font-size:12px;
+	line-height:24px;
+	
+}
+
+
+.hui_detail{
+	padding:6px 10px;
+	font-size:12px;
+	line-height:20px;
+}
+
+
+.hui_detail .grey{
+	color:#838383;
+}
+
+.hui_detail .red{
+	color:#e60807;
+}
+
+.browse_num ul{
+	display:-webkit-box;
+	display:-moz-box;
+	display:box;
+	width:100%;
+}
+.browse_num ul li{
+    line-height:44px;
+	width:50%;
+	-moz-box-flex:1;
+	text-align:center;
+}
+
+.browse_num ul li span{
+	color:#272727;
+	font-size:14px;
+}
+
+.browse_num ul li b{
+	/*color:#fc8600;*/
+	font-weight:bolder;
+	font-size:12px;
+}
+
+.browse_num .buy{
+	padding:0 10px 15px 10px;
+}

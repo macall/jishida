@@ -1,0 +1,202 @@
+.comment_list_txt textarea{
+	width: 100%;
+	height: 200px;
+	font-size:12px;
+	color:#adadad;
+}
+
+.comment_list_txt{
+	padding: 10px;
+	background-color: white;
+
+}
+.comment_list_star{
+	background-color: white;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 5px;
+	font-size: 18px;
+	color: #fb8602;
+}
+.bk{
+	color: #b0b0b0;
+}
+.comment_commentary{
+	
+	margin:15px 10px;
+	padding: 10px 0;
+	color: #fff;
+	background:#fb8602;
+	border-radius: 30px;
+	text-align: center;
+	font-size: 14px;
+	font-weight:bolder;
+}
+
+/*-------------------------评分星星-------------------------*/
+.tx_star{
+	position:relative;
+	height:60px;
+	
+}
+
+.tx_star .five_star_grey i{
+	font-size:30px;
+	color:#e2e2e2;
+	margin:0 15px 0 0;
+}
+.tx_star .five_star_grey{
+	height:40px;
+	top:10px;
+	left:10px;
+	width:100%;
+}
+.tx_star b{
+	position:absolute;
+	top:10px;
+	font-size:30px;
+	color:#fc8600;
+	right:10px;
+	
+}
+/*-------------------------评分星星-------------------------*/
+/*-------------------------点评列表-------------------------*/
+.overall_merit{
+	padding:22px 10px 17px 10px; 
+	overflow:hidden;
+	
+}
+.overall_merit .left{
+
+	float:left;
+	text-align:center;
+	padding:0 5px;
+}
+.overall_merit .left .total{
+	width:90px;
+	height:48px;
+	border-bottom:1px solid #e4e4e4;
+	line-height:48px;
+	text-align:center;
+	font-weight:bolder;
+	color:#ff943a;
+	font-size:17px;
+}
+
+.overall_merit .tatal_num{
+	height:29px;
+	line-height:29px;
+	color:#a1a1a1;
+	font-size:12px;
+	text-align:center;
+	}
+
+.overall_merit .total_star{
+	padding-bottom: 5px;
+}
+
+
+.overall_merit .right{
+	float:right;
+}
+
+
+
+.overall_merit .critical li{
+	overflow:hidden;
+	height:12px;
+	line-height:12px;
+	margin-bottom:9px;
+}
+
+
+.overall_merit .star_num{
+	float:right;
+	color:#64635f;
+	font-size:12px;
+	padding:0 4px;
+	line-height: 12px;
+	}
+.overall_merit .percentage_block{
+	margin-top:4px;
+	float:right;
+	width:100px;
+	height:4px;
+	background:#dfdedc;
+}
+.overall_merit .percentage_block .percentage{
+
+	height:100%;
+	background:#f7962f;
+}
+.overall_merit .people_num{
+	float:right;
+	color:#b2b1af;
+	font-size:12px;
+	width:45px;
+	text-align:right;
+}
+
+
+/*---------------*/
+.shop_comment_list{
+	border-top:1px solid #ddd8ce;
+}
+.shop_comment_list li {
+	border-bottom:1px solid #ddd8ce;
+	padding:15px 22px;
+	background:#fff;
+}
+
+.shop_comment_list li .name{
+	color:#6c6c6c;
+	font-size:15px;
+	padding: 5px 0;
+}
+
+.shop_comment_list li .comment_p{
+	color: #4b4b4b;
+		font-size: 12px;
+		line-height: 20px;
+		padding-top: 5px;
+	
+}
+
+.shop_comment_list li .comment_star{
+	overflow:hidden;
+}
+.shop_comment_list li .comment_star .five_star_orange{
+   float:right;
+   line-height: 20px;
+   width:auto;
+}
+
+.shop_comment_list li .comment_star .comment_time{
+	float: left;
+font-size: 12px;
+line-height: 20px;
+color: #999999;
+
+}
+
+.shop_comment_list li .comment_star .five_star_orange .orange {
+
+margin: 0px 2px;
+font-size: 12px;
+}
+
+.shop_comment_list li .comment_star .five_star_grey{
+	height:220px;
+}
+
+.shop_comment_list li .comment_star .five_star_grey .grey{
+	margin: 0px 2px;
+font-size: 12px;
+}
+
+/*-------------------------点评列表-------------------------*/
+.i_say{
+	background:@main_color;
+	margin: 10px 8px;text-align: center;
+	border-radius:20px;
+}

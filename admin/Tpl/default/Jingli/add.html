@@ -1,0 +1,57 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<div class="main">
+<div class="main_title">{%ADD} <a href="{:u("Jingli/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">用户名:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="name" /></td>
+	</tr>
+	<tr>
+		<td class="item_title">密码:</td>
+		<td class="item_input"><input type="password" class="textbox require" name="password" /></td>
+	</tr>
+	<tr>
+		<td class="item_title">手机:</td>
+		<td class="item_input">
+			<input type="text" name="mobile" class="textbox require" />
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">地址:</td>
+		<td class="item_input">
+			<input type="text" name="address" />
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">真实姓名:</td>
+		<td class="item_input">
+			<input type="text" name="truename" />
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="jingli" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert" />
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="{%ADD}" />
+			<input type="reset" class="button" value="{%RESET}" />
+			<input type="hidden" value="1" name="type_id" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>	 
+</form>
+</div>
+<include file="Public:footer" />

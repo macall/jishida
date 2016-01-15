@@ -1,0 +1,227 @@
+{include file="./inc/header.html"}
+<style type="text/css">
+.order_data_box{display:none;}
+</style>
+<section class="content erccontent">
+    <section class="header_box servie">
+        <ul>
+            <li class="title ">点到按摩</li>
+            <li class="lfo"><a href="#">返回</a> </li>
+        </ul>
+    </section>
+    <section class="datajies">
+        <ul>
+            <li class="fl cu_q">
+                <b>{$data.goods_brief}</b><i>{$data.cur_price_format}</i>
+                <p>{$data.server_time}分钟</p>
+            </li>
+            <li class="fr cu_v">
+                <img src="images/chakan.png">
+                <p>{$data.buy_count}单</p>
+            </li>
+        </ul>
+    </section>
+    <section class="ernav">
+        <ul>
+            <li class="nou">服务内容</li>
+            <li>下单须知</li>
+            <li>客户评价</li>
+        </ul>
+        <section class= "rotation">
+            {$data.goods_desc}
+        </section>
+        <section class= "rotation" style="display:none">
+            {$data.notes}
+
+        </section>
+        <section class= "rotation" style="display:none">
+            <ul>
+			{foreach from=$data.message_list item=list key=key}
+				<li class="shangmian">
+                    <span>{$list.user_name}{$list.xing}</span>
+                    <p>
+                        <i><img src="images/jianjio_1.png"> </i>
+                        {$list.content}
+                    </p>
+                    <em>{$list.create_time_format}</em>
+                </li>
+				{/foreach}
+                {if $list.reply_content neq ''}
+                <li class="Customer">
+                    <span> </span>
+
+                    <p>
+                        <i><img src="images/jianjio_2.png"> </i>
+                        <b>回复 <strong>{$list.user_name}</strong></b>
+                        {$list.reply_content}
+                    </p>
+                    <section class="xiafang"><i class="fl">{$list.reply_time_format}</i></section>
+                </li>
+				{/if}
+            </ul>
+            <section class="botom_gd">
+                <ul>
+                    <li>
+                        <a href="{wap_url a="index" r="dp_list#index"  p="id=$data.goods_id&type=deal"}">查看更多评论</a>
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+    </section>
+    <section class="bottom_1">
+        <ul>
+            <li class="fl">
+                <p>时长：{$data.server_time}分钟 </p>
+                <p>合计：{$data.cur_price_format}元</p>
+            </li>
+        </ul>
+    </section>
+</section>
+<div class="wrap">
+    <form id="goods-form" action="{wap_url a="index" r="postcart#index" }"  method="post">
+	<input type="hidden" name="id" value="{$data.goods_id}">
+        <div class="content">
+            <div class="list-view">
+                {if $data.attr.has_attr_1}
+                <div class="evaluate_title">
+                    请选择商品属性
+                </div>
+                <div class="set_meal ">
+                    <!--div class="set">
+                    <span>颜色:</span>
+                    <a class="meal">绿色</a>
+                    <a class="meal">红色</a>
+                    </div>
+                    <div class="set">
+                    <span>尺码:</span>
+                    <a class="meal">大</a>
+                    <a class="meal">小</a>
+                    </div-->{if $data.attr.has_attr_1 eq 1}
+                    <div class="deal_attr_box set">
+                        <span class="deal_attr">请选择{$data.attr.attr_title_1}：</span>
+                        <ul class="cf deal_attr_box_a" style="padding: 0;margin: 0;">
+                            {foreach from=$data.attr.attr_1 item=attr name=attr}
+                            <li price="{$attr.attr_price}" rel="{$attr.attr_name}" value="{$attr.attr_id}" class="meal">
+                                {$attr.attr_name}
+                            </li>
+                            {/foreach}
+                        </ul>
+                        <select name="attr_value[]" style="display:none">
+                            <option value="0">请选择{$data.attr.attr_title_2}</option>
+                            {foreach from=$data.attr.attr_1 item=attr name=attr}<option value="{$attr.attr_name}">{$attr.attr_name}</option>
+                            {/foreach}
+                        </select>
+                        <select name="attr[]" style="display:none">
+                            <option value="0">请选择{$data.attr.attr_title_1}</option>
+                            {foreach from=$data.attr.attr_1 item=attr name=attr}<option value="{$attr.attr_id}" rel="{$attr.attr_name}" price="{$attr.attr_price}">{$attr.attr_name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    {/if}
+                    {if $data.attr.has_attr_2 eq 1}
+                    <div class="deal_attr_box set">
+                        <span class="deal_attr">请选择{$data.attr.attr_title_2}：</span>
+                        <ul class="cf deal_attr_box_b" style="padding: 0;margin: 0;">
+                            {foreach from=$data.attr.attr_2 item=attr}
+                            <li price="{$attr.attr_price}" rel="{$attr.attr_name}" value="{$attr.attr_id}" class="meal">
+                                {$attr.attr_name}
+                            </li>
+                            {/foreach}
+                        </ul>
+                        <select name="attr_value[]" style="display:none">
+                            <option value="0">请选择{$data.attr.attr_title_2}</option>
+                            {foreach from=$data.attr.attr_2 item=attr name=attr}<option value="{$attr.attr_name}">{$attr.attr_name}</option>
+                            {/foreach}
+                        </select>
+                        <select name="attr[]" style="display:none">
+                            <option value="0">请选择{$data.attr.attr_title_2}</option>
+                            {foreach from=$data.attr.attr_2 item=attr name=attr}<option value="{$attr.attr_id}" rel="{$attr.attr_name}" price="{$attr.attr_price}">{$attr.attr_name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    {/if}
+                    <script type="text/javascript">
+                        							{foreach from=$data.attr.attr_1_2 item=val key=key}
+                        							var {$key} = "{$val}";
+                        							{/foreach}
+                        							$(document).ready(function(){
+                        								$(".deal_attr_box ul li").click(function(){
+                        									$(this).closest(".deal_attr_box").find("li").removeClass("cur");
+                        									$(this).addClass("cur");
+                        									var cur_price=$(".j_discount_price").attr("rel");
+                        									var price=$(this).attr("price");
+                        									var val = $(this).attr("value");
+                        									var rel = $(this).attr("rel");
+                        									var total = 0;
+                        									$(this).parent().parent().find("select[name='attr[]']").val(val);
+                        									$(this).parent().parent().find("select[name='attr_value[]']").val(rel);
+                        									if($(".deal_attr_box ul li.cur").length!=2){
+                        										return false;
+                        									}
+                        									var number_ext="";
+                        									$(".deal_attr_box ul li.cur").each(function(){
+                        										total += parseFloat($(this).attr("price"));
+                        										number_ext += "_"+$(this).attr("value");
+                        									});
+                        									var new_price= parseFloat(total) + parseFloat(cur_price) ;
+                        									$(".j_discount_price").html(new_price.toFixed(2));
+                        									$("#J_left_number").val(eval("attr_limit_num"+number_ext));
+                        								});
+                        							});
+                        						
+                    </script>
+                </div>
+                {/if}
+            </div>
+            
+            <div class="buy">
+                {if $data.left_num}<input type="hidden" id="J_left_number" name="left_number" value="{$data.left_num}">{/if}
+                <button id="J_post_cart" type="submit" name="Submit" class="plank">
+                  	  下一步
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    jQuery(function(){
+        $("#goods-form").submit(function(){
+            var is_attr_err = false;
+            if ($("select[name='attr[]']").length > 0) {
+                $("select[name='attr[]']").each(function(){
+                    if (parseInt($(this).val()) == 0) {
+                        is_attr_err = true;
+                    }
+                });
+            }
+            if (is_attr_err) {
+                alert("请选择商品属性");
+                return false;
+            }
+            var left_number = $("#J_left_number").val();
+            if (left_number == 0) {
+                alert("库存不足");
+                return false;
+            }
+            
+            var ajaxurl = $(this).attr("action");
+            var query = $(this).serialize();
+            $.ajax({
+                url: ajaxurl,
+                data: query,
+                type: post,
+                dataType: "json",
+                success: function(ajaxobj){
+                    alert();
+                },
+                error: function(){
+                    alert("请求服务器失败");
+                }
+            });
+            return false;
+        });
+    });
+    
+</script>
+{include file="./inc/footer.html"} 

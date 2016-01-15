@@ -1,0 +1,163 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/user.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<load href='__TMPL__Common/js/deal_order.js' />
+<PHP>
+function get_delivery_sn($deal_order_item_id)
+{
+	$delivery_notice = M("DeliveryNotice")->where("order_item_id=".$deal_order_item_id)->order("delivery_time desc")->find();
+	$order_id = M("DealOrderItem")->where("id=".$delivery_notice['order_item_id'])->getField("order_id");
+	$res = $delivery_notice['notice_sn'];
+	if($delivery_notice['express_id']!=0)
+	{
+		$res.=" <br /><a href='".U("Express/eprint",array("order_id"=>$order_id,"express_sn"=>$delivery_notice['notice_sn'],"express_id"=>$delivery_notice['express_id']))."' target='_blank'>".l("PRINT_EXPRESS")."</a> <a href='javascript:void(0);' onclick='track_express(\"".$delivery_notice['notice_sn']."\",\"".$delivery_notice['express_id']."\");'>".l("TRACK_EXPRESS")."</a>";
+	}
+	return $res;
+}
+function get_delivery_arrival($deal_order_item_id)
+{
+	$delivery_notice =  M("DeliveryNotice")->where("order_item_id=".$deal_order_item_id)->order("delivery_time desc")->find();
+	if($delivery_notice['is_arrival']==1)
+	{
+		return l("USER_CONFIRM_DELIVERY");
+	}
+	elseif($delivery_notice['is_arrival']==2)
+	{
+		return "<span style='color:#f30;'>用户未收到货，维权</span>";
+	}
+	else
+	{
+		return l("USER_NOT_CONFIRM_DELIVERY");
+	}
+}
+function get_delivery_memo($deal_order_item_id)
+{
+	return M("DeliveryNotice")->where("order_item_id=".$deal_order_item_id)->getField("memo");
+}
+
+</PHP>
+<script type="text/javascript">
+	function track_express(express_sn,express_id)
+	{	
+		$.ajax({ 
+				url: "<?php echo u("DealOrder/check_delivery");?>&express_sn="+express_sn+"&express_id="+express_id, 
+				data: "ajax=1",
+				dataType: "json",
+				success: function(obj){
+					if(obj.status==2)
+					{
+						window.open(obj.msg);
+					}
+					if(obj.status==1)
+					{
+						$.weeboxs.open(obj.msg, {contentType:'html',showButton:false,title:LANG['TRACK_EXPRESS'],width:530,height:280});
+					}
+					if(obj.status==0)
+					{
+						alert(obj.msg);
+					}				
+				}
+		});		
+	}
+
+</script>
+<div class="main">
+<div class="main_title">
+指派技师
+</div>
+<div class="blank5"></div>
+
+<table class="form" cellpadding=0 cellspacing=0>
+    
+	<tr>
+		<td colspan=4 class="topTd"></td>
+	</tr>
+        <tr>
+		<td class="item_title">当前预约时间:</td>
+                <td colspan="3" class="item_input">
+                    {$now_order} ~ {$now_order_end}
+                </td>
+	</tr>
+	<tr>
+		<td class="item_title">指派技师列表:</td>
+                <td class="item_input" style="width: 30%">
+                    <select multiple="multiple" size="<?php echo count($deal_tech_list);?>" style="width: 300px">
+                        <foreach name="deal_tech_list" item="deal_tech">
+                            <option value ="{$deal_tech.tech_id}" onclick="get_tech_order_list(this)">{$deal_tech.tech_name}</option>
+                        </foreach>
+                    </select>
+		</td>
+		<td class="item_title">技师订单列表:</td>
+		<td class="item_input" id="tech_list">
+			
+		</td>
+	</tr>
+        <tr>
+		<td class="item_title">选定技师:</td>
+                <td class="item_input">
+                    <input type="hidden" id="order_id" value="{$order_id}" />
+                    <input type="hidden" id="assign_tech" value="" />
+                    <input type="text" id="show_tech" class="textbox" value="" />
+                    <input type="button" class="button" value="给技师派单" onclick="do_assign_tech()"  />
+                </td>
+	</tr>
+	
+	<tr>
+		<td colspan=4 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+<input type="button" style="display: block;margin: auto;" class="button" value="返回订单列表" onclick="location.href='__APP__?m=JsdOrder&a=deal_index';"  />
+
+</div>
+<include file="Public:footer" />
+<script>
+    function do_assign_tech(){
+        var query = new Object();
+        query.tech_id = $("#assign_tech").val();
+        query.order_id = $("#order_id").val();
+        $.ajax({ 
+            url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=do_assign_tech", 
+            data: query,
+            dataType: "json",
+            success: function(obj){
+               if(obj.data == 1){
+                   location.href='__APP__?m=JsdOrder&a=deal_index';
+               }
+            }
+        });
+    }
+    function get_tech_order_list(obj){
+        var query = new Object();
+        var tech_id = $(obj).val();
+        query.tech_id = tech_id;
+        
+        $("#assign_tech").val(tech_id);
+        $("#show_tech").val($(obj).text());
+        $.ajax({ 
+            url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=get_tech_order_list", 
+            data: query,
+            dataType: "json",
+            success: function(obj){
+                var html = '';
+                if(obj.data){
+                    html = '<select multiple="multiple" size="'+obj.data.length+'" style="width: 300px">'
+                    $.each(obj.data,function(i,item){
+                        html += '<option value ="'+item.id+'"">'+item.order_time+' ~ '+item.order_end_time+'</option>';               
+                    });
+                    html += '</select>';
+                }else{
+                    html += '当前无预约';
+                }
+                
+                
+                $("#tech_list").html(html);
+            }
+        });
+    }
+</script>

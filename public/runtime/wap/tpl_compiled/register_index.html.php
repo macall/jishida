@@ -1,0 +1,324 @@
+<?php echo $this->fetch('./inc/header.html'); ?>
+<script>
+<!--
+    /*第一种形式 第二种形式 更换显示样式*/
+    function setTab(name, cursel, n) {
+        for (i = 1; i <= n; i++) {
+            var menu = document.getElementById(name + i);
+            var con = document.getElementById("con_" + name + "_" + i);
+            menu.className = i == cursel ? "hover" : "";
+            con.style.display = i == cursel ? "block" : "none";
+        }
+    }
+//-->
+</script>		
+<div class="wrap">
+    <div class="comment_list_txt1">
+        <div id="Tab1">
+            <div class="Menubox">
+                <ul>
+                    <li id="one1" onclick="setTab('one', 1, 7)"  class="hover" style=" border-right:1px solid #ccc;">账号注册</li>
+                    <li id="one2" onclick="setTab('one', 2, 7)">手机注册</li>
+                </ul>
+            </div>
+            <div class="Contentbox">  
+                <div id="con_one_1" class="hover">
+                    <div class="comment_list_txt">
+                        <form id="normal-register-form" action="<?php
+echo parse_wap_url_tag("u:index|register|"."".""); 
+?>" autocomplete="off" method="post" onsubmit="return check(this)">
+
+                              <div class="Contentbox">  
+                                <div class="inputtxt">
+                                    <div class="inputpc"><i class="fa fa-envelope"></i></div>	
+                                    <div class="input_sr"><input type="text" placeholder="请输入邮箱" name="email" id="email"></div>
+                                </div>		   
+                                <div class="inputtxt">
+                                    <div class="inputpc"><i class="fa fa-user"></i></div>	
+                                    <div class="input_sr"><input type="text" placeholder="请输入昵称" name="user_name" id="user_name"></div>
+                                </div>
+                                <div class="inputtxt"> 
+                                    <div class="inputpc"><i class="fa fa-lock"></i></div>
+                                    <div class="input_sr"><input type="text" placeholder="请输入密码" name="pwd" id="pwd"></div>	 
+                                </div>
+                                <div class="inputtxt"> 
+                                    <div class="inputpc"><i class="fa fa-lock"></i></div>
+                                    <div class="input_sr"><input type="text" placeholder="请再次输入密码" name="ppwd" id="ppwd"></div>	 
+                                </div>
+                                <div class="inputtxt2 chk"> 
+                                    <span class="chk_sp1">选择性别:</span>
+                                    <input class="mt_sex" type="radio" name="sex" value="1" /><span class="chk_sp2">男</span>
+                                    <input class="mt_sex" type="radio" name="sex" value="0"/><span class="chk_sp2">女</span>
+                                </div>
+                                <div class="btn_login">
+                                    <?php if ($this->_var['ref_uid']): ?><input type="hidden" name="ref_uid" id="ref_uid" value="<?php echo $this->_var['ref_uid']; ?>"><?php endif; ?>
+                                    <input  type="submit"  name="Submit" class="mj-submit" value="注册" 	style="background: none;">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div id="con_one_2" style="display:none;">
+                    <div class="comment_list_txt">
+                        <form id="mb_rg" onsubmit="return mb_check(this)" method="post" action="<?php
+echo parse_wap_url_tag("u:index|register_do_phone|"."".""); 
+?>">
+                                <span>手机号</span>
+                                <input id="mobile" name="mobile" value="" holder="请输入手机号" />
+                                <br>
+                                <span>验证码</span>
+                                <input name="sms_verify" id="sms_verify" holder="请输入验证码" />
+                                <input type="Button"  id = "btn_send" onclick = "javascript:do_send()" value="发送验证码" >
+                                <br>
+                                <span>密码</span>
+                                <input type="password" name="password" id="mb_password" holder="请输入密码" />
+                                <br>
+                                <span>确认密码</span>
+                                <input type="password" name="password_confirm" id="mb_password_confirm" holder="请再次输入密码"/>
+                                <div class="inputtxt2 chk"> 
+                                    <span class="chk_sp1">选择性别:</span>
+                                    <input class="mt_sex" type="radio" name="mb_sex" value="1" /><span class="chk_sp2">男</span>
+                                    <input class="mt_sex" type="radio" name="mb_sex" value="0"/><span class="chk_sp2">女</span>
+                                </div>
+                                <div class="btn_login">
+                                    <input  type="submit"  name="Submit" class="mj-submit" value="立即注册" style="background: none;">
+                                </div>
+<!--                            <dl>
+                                <dt></dt>
+                                <dd>
+                                    <button class="ui-button f_l orange" rel="orange" type="submit"></button>
+
+                                </dd>
+                            </dl>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>             
+
+    </div>
+</div>
+<script type="text/javascript">
+var left_time_act = null;
+var left_time = 0;
+function setTab(name,cursel,n){
+	 for(i=1;i<=n;i++){
+	  var menu=document.getElementById(name+i);
+	  var con=document.getElementById("con_"+name+"_"+i);
+	  menu.className=i==cursel?"hover":"";
+	  con.style.display=i==cursel?"block":"none";
+	 }
+	}
+function left_time_func(){
+	clearTimeout(left_time_act);
+	if(left_time > 0){
+		$("#btn_send").val(left_time + "秒后重新发送" );
+		$("#btn_send").addClass("dis");
+		$("#btn_send").css({"color":"#999","border":"1px solid #999"});
+		left_time --;
+		left_time_act = setTimeout(left_time_func,1000);
+	}
+	else{
+		$("#btn_send").css({"color":"#fc8600","border":"1px solid #fc8600"});
+		$("#btn_send").removeClass("dis");
+		$("#btn_send").val("重新发送" );
+	}
+}	
+function  do_send(){
+	if($("#btn_send").hasClass("dis")) return false;
+	var mobile=$("#mobile").val();	
+	
+	if(!mobile){
+		alert("请填写手机号码");
+		return false;	
+	}
+	
+	//alert(mobile.length);
+	if(mobile.length != 11){
+		alert("请填写正确的手机号码");
+		return false;	
+	}
+	
+	//http://o2o.fanwe.net/sjmapi/index.php?act=register_verify_phone&mobile=13559110609&is_login=1&r_type=2
+	var query = new Object();
+	
+	query.mobile = mobile;
+	query.is_login = 1;
+	//query.r_type = 1;
+	query.post_type = "json";
+	var ajaxurl = '<?php
+echo parse_wap_url_tag("u:index|register_verify_phone|"."".""); 
+?>';
+	//alert(ajaxurl);
+	
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			alert(data.info);
+			
+			if(data.status == 1){
+				left_time = 60;
+				left_time_func();
+				//location.replace(document.referrer);
+				//window.location.href = "<?php
+echo parse_url_tag("u:index|index#index|"."".""); 
+?>";
+			}else{
+				
+			}
+		}
+		,error:function(){
+			alert("服务器提交错误");
+		}
+	});
+}
+    
+</script>
+<script type="text/javascript">
+    function  mb_check() {
+
+        var obj1 = $("#mobile").val();
+        var obj2 = $("#sms_verify").val();
+        var obj3 = $("#mb_password").val();
+        var obj4 = $("#mb_password_confirm").val();
+        var obj5 = $("input[name='mb_sex']:checked").val();
+//        var obj6 = $("#ref_uid").val();
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if(!obj1){
+		alert("请填写手机号码");
+		return false;	
+	}
+	
+	//alert(mobile.length);
+	if(obj1.length != 11){
+		alert("请填写正确的手机号码");
+		return false;	
+	}
+        
+        if(!obj2){
+		alert("请填入验证码");
+		return false;	
+	}
+        if (!obj2) {
+            alert("请填昵称");
+            return false;
+        }
+        if (!obj3) {
+            alert("请填密码");
+            return false;
+        }
+        if (!obj4) {
+            alert("请填确认密码");
+            return false;
+        }
+        if (!obj5) {
+            alert("选择性别");
+            return false;
+        }
+        if (obj3 != obj4) {
+            alert("两次密码不一致");
+            return false;
+        }
+        var query = new Object();
+        query.mobile = obj1;
+        query.sms_verify = obj2;
+        query.password = obj3;
+        query.password_confirm = obj4;
+        query.gender = obj5;
+//        query.ref_uid = obj6;
+        query.post_type = "json";
+        var ajaxurl = $("#mb_rg").attr("action");
+        $.ajax({
+            url: ajaxurl,
+            data: query,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1) {
+                    alert(data.info);
+                    window.location.href = "<?php
+echo parse_wap_url_tag("u:index|user_center#index|"."".""); 
+?>";
+                } else {
+                    alert(data.info);
+                }
+            }
+            , error: function () {
+                alert("服务器提交错误");
+            }
+        });
+        return false;
+    }
+    
+    function  check() {
+
+        var obj1 = $("#email").val();
+        var obj2 = $("#user_name").val();
+        var obj3 = $("#pwd").val();
+        var obj4 = $("#ppwd").val();
+        var obj5 = $("input[name='sex']:checked").val();
+        var obj6 = $("#ref_uid").val();
+        var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if (!obj1) {
+            alert("请填写邮箱");
+            return false;
+        }
+        if (!myreg.test(obj1)) {
+            alert('提示\n\n请输入有效的E_mail！');
+            return false;
+        }
+        if (!obj2) {
+            alert("请填昵称");
+            return false;
+        }
+        if (!obj3) {
+            alert("请填密码");
+            return false;
+        }
+        if (!obj4) {
+            alert("请填确认密码");
+            return false;
+        }
+        if (!obj5) {
+            alert("选择性别");
+            return false;
+        }
+        if (obj3 != obj4) {
+            alert("两次密码不一致");
+            return false;
+        }
+        var query = new Object();
+        query.email = obj1;
+        query.user_name = obj2;
+        query.password = obj3;
+        query.gender = obj5;
+        query.ref_uid = obj6;
+        query.post_type = "json";
+        var ajaxurl = $("#normal-register-form").attr("action");
+        $.ajax({
+            url: ajaxurl,
+            data: query,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1) {
+                    alert(data.info);
+                    window.location.href = "<?php
+echo parse_wap_url_tag("u:index|user_center#index|"."".""); 
+?>";
+                } else {
+                    alert(data.info);
+                }
+            }
+            , error: function () {
+                alert("服务器提交错误");
+            }
+        });
+        return false;
+    }
+</script>					
+<?php echo $this->fetch('./inc/footer.html'); ?> 

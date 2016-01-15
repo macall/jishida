@@ -1,0 +1,6 @@
+{foreach from=$data.feeinfo item=feeinfo_item key=key}
+	<li  class="message">
+	     <span class="first">{$feeinfo_item.item}:</span>
+		 <span class="second">{$feeinfo_item.value}</span>
+	</li>
+{/foreach}

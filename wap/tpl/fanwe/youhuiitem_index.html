@@ -1,0 +1,151 @@
+{include file="./inc/header.html"}
+<script type="text/javascript">
+	function  check(id){
+		var  obj1=$("#add_id").val();
+		var query = new Object();
+		query.id = id;
+		query.post_type = "json";
+		var ajaxurl ="{wap_url a="index" r="fasongduanxin"}";
+		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				alert(data.info);
+				window.location.href="{wap_url a="index" r="youhuiitem#index" p="id=$data.id"}";
+			}
+			,error:function(){
+				alert("服务器提交错误");
+			}
+		});	
+		return false;
+	}
+</script>	
+<style type="text/css">
+	.hui_detail img{
+		width:100%;
+	}
+
+</style>
+<div class="wrap">
+<div class="content">
+					
+					<div class="goods_abbr">
+						<div class="good_detail">
+							       <div class="good_pic">
+							       	    <a>
+							       	    	<img src="{$data.logo}" width="100%">
+							       	   	</a>
+							       </div>
+								   <div class="browse_num">
+								   	      <ul>
+								   	      	<li>
+								   	      		<span>浏览次数:</span><b class="font-fc8">{$data.view_count}</b>
+								   	      	</li>
+											<li>
+								   	      		<span>下载次数:</span><b class="font-fc8">{$data.down_count}</b>
+								   	      	</li>
+								   	      </ul>
+										 <div class="buy">
+										 	<div class="back-main " style="border-radius: 20px;">
+										 	<input type="hidden" value="{$youhuilist.id}" id="add_id">
+										 	{if $is_login eq 1}
+												<input type="button" class="plank" value="领取"  onclick="javascript:check('{$data.id}');" style=" background:none;"/> 
+											{else}
+												<input type="button" class="plank" value="登陆后领取" onclick="location.href='{wap_url a="index" r="login#index"}'" style=" background:none;"/>
+											{/if}
+											
+										</div>	
+					                     </div>
+										 
+										  
+								   </div>
+						  </div>
+						
+						 
+						 
+						 
+						 
+						 
+						
+					</div>	
+					
+					
+	<div class="blank8"></div>	
+	               		
+	<div class="blank8"></div>
+					
+				<div class="list-view">
+						 <div class="evaluate_title">支持门店</div>
+						  {foreach from=$data.list_merchant item=item key=key}
+						 <div class="business_info">
+						 	   <div class="business_address">
+						 	   	     <h3>{$item.name}</h3>
+									 <span>{$item.address}</span>
+						 	   </div>
+							   <a class="business_phone" href="tel:{$item.tel}" style="display:block;">
+							   	     <i class="fa fa-phone"></i>
+							   </a>
+						 </div>
+						{/foreach}
+						
+					</div>	
+					
+				{if $data.content}	
+	<div class="blank8"></div>				
+					<div class="list-view">
+						 <div class="evaluate_title">优惠券详情</div>
+						<div class="hui_detail">
+							{$data.content}
+						</div>
+						 
+						
+					</div>
+					{/if}
+					{if $data.use_notice}
+	<div class="blank8"></div>				
+					<div class="list-view">
+						 <div class="evaluate_title">使用须知</div>
+						 <div class="specifier" >
+						 {$data.use_notice}
+						 </div>
+						
+					</div>
+					{/if}
+   <div class="blank8"></div>
+   
+                 <div class="list-view">
+						 <div class="evaluate_title">评价</div>
+						 <div class="assess_list">
+						 	{if $data.comment_list}
+						 	  <ul>
+						 	  	{foreach from=$data.comment_list item=item key=key} 
+						 	  	 <li>
+						 	  	 	  <div class="assess_detail">
+						 	  	 	  	  <div class="a_d_left">
+						 	  	 	  	  	   <span class="s_d_name">{$item.user_name}</span>
+											   
+						 	  	 	  	  </div>
+						 	  	 	  	  <span class="a_d_right">{$item.create_time_format}</span>
+						 	  	 	  </div>
+									  <p>
+									  	{$item.content}
+									  </p>
+						 	  	 </li>
+								 {/foreach}
+								 
+						 	  </ul>
+							  {else}
+							  <div style="padding: 10px 0;text-align: center;">暂无评论</div>
+							  {/if}
+						 </div>
+						 <div class="see_more">
+						 	<a href="{wap_url a="index" r="dp_list#index"  p="id=$data.id&type=youhui"}" class="font-fc8">查看全部评价</a>
+						 </div>
+					</div>
+					
+				 
+				</div>
+				</div>
+{include file="./inc/footer.html"} 

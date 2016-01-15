@@ -1,0 +1,42 @@
+.uc_topic_nav {
+display: inline-block;
+width: 100%;
+heigth: 30px;
+background: #f2f2f2;
+border-bottom: #FE7000 2px solid;
+}
+.uc_topic_nav li.act a, .uc_topic_nav li.act a:hover {
+display: block;
+text-align: center;
+line-height: 30px;
+background: #FE7000;
+text-decoration: none;
+color: #fff;
+}
+.uc_topic_nav li a:hover {
+display: block;
+text-align: center;
+line-height: 30px;
+background: #ccc;
+text-decoration: none;
+color: #666;
+}
+.uc_topic_nav li a {
+display: block;
+text-align: center;
+line-height: 30px;
+}
+a {
+color: #000;
+text-decoration: none;
+}
+li {
+text-align: -webkit-match-parent;
+}
+.tuan ul li{ float:left; width:25%; line-height:30px; height:30px;}
+.left-box, .right-box {
+position: absolute;
+}
+.left-box {
+left: 8px;
+}

@@ -1,0 +1,75 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/verification.css";			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="wrap">
+  	<div class="content">
+		<div class="comment_list_txt">
+			<div>
+				 <div class="Contentbox">  
+					 <form id="normal-login-form" action="{wap_url a="index" r="biz_login"}" autocomplete="off" method="post">
+					   <div class="hover">
+							<div class="inputtxt">
+								<div class="inputpc"><i class="fa fa-user"></i></div>	
+								<div class="input_sr"><input type="text" placeholder="请输入邮箱或昵称" id="biz_email" name="email" ></div>
+							</div>
+							<div class="inputtxt"> 
+								<div class="inputpc"><i class="fa fa-lock"></i></div>
+								<div class="input_sr"><input type="password" placeholder="请输入密码" name="password" id="biz_pwd"></div>	 
+							</div>
+							<div class="find_pw"></div>
+							<div class="btn_login back-main" >
+								<input type="button" value="商家登录" id="user_login" style=" background:none;" class="font-main">
+							</div>
+					   </div>
+					 </form>
+		
+				 </div>
+			</div>             
+		
+	 	</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$("#user_login").bind('click',function(){
+			
+			var obj1 = $("#biz_email").val();
+            var obj2 = $("#biz_pwd").val();
+            if (!obj1) {
+                alert("请填写账户或邮箱");
+                return false; 
+            }
+            if (!obj2) {
+                alert("请填写密码");
+                return false;  
+            }
+			var query = new Object();
+			query.biz_email=obj1;
+			query.biz_pwd=obj2;
+			query.post_type = "json";
+			ajaxurl=$("#normal-login-form").attr("action");
+			$.ajax({
+				url:ajaxurl,
+				data:query,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					alert(data.info);	
+					if(data.user_login_status==1){
+						window.location.href = "{wap_url a="index" r="biz_input_page#index"}";
+					}
+				}
+				,error:function(){
+					//alert("服务器提交错误");
+				}
+			});	
+		
+			
+		});
+	});        
+</script>
+{include file="./inc/footer.html"} 

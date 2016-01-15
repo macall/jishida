@@ -1,0 +1,92 @@
+@charset "utf-8";
+body {color: #555;background: #FFF;min-height: 480px;font-family: YaHei,Helvetica,Tahoma,sans-serif;font-size: 14px;line-height: 1.5;}
+header {position: relative;color: #FFF;height: 50px;text-align: center;background: #a11d58;}
+head, header a {color: #FFF;text-shadow: 0 1px 1px #348DA7;}
+.left-box, .right-box {position: absolute;top: 10px;}
+.hd-rbtn, .hd-lbtn span {display: inline-block;height: 27px;line-height: 27px;padding: 0 10px;background: -webkit-linear-gradient(top,#EB2555,#A04E65);border: 1px solid #B80F38;border-radius: 5px;}
+.hd-lbtn {position: relative;display: block;}
+.hd-lbtn span {padding: 0 10px 0 5px;margin-left: 12px;position: relative;border-left: 0;border-radius: 2px 5px 5px 2px;}
+.left-box {left: 8px;}
+header h1 {font: 700 20px/50px Arial;text-shadow: 0 1px 1px #a11d58;}
+.body {padding: 10px;}
+
+
+#search-box {
+height: 40px;
+clear: both;
+}
+#search-hot {
+padding: 0 4px;
+margin: 10px 0;
+}
+#search-hot h3 {
+font-weight: 700;
+text-shadow: 1px 1px 1px #FFF;
+padding-left: 6px;
+}
+#search-hot .hot-link-list {
+text-align: center;
+padding: 0px;
+}
+#search-hot .hot-link-list li{float:left;width:20%;margin: 6px;margin-right:6px;}
+#search-hot .hot-link-list .hot-link {
+-moz-box-flex: 1;
+display: block;
+box-flex: 1;
+-webkit-box-flex: 1;
+width: 100%;
+font-size: 14px;
+height: 30px;
+line-height: 30px;
+
+border: 1px solid #d1d1d1;
+border-radius: 3px;
+
+color: #616060;
+background:-webkit-linear-gradient(top,#f6f6f5,#f1f0ee);
+}
+.cf:after {display: block;height: 0px;visibility: hidden;clear: both;overflow: hidden;content: '';}
+#search-form{
+	text-align: center;
+margin: 0 auto;
+width: 100%;
+}
+
+.box-search{
+	border:#ccc solid 1px;
+	border-radius: 5px;
+
+background:-webkit-linear-gradient(top,#f2f2f2,#fdfdfd);
+}
+#search-form #keyword {
+border: 0;
+
+
+background: #fff; 
+
+color: #c8c8c8;
+font-size: 14px;
+width:80%;
+float:left;
+
+margin-left: 3px;
+background:-webkit-linear-gradient(top,#f2f2f2,#fdfdfd);
+padding:10 15px;
+}
+#search-form .btn-login {
+width:19%;
+
+border: 0;
+background: none;
+
+color: #8c8c8c;
+font-size: 13px;
+float:right;
+padding:10px 0;
+border-left:1px solid #ccc;
+}
+#search-hot h3 {
+font-weight: 700;
+text-shadow: 1px 1px 1px #FFF;
+padding-left: 6px;
+}

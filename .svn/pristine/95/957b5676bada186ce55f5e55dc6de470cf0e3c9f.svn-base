@@ -1,0 +1,128 @@
+{include file="./inc/header.html"}
+<div class="wrap">
+
+				<div class="content back-white">
+				<div class="search_box">
+					  <div class="search_text">
+					  	    <div class="ico"> <i class="fa fa-search"></i></div>
+							<div class="box"><input type="text" name = "keyword" id = "keyword" placeholder="请输入商户名，分类，地点"></div>
+					  </div>
+					  <div class="search_bottom">
+					  	  <input type="button" onclick = "search_submit()"  value="搜索">
+					  </div>
+				</div>	 
+				<div class="criteria">
+					   <h3>请选择搜索类型</h3>
+					   <ul class="search_criteria">
+					   	     <li id="tab1" onclick = "setTab('tab',1,4)">搜团购</li>
+					   	     <li id="tab2" onclick = "setTab('tab',2,4)">搜商品</li>					   	     
+							 <li id="tab3" onclick = "setTab('tab',3,4)">搜优惠</li>
+							 <li id="tab4" onclick = "setTab('tab',4,4)">搜商家</li>
+					   </ul>
+				</div>	
+				
+				<div class="Contentbox">
+					<div id="con_one_1" class="hover">
+				       <ul class="hot_search_list">
+				       	   <li><a href="">1</a></li>
+						   <li><a href="">明天</a></li>
+						   <li><a href="">后天</a></li>
+						   <li><a href="">早点</a></li>
+						   <li><a href="">午饭</a></li>
+						   <li><a href="">晚饭</a></li>
+						   <li><a href="">夜宵</a></li>
+						   <li><a href="">西瓜</a></li>
+						   <li><a href="">苹果</a></li>
+				       </ul>
+				     </div>  
+					 
+					   <ul class="hot_search_list">
+				       	   <li><a href="">2</a></li>
+						   <li><a href="">明天</a></li>
+						   <li><a href="">后天</a></li>
+						   <li><a href="">早点</a></li>
+						   <li><a href="">午饭</a></li>
+						   <li><a href="">晚饭</a></li>
+						   <li><a href="">夜宵</a></li>
+						   <li><a href="">西瓜</a></li>
+						   <li><a href="">苹果</a></li>
+				       </ul>
+					   <ul class="hot_search_list">
+				       	   <li><a href="">3</a></li>
+						   <li><a href="">明天</a></li>
+						   <li><a href="">后天</a></li>
+						   <li><a href="">早点</a></li>
+						   <li><a href="">午饭</a></li>
+						   <li><a href="">晚饭</a></li>
+						   <li><a href="">夜宵</a></li>
+						   <li><a href="">西瓜</a></li>
+						   <li><a href="">苹果</a></li>
+				       </ul>
+					   <ul class="hot_search_list">
+				       	   <li><a href="">4</a></li>
+						   <li><a href="">明天</a></li>
+						   <li><a href="">后天</a></li>
+						   <li><a href="">早点</a></li>
+						   <li><a href="">午饭</a></li>
+						   <li><a href="">晚饭</a></li>
+						   <li><a href="">夜宵</a></li>
+						   <li><a href="">西瓜</a></li>
+						   <li><a href="">苹果</a></li>
+				       </ul>	 
+				</div>
+					
+				 
+				</div>
+			
+</div>				
+<script type="text/javascript">
+$(document).ready(function () { 
+	   $(".search_criteria li").click(function(){
+		   	  $(".search_criteria li").removeClass("this");
+			  $(this).addClass("this");  
+		   })
+	
+	$(".search_criteria li").click(function(){
+	  	 var t=$(this).index();
+		 //alert(t);
+		  $(".list-view .hot_search_list").hide();
+		 $(".list-view .hot_search_list").eq(t).show();
+		 
+	  })
+ });  
+  
+var search_type = 1;
+setTab('tab',search_type,4);
+
+function setTab(name,cursel,n){
+	search_type = cursel;
+	 for(i=1;i<=n;i++){
+	  var menu=document.getElementById(name+i);
+	  //var con=document.getElementById("con_"+name+"_"+i);
+	  menu.className=i==cursel?"this":"";
+	  //con.style.display=i==cursel?"block":"none";
+	 }
+	}
+	
+	
+function search_submit(){
+	var keyword=$("#keyword").val();
+
+	if(!keyword)
+	{
+		alert("请填写搜索关键字");
+	}else{
+		if (search_type == 2){
+			window.location.href = APP_ROOT+"/index.php?ctl=goodslist&keyword="+keyword;
+		}else if (search_type ==3){
+			window.location.href = APP_ROOT+"/index.php?ctl=youhuilist&keyword="+keyword;
+		}else if (search_type ==4){
+			window.location.href = APP_ROOT+"/index.php?ctl=merchantlist&keyword="+keyword;
+		}else{
+			window.location.href = APP_ROOT+"/index.php?ctl=tuanlist&keyword="+keyword;
+		}
+	}
+}	
+</script>
+				
+{include file="./inc/footer.html"}

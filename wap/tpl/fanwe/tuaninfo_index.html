@@ -1,0 +1,12 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/tuaninfo_index.css";			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+	<div class="wrap  tuan_info_p">
+		<div class="info_p">
+		{$data.tuan_info}
+		</div>
+	</div>	
+{include file="./inc/footer.html"} 

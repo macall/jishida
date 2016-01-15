@@ -1,0 +1,59 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+
+    <div class="comments back-white">
+        <div class="comment-list">
+            {foreach from=$data.item item=list key=key}
+            <div class="comment">
+                <p class="info">
+                    <span class="name">{$list.user_name}</span>
+                    <span class="time">{function name="to_date" v=$list.create_time}</span>
+                   
+                </p>
+                <p class="message break-word">
+                    {$list.content}
+                </p>
+            </div>
+            {/foreach}
+        </div>
+	<div class="p-10">	
+      <div  class="back-main b-r-20">
+    	 {if $is_login eq 1}
+			<input type="button" class="plank"   onclick="document.getElementById('light').style.display='block'; document.getElementById('fade').style.display='block'" value="我要点评" style="background:none;">												
+		{else}
+			<input type="button" class="plank" value="登陆后点评" onclick="location.href='{wap_url a="index" r="login#index"}'" style="background:none;">
+		 {/if}
+			
+	</div>
+	</div>   		
+		
+    </div>
+	<div id="light" class="white_content" style="display='none';">
+                <form id="goods-form" action="{wap_url a="index" r="youhui_comment_list#index" p="yh_id=$data.yh_id&merchant_id=$data.merchant_id"}"  method="post">
+        
+                    <div id="deal-terms" class="box-style deal-terms">
+                        <h2 gaevent="imt/deal/terms">我要点评</h2>
+                        <div class="textarea">
+                            <textarea name="content" id="content"></textarea>
+                        </div>
+						
+						<div class="ft-account">
+                            <input type="hidden" value="1" id="add">
+                            <button type="submit" class="but_go" onclick="check1(this);">提交</button>
+                            <button class="but_black" type="button" value="取消" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">取消</button>
+                        </div>
+						
+                    </div>
+                    </form>
+                </div>
+				
+    
+    <div id="fade" class="black_overlay"></div>
+	
+        
+   
+{include file="./inc/footer.html"}	

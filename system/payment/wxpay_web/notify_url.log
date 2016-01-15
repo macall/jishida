@@ -1,0 +1,309 @@
+﻿执行日期：2015-01-10-20：44：58
+【接收到的request通知】:
+array (
+  'order_id' => '717',
+  'out_trade_no' => '20150110150',
+  'bank_billno' => '201501106180536589',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m28YmBVu2x3OEEhedwGhkukp2UvpoHWAlUKIGZAICQmVl1DdsBxx1xxIoDp0MxUE6mS3ylgvBkBw',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => 'EBC658D2616CA0E6A0F5AE24C527EBBA',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204458',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106108345474',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：44：58
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420893898</TimeStamp>
+<NonceStr><![CDATA[o5aSvIMwJWLIYhLd]]></NonceStr>
+<AppSignature><![CDATA[b886ab107c65a0cf711b8432941e10213142d153]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：45：09
+【接收到的request通知】:
+array (
+  'order_id' => '716',
+  'out_trade_no' => '20150110399',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m0vjQ-q9pcPZQUyZfSbKUwjksUR0loEcNcjkG8128rSG6CurKrmLnKRFpbgYWpIEaoqAH1fX4RSn',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => 'B01646BE869F76F570B7CEC4CAA26C07',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204110',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106087417216',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：45：09
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420893909</TimeStamp>
+<NonceStr><![CDATA[hyLqohIQt6nENr4z]]></NonceStr>
+<AppSignature><![CDATA[ce194bf43c1278e2e60a0d2a5b0ab13e8c6c53a2]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：45：13
+【接收到的request通知】:
+array (
+  'order_id' => '717',
+  'out_trade_no' => '20150110150',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m28YmBVu2x3OEEhedwGhkukp2UvpoHWAlQ7rAGcScGwi0c6fiVly3WcYy5S6D88BNiMNbyHE8DBS',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => '9CCA2E7ACFBA514DB5EE82BC438C4B7E',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204458',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106108345474',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：45：13
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420893913</TimeStamp>
+<NonceStr><![CDATA[4tXEo9y0GIAgPIfl]]></NonceStr>
+<AppSignature><![CDATA[19d98f76808df401146a34d70eb37fea5011d5a3]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：45：29
+【接收到的request通知】:
+array (
+  'order_id' => '717',
+  'out_trade_no' => '20150110150',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m28YmBVu2x3OEEhedwGhkukp2UvpoHWAlUqXjt89K3Ulsb9FGcCY6G4THyQHGyEEadp_hD-pYGMt',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => 'C9CD26FB455A4BA644200CD6C0E9B1F0',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204458',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106108345474',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：45：29
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420893929</TimeStamp>
+<NonceStr><![CDATA[pR0bOItNmfN4PyCi]]></NonceStr>
+<AppSignature><![CDATA[aba77006c50fdcc2db30cb25928e2c1980917e48]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：46：01
+【接收到的request通知】:
+array (
+  'order_id' => '717',
+  'out_trade_no' => '20150110150',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m28YmBVu2x3OEEhedwGhkukp2UvpoHWAlcxHhf6R8_yqSrBpBxRDHlHUai-v-8MnLxll2fklRQaP',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => '1C6390C2E4EA5275046E45CE82365FDF',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204458',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106108345474',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：46：01
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420893961</TimeStamp>
+<NonceStr><![CDATA[UL7B4EvhHFgHCbh5]]></NonceStr>
+<AppSignature><![CDATA[84922f4b17617df2f4b5737e076b0d762e3a7628]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：49：02
+【接收到的request通知】:
+array (
+  'order_id' => '717',
+  'out_trade_no' => '20150110150',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m28YmBVu2x3OEEhedwGhkukp2UvpoHWAlWZvhqMO81myDIBGxOXJpnSQhbFEVK4HeoT1YgBSld1v',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => '7E6078CD7813FD50C889CF931875ED15',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110204458',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106108345474',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：49：02
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420894142</TimeStamp>
+<NonceStr><![CDATA[BKZWzfHkHtSyp5i9]]></NonceStr>
+<AppSignature><![CDATA[9b4c0d352ec4e173c6d4c2be82d02a5b4fdbe6c6]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：49：54
+【接收到的request通知】:
+array (
+  'order_id' => '713',
+  'out_trade_no' => 'aaDz1PuAxDcaa4gQ',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m9vWBexzicdrTlqGpgCXV-ZflBhZIMzR-fQdf6dE7c3gQ_3eJwatIonVfArCOMztWawGy879-Fa2',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => 'DEEAC47038222A31319C49F725A57A81',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110201551',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106039608651',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：49：54
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420894194</TimeStamp>
+<NonceStr><![CDATA[A2CjVllo4z3klj7s]]></NonceStr>
+<AppSignature><![CDATA[9cbd4357f2eaebc1d89ea12a4f509bc7e26a024d]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：51：07
+【接收到的request通知】:
+array (
+  'order_id' => '718',
+  'out_trade_no' => '20150110379',
+  'bank_billno' => '201501106130639446',
+  'bank_type' => '3115',
+  'discount' => '0',
+  'fee_type' => '1',
+  'input_charset' => 'GBK',
+  'notify_id' => 'e-xM8N3vuLyGv1RyqlL9m5r7RBcQZE7Nc7uIk3aLh8LUAsnyQLb1g_W1W1jM1k5fUDB1wyWWF40vsJeu--ljvTec49IeJpN9',
+  'partner' => '1218665901',
+  'product_fee' => '1',
+  'sign' => '82478DA1BA8C6E03468143A9A1C6ABE9',
+  'sign_type' => 'MD5',
+  'time_end' => '20150110205107',
+  'total_fee' => '1',
+  'trade_mode' => '1',
+  'trade_state' => '0',
+  'transaction_id' => '1218665901201501106079233227',
+  'transport_fee' => '0',
+)
+
+
+执行日期：2015-01-10-20：51：07
+【接收到的wx_config通知】:
+array (
+  'appid' => 'wxbe5ad809db64f3d6',
+  'appsecret' => 'ba18869a4bb76ef7f4b794d823b992bc',
+  'mchid' => '',
+  'partnerid' => '1218665901',
+  'partnerkey' => 'db0f5a0c42a33efba1ae19af18a4cf24',
+  'key' => 'MM1eyHBdkTEZt9k22PCFuotIVJsot22xHupAlhb5ppjP1GUNSRcPqTRJgq1PddgT3FHAzZU8bOyiJWCuORk5eox87jPJalP4iXkQNHgTikWMhvt9BcEofBL8QphDfK3S',
+  'sslcert' => '',
+  'sslkey' => '',
+  'type' => 'V2',
+)
+
+
+执行日期：2015-01-10-20：51：07
+【接收到的top_xml通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420894267</TimeStamp>
+<NonceStr><![CDATA[RwW9H7KQDC8VHXgC]]></NonceStr>
+<AppSignature><![CDATA[3d0a446ce70ec383ba671b437cb795b1ff4efd26]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+
+执行日期：2015-01-10-20：51：07
+【接收到的notify通知】:
+<xml><OpenId><![CDATA[oVYNNt0Ihl0s2VrTH-4opgZNQyOs]]></OpenId>
+<AppId><![CDATA[wxbe5ad809db64f3d6]]></AppId>
+<IsSubscribe>1</IsSubscribe>
+<TimeStamp>1420894267</TimeStamp>
+<NonceStr><![CDATA[RwW9H7KQDC8VHXgC]]></NonceStr>
+<AppSignature><![CDATA[3d0a446ce70ec383ba671b437cb795b1ff4efd26]]></AppSignature>
+<SignMethod><![CDATA[sha1]]></SignMethod>
+</xml>
+
+

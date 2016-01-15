@@ -1,0 +1,345 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/merchantitem_index.css";	
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+
+<script>
+	var u=$(document).height();
+	 $(".cover_tx").height(u);
+	// alert(u);
+</script>
+<div class="cover_tx" style="display:none;">
+	<div class="alert_block_tx"></div>
+	<div class="alert_text_tx">
+		<h3>{$data.name}</h3>
+		<p>
+			{$data.mobile_brief}
+		</p>
+		<div class="import_tx">
+			<span>请输入下单金额 :</span>
+			<div>
+				<input type="text" name="money" id="J_order_money">
+			</div>
+		</div>
+		<div class="button_tx">
+			<div class="sure_tx">
+				<div class="block_tx">
+				<button id="J_order_auto" type="submit"  >确认</button>
+				</div>
+			</div>
+			<div class="cancel_tx">
+				<div class="block_tx">
+				<button id="J_order_del" type="submit"  >取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrap">
+				<div class="content">
+					
+					<div class="list-view">
+						 <div class="whole_grade">
+						 	   <a href="">
+						 	   	  <div class="g_pic">
+						 	   	  	<img src="{$data.logo}" width="58" height="56">
+						 	   	  </div>
+						 	   	  <div class="grade_num">
+						 	   	  	  <h3>{$data.name}</h3>
+									  <div class="grade">
+									  	   <span>评分:</span>
+										   <div class="five_star_orange" >
+											   	    <i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>
+											   	    <div class="five_star_grey" style="width:{$data.width}px">
+											   	    	<i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i>
+											   	    </div>
+											   </div>
+										   <b><?php echo round($this->_var['data']['avg_point'],1); ?></b>
+									  </div>
+						 	   	  </div> 
+								   
+						 	   </a>
+						 </div>
+						
+						 <div class="business_info">
+						 	   <div class="business_address">
+						 	   	 	 <!--h3>{$data.brand_name}</h3-->
+									 <span>{$data.brief}</span>
+						 	   </div>
+						 </div>
+						
+					</div>	
+					
+					
+					
+	<div class="blank8"></div>
+	{if $data.is_auto_order eq 1}
+	{if $is_login eq 1}
+			<input type="hidden" id="J_location_id" value="{$data.id}">
+			<button id="J_order_cart" type="submit"  name="Submit" class="plank"  >立即付款</button>
+		{else}
+			<button onclick="window.location.href ='{wap_url a="index" r="login#index"}'" type="submit"  name="Submit" class="plank"  >登录后下单</button>
+		{/if}
+	<div class="blank8"></div>
+	{/if}
+	<script type="text/javascript">
+			$("#J_order_cart").click(function(){
+				$(".cover_tx").css("display","block");
+			});	
+			$("#J_order_del").click(function(){
+				$(".cover_tx").css("display","none");
+				$("#J_order_money").val("");
+			});
+			$("#J_order_auto").click(function(){
+			
+				var money=$("#J_order_money").val();
+				
+				$('#J_order_auto').attr('disabled',"true");//添加disabled属性
+				
+		
+				var location_id=$("#J_location_id").val();
+				
+				if(!money){
+					alert("下单金额输入不能为空!");
+					return false;
+				}
+				var query = new Object();
+				query.money = money;
+				query.location_id=location_id;
+				query.post_type="json";
+				var ajaxurl = '{wap_url a="index" r="auto_order"}';
+				$.ajax({
+					url:ajaxurl,
+					data:query,
+					type:"Post",
+					dataType:"json",
+					success:function(obj){
+						if(obj.status==1){			
+							alert(obj.info);
+							window.location.href = '{wap_url a="index" r="my_order_detail#index"}'+'&id='+obj.order_id;
+						}
+					}
+					,error:function(){
+						alert("服务器提交错误");
+						$('#J_order_auto').removeAttr("disabled"); //移除disabled属性 
+					}
+				});	
+			});
+	</script>
+				<div class="list-view">
+						 <div class="evaluate_title">商家信息</div>
+						 <div class="business_info">
+						 	   <div class="business_address">
+						 	   	     <h3>{$data.supplier_name}</h3>
+									 <span>{$data.address}</span>
+						 	   </div>
+							   <a href="tel:{$data.tel}" class="business_phone" style="display:block;">
+							   	     <i class="fa fa-phone"></i>
+							   </a>
+						 </div>
+						
+					</div>	
+		{if $data.other_supplier_location}
+	<div class="blank8"></div>
+				<div class="list-view">	
+						 <div class="evaluate_title">其它门店</div>
+						 {foreach from=$data.other_supplier_location item=supplier_location name=supplier_location}
+						
+						 <div class="business_info  {if $smarty.foreach.supplier_location.iteration gt 3}business_display{/if}" onclick = "javascript:window.location.href='{wap_url a="index" r="merchantitem" p="id=$supplier_location.id"}'"  >
+						 	   <div class="business_address">
+						 	   	     <h3>{$supplier_location.name}</h3>
+									 <span>{$supplier_location.address}</span>
+									 <span>{$supplier_location.tel}</span>
+						 	   </div>
+							   <a class="business_phone" href="tel:{$supplier_location.tel}" style="display: block;">
+							   	     <i class="fa fa-phone"></i>
+							   </a>
+						 </div>
+						 
+						{/foreach}
+						{if $smarty.foreach.supplier_location.iteration gt 3}
+						<div class="see_more J_location_more" style="color:#fc8600;border-top:1px solid #f5f5f5;cursor:pointer;">
+						 	点击下拉查看
+						 </div>
+						  <script type="text/javascript">
+						 	$(".J_location_more").click(function(){
+								$(".business_display").toggleClass("business_blank");
+							});
+						 </script>
+						 {/if}
+			 </div>			
+		{/if}							
+					
+	
+	
+					
+	<div class="blank8"></div>
+					{if $data.tuan_list}
+					<div class="list-view">
+						 <div class="list_title">该商家的团购</div>
+						 <ul class="tuan_ul">
+						 	{foreach from=$data.tuan_list item=tlist key=key name=tlist}
+						 	<li class="tuan_li {if $smarty.foreach.tlist.iteration gt 2}business_tuan_display{/if}" >
+						 	     <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$tlist.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$tlist.img}" width="140" height="85">
+											{if $tlist.auto_order eq 1}<i class="tuan_ico order">免预约</i>{/if}
+						 	     		 </div>
+										 <div class="info">
+										 	<h2>{$tlist.name}</h2>
+											<h3>{$tlist.brief}</h3>
+											<div class="tuan_price">
+						                         <p class="price">
+						                         	 <em>{$tlist.current_price}<i>元</i></em>
+													 <del>{$tlist.origin_price}元</del>
+												 </p>
+						                         <p class="bought"><i></i>已售{$tlist.buy_count}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							{if $smarty.foreach.tlist.iteration gt 2}
+								<div class="see_more J_tuan_more" style="color:#fc8600;border-top:1px solid #f5f5f5;cursor:pointer;">
+							 	点击下拉查看
+								</div>
+							  <script type="text/javascript">
+							 	$(".J_tuan_more").click(function(){
+									$(".business_tuan_display").toggleClass("business_tuan_blank");
+								});
+							 </script>
+							 {/if}
+						 </ul>
+						
+					</div>
+					{/if}
+	<div class="blank8"></div>
+					{if $data.goods_list}
+					<div class="list-view">
+						 <div class="list_title">该商家的商品</div>
+						 <ul class="tuan_ul">
+						 	{foreach from=$data.goods_list item=glist key=key name=glist}
+						 	<li class="tuan_li {if $smarty.foreach.glist.iteration gt 2}business_goods_display{/if}" >
+						 	     <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$glist.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$glist.img}" width="140" height="85">
+											{if $glist.is_hot eq 1}<i class="tuan_ico hot">热</i>{/if}
+						 	     		 </div>
+										 <div class="info">
+										 	<h2>{$glist.name}</h2>
+											<h3>{$glist.brief}</h3>
+											<div class="tuan_price">
+						                         <p class="price">
+						                         	 <em>{$glist.current_price}<i>元</i></em>
+													 <del>{$glist.origin_price}元</del>
+												 </p>
+						                         <p class="bought"><i></i>已售{$glist.buy_count}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							
+						 </ul>
+						 {if $smarty.foreach.glist.iteration gt 2}
+								<div class="see_more J_goods_more" style="color:#fc8600;border-top:1px solid #f5f5f5;cursor:pointer;">
+							 	点击下拉查看
+								</div>
+							  <script type="text/javascript">
+							 	$(".J_goods_more").click(function(){
+									$(".business_goods_display").toggle();
+								});
+							 </script>
+							 {/if}
+					</div>
+					{/if}
+      <div class="blank8"></div>
+	                   
+					 {if $data.youhui_list}  
+					<div class="list-view">
+						 <div class="list_title">该商家的优惠券</div>
+						 <ul class="youhui_ul">
+						 	{foreach from=$data.youhui_list item=ylist key=key name=ylist}
+						 	<li class="tuan_li {if $smarty.foreach.ylist.iteration gt 2}business_youhui_display{/if}" >
+						 	     <a href="{wap_url a="index" r="youhuiitem#index"  p="id=$ylist.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$ylist.merchant_logo}" width="140" height="85">
+										</div>
+										 <div class="info">
+										 	<h2>{$ylist.title}</h2>
+											<h3>{$ylist.content}</h3>
+											<div class="tuan_price">
+												 <p>发布时间：{$ylist.begin_time}</p>
+						                         <div class="downloader">已下载 :{$ylist.down_count}</div>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							{if $smarty.foreach.ylist.iteration gt 2}
+								<div class="see_more J_youhui_more" style="color:#fc8600;border-top:1px solid #f5f5f5;cursor:pointer;">
+							 	点击下拉查看
+								</div>
+							  <script type="text/javascript">
+							 	$(".J_youhui_more").click(function(){
+									$(".business_youhui_display").toggle();
+								});
+							 </script>
+							 {/if}
+							
+							</ul>
+						 
+					</div>
+					{/if}
+					
+   <div class="blank8"></div>
+   
+                 <div class="list-view">
+						 <div class="evaluate_title">评价</div>
+						 {if $data.comment_list}
+						 <div class="assess_list">
+						 	
+						 	  <ul>
+						 	  	{foreach from=$data.comment_list item=plist name=abc} 
+						 	  	 <li>
+						 	  	 	  <div class="assess_detail">
+						 	  	 	  	  <div class="a_d_left">
+						 	  	 	  	  	   <span class="s_d_name">{$plist.user_name}</span>
+											   <div class="five_star_orange">
+											   	    <i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>
+											   	    <div class="five_star_grey" style="width:{$plist.width}">
+											   	    	<i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i>
+											   	    </div>
+											   </div>
+						 	  	 	  	  </div>
+						 	  	 	  	  <span class="a_d_right">{function name="to_date" v=$plist.create_time}</span>
+						 	  	 	  </div>
+									  <p>
+									  	{$plist.content}
+									  </p>
+						 	  	 </li>
+								 {/foreach}
+								
+						 	  </ul>
+							  
+						 </div>
+						 {else}
+							 <div class="assess_list" style="text-align:center;padding:10px 0;"> 暂无评论</div>
+						{/if}
+						 <div class="see_more">
+						 	<a href="{wap_url a="index" r="dp_list#index"  p="id=$data.id&type=supplier"}">查看全部评价</a>
+						</div>
+					</div>
+					
+				 
+				</div>
+{include file="./inc/footer.html"} 

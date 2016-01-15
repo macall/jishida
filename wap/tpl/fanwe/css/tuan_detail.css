@@ -1,0 +1,123 @@
+@charset "utf-8";
+a:hover{cursor:pointer;text-decoration:none;}
+.header {text-align: center;}
+.left-box, .right-box {position: absolute;}
+
+.left-box {left: 8px;}
+.hd-lbtn {position: relative;display: block;}
+.header h1 {font-size:18px;font-family:"微软雅黑"; line-height:51px; margin:0;}
+.header .right-box {position: absolute;right: 8px;top: 0;}
+.header .right-box a {color: #FFF;height: 29px;font-size: 14px;margin: 11px 0 0;padding-left: 18px;}
+.right-box img{ height:45%; position:relative; top:6px;}
+
+.deal {background: #efefef;overflow: hidden;}
+.tuan_box{padding:10px;border-bottom: 1px solid #ccc;background: #FFF;}
+.detail_info{border-bottom:#ccc 1px dashed;padding-bottom:20px;line-height:45px;padding-left:15px;}
+.f_l{float:left;}
+.f_r{float:right;}
+.cf:after {display: block;height: 0px;visibility: hidden;clear: both;overflow: hidden;content: '';}
+.detail_price span{color:#a31d58;font-weight:bolder;}
+.detail_price .red{font-size:40px;}
+.detail_price  del{color:#989898;font-size: 16px;padding-left:15px;}
+.deal-title {margin: 30px 2px;position: relative;}
+.deal-title h1 {font-size: 19px;font-weight: 700;margin-bottom: 18px;}
+.deal-title .explain {font-size: 15px;}
+.deal-tips {overflow: hidden;padding-left: 1.5625em;}
+.deal-tips li {float: left;width: 50%;font-size: 14px;text-align: left;color: #999;line-height: 27px;}
+.deal-tips .yes {color: #a6c04c;}
+.deal-bizinfo {position: relative;}
+.box-style {background: #FFF;border-top: 2px solid #a11d57;margin:0 0 13px 0;padding: 8px 7px;border-bottom:1px solid #ccc;box-shadow: 2px 2px 4px #ededed;-moz-box-shadow: 2px 2px 2px #ededed;-webkit-box-shadow: 2px 2px 4px #ededed;}
+.box-style h2 {color: #333;font-size: 16px;padding: 0 5px 6px;text-align: left;}
+.icon-fonts {margin-right: .7em;text-align: center;opacity: .7;line-height: 1em;float:left;width:19px;padding-top: 3px;}
+.biz-info {overflow: hidden;margin: 0 auto;padding: 8px;margin-bottom: 8px;border-top: 1px dashed rgba(0,0,0,.1);border-bottom: 1px dashed rgba(0,0,0,.1);}
+.biz-info .call {width: 19%;float: left;color: #52B3CC;font-size: 28px;line-height: 47px;margin: 0;}
+.biz-info .call a {display: block;padding-left: 20px;height:27px;padding-top:20px;}
+.biz-info .biz-detail {float: left;width: 80%;border-right: 1px solid #e5e5e5;}
+.biz-detail p {margin-bottom: 3px;}
+.ell {text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.biz-detail .title {font-size: 15px;color: #333;}
+.biz-detail .address {font-size: 13px;color: #999;}
+.deal-comment a {height: 26px;display: block;position: relative;}
+.deal-comment .score-bg {font-size: 18px;color: #f49231;display: inline-block;padding-left: 120px;}
+.deal-comment .score-rl {position: absolute;left: 0;top: 0;}
+.star {font-style: normal;font-family: Test;color: #f49231;font-size: 18px;line-height: 26px;float: left;margin-right: 5px;}
+.deal-comment .comment-acount {margin-right:1.9%;padding-right: 43px;float: right;font-size: 14px;color: #999;position: relative;line-height: 26px;height:16px;}
+.deal-comment .comment-acount:after {position: absolute;right: -1px;top: 7px;width: 1em;margin-right: .4em;text-align: center;opacity: .7;line-height: 1em;font-size: 14px;color: #D5D5D5;}
+
+.deal-detail .tab-box {padding: 8px 0;border-bottom: 1px dashed rgba(0,0,0,.1);border-top: 1px dashed rgba(0,0,0,.1);}
+.box-style .more {margin: 11px 0 11px 11px;margin-right:1.9%;color: #a6c04c;position: relative;height:20px}
+.deal-terms ul {padding: 9px 0 0 30px;}
+.btn-large {width: 100%;font-size: 20px;height: 46px;display: block;line-height: 44px;text-align: center;color: #FFF;background: #A6C04C;border-radius: 3px;border: 1px solid #91A351;box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;-moz-box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;}
+.btn-tip {background: #a11d58;border: 1px solid #6f0031;color:#fff;}
+.deal-advice ul li {border-top: 1px dashed #e7e7e7;position: relative;}
+.deal-advice {padding-bottom: 0;}
+.deal-pricetag {padding-bottom: 10px;border-bottom: 1px dashed #ccc;}
+.deal-pricetag .price_left {width: 50%;display: inline-block;text-align: left;}
+
+.discount-price span {font-size: 14px;font-weight: 400;}
+.discount-price span.j_discount_price{font-size: 28px;color: #a21e58;}
+.dt-price {color: #999;font-style: normal;text-decoration: line-through;font-size: 13px;line-height: 19px;margin: 7px 0 0 5px;}
+.m-t15 {margin-top: 15px;padding-left:15px;}
+.deal-pricetag .btn-large {-webkit-box-flex: 1;width: 42%;height: 40px;line-height: 40px;float: right;display: inline-block;}
+/*.deal-tips .yes .icon-fonts{background:url(../images/tuan_ok.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-tips .deal-tuan-count .icon-fonts{background:url(../images/tuan_shouchu.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-tips .deal-tuan-time .icon-fonts{background:url(../images/tuan_time.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-bizinfo h2 .icon-fonts{background:url(../images/tuan_supplier.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-detail h2 .icon-fonts{background:url(../images/tuan_taocan.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-terms  h2 .icon-fonts{background:url(../images/tuan_xuzhi.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-advice h2 .icon-fonts{background:url(../images/tuan_tuijian.png) no-repeat 0 center;display: inline;padding: 19px ;}
+*/
+.deal-terms ul li{list-style-type:disc;}
+.deal-advice ul{padding:0px;margin-left:10px;}
+/*.deal-advice ul  li {padding:25px 0px; background:url(../images/tuan_next.png) no-repeat 98.1% center ;border-bottom: 1px dashed rgba(0,0,0,.1);}*/
+.deal-advice a.advice-buy{display:block;widht:100%;}
+.sc_ori{ font-size:22px; font-weight:blod; color:#FE4700; line-height:20px;}
+.starsBarBig{ background: url(../images/star_bar.png) no-repeat 0 -79px;position: relative;}
+.starsBarBig .s{display:block; height:20px; background: url(../images/star_bar.png) no-repeat 0 -48px;}
+#J_post_cart:hover{cursor:pointer;text-decoration:none;}
+.box-style h2 .icon-fonts{padding-top:0px}
+.box-style .more_next {
+font-family: Test;
+content: 'F';
+position: absolute;
+right: 3px;
+top: 4px;
+width: 1em;
+margin-right: .4em;
+text-align: center;
+opacity: .7;
+line-height: 1em;
+font-size: 14px;
+}
+.comment-acount .more_next_count{
+font-family: Test;
+content: 'F';
+position: absolute;
+right: -1px;
+top: 7px;
+width: 1em;
+margin-right: .4em;
+text-align: center;
+opacity: .7;
+line-height: 1em;
+font-size: 14px;
+color: #D5D5D5;
+}
+.advice-buy {
+padding: 12px 25px 12px 8px;
+display: block;
+color:#676767;
+}
+.buy_next{
+font-family: Test;
+content: 'F';
+position: absolute;
+right: 7px;
+top: 12px;
+color: #D5D5D5;
+height:20px;
+}
+.deal-details img{
+	width:100%;
+}
+

@@ -1,0 +1,254 @@
+@charset "utf-8";
+.deal {background: #efefef;overflow: hidden;}
+.tuan_box{padding:0 20px;border-bottom: 1px solid #ccc;background: #FFF;}
+.detail_info{border-bottom:#ccc 1px dashed;padding-bottom:20px;line-height:45px;padding-left:15px;}
+.f_l{float:left;}
+.f_r{float:right;}
+.cf:after {display: block;height: 0px;visibility: hidden;clear: both;overflow: hidden;content: '';}
+.detail_price span{color:#a31d58;font-weight:bolder;}
+.detail_price .red{font-size:40px;}
+.detail_price  del{color:#989898;font-size: 16px;padding-left:15px;}
+.deal-title {margin: 30px 2px;position: relative;}
+.deal-title h1 {font-size: 19px;font-weight: 700;margin-bottom: 18px;}
+.deal-title .explain {font-size: 15px;}
+.deal-tips {overflow: hidden;padding-left: 25px;}
+.deal-tips li {float: left;width: 50%;font-size: 18px;text-align: left;color: #999;line-height: 27px;height:50px;line-height:50px;}
+.deal-tips .yes {color: #a6c04c;}
+/*.deal-bizinfo {position: relative;}*/
+.box-style {background: #FFF;padding: 8px 7px;}
+.box-style h2 {color: #333;font-size: 16px;/*padding: 0 5px 6px;*/text-align: left;}
+.icon-fonts {margin-right: .7em;text-align: center;opacity: .7;line-height: 1em;font-size: 19px;}
+.biz-info {overflow: hidden;margin: 0 auto;padding: 8px;margin-bottom: 8px;border-top: 1px dashed rgba(0,0,0,.1);border-bottom: 1px dashed rgba(0,0,0,.1);}
+.biz-info .call {width: 19%;float: left;color: #52B3CC;font-size: 28px;line-height: 47px;margin: 0;}
+.biz-info .call a {display: block;padding-left: 20px;}
+.biz-info .biz-detail {float: left;width: 80%;border-right: 1px solid #e5e5e5;}
+.biz-detail p {margin-bottom: 3px;}
+.ell {text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.biz-detail .title {font-size: 15px;color: #333;}
+.biz-detail .address {font-size: 13px;color: #999;}
+.deal-comment a {height: 26px;display: block;position: relative;}
+.deal-comment .score-bg {font-size: 18px;color: #f49231;display: inline-block;padding-left: 120px;}
+.deal-comment .score-rl {position: absolute;left: 0;top: 0;}
+.star {font-style: normal;font-family: Test;color: #f49231;font-size: 18px;line-height: 26px;float: left;margin-right: 5px;}
+.deal-comment .comment-acount {margin-right:27px;padding-right: 27px;float: right;font-size: 14px;color: #999;position: relative;line-height: 26px;background:url(../images/tuan_next.png) no-repeat right 0;}
+.deal-comment .comment-acount:after {position: absolute;right: -1px;top: 7px;width: 1em;margin-right: .4em;text-align: center;opacity: .7;line-height: 1em;font-size: 14px;color: #D5D5D5;}
+.deal-comment .score-rl span {margin-right: 5px;width: 19px;}
+.deal-detail .tab-box {padding: 8px 0;border-bottom: 1px dashed rgba(0,0,0,.1);border-top: 1px dashed rgba(0,0,0,.1);}
+.box-style .more {padding: 11px 0 11px 11px;margin-right:40px;color: #a6c04c;font-size: 18px;position: relativedisplay: block;background:url(../images/tuan_rnext.png) no-repeat right 0;}
+.btn-large {width: 100%;font-size: 20px;height: 46px;display: block;line-height: 44px;text-align: center;color: #FFF;background: #A6C04C;border-radius: 3px;border: 1px solid #91A351;box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;-moz-box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,1px 1px 4px #CCC;}
+.btn-tip {background: #a11d58;border: 1px solid #7D7D7D;}
+.deal-advice ul li {border-top: 1px dashed #e7e7e7;position: relative;}
+.deal-advice {padding-bottom: 0;}
+.deal-pricetag {padding-bottom: 10px;border-bottom: 1px dashed #ccc;}
+.deal-pricetag div {width: 50%;display: inline-block;text-align: left;}
+.discount-price {font-size: 28px;color: #a21e58;}
+.discount-price span {font-size: 14px;font-weight: 400;}
+.dt-price {color: #999;font-style: normal;text-decoration: line-through;font-size: 13px;line-height: 19px;margin: 7px 0 0 5px;}
+.m-t15 {margin-top: 15px;padding-bottom: 25px;padding-left:15px;}
+.deal-pricetag .btn-large {-webkit-box-flex: 1;width: 40%;height: 40px;line-height: 40px;float: right;display: inline-block;}
+.deal-tips .yes .icon-fonts{background:url(../images/tuan_ok.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-tips .deal-tuan-count .icon-fonts{background:url(../images/tuan_shouchu.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-tips .deal-tuan-time .icon-fonts{background:url(../images/tuan_time.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-bizinfo h2 .icon-fonts{background:url(../images/tuan_supplier.png) no-repeat 0 center;display: inline;/*padding: 19px ;*/}
+.deal-detail h2 .icon-fonts{background:url(../images/tuan_taocan.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-terms  h2 .icon-fonts{background:url(../images/tuan_xuzhi.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-advice h2 .icon-fonts{background:url(../images/tuan_tuijian.png) no-repeat 0 center;display: inline;padding: 19px ;}
+.deal-terms ul li{
+	
+}
+.deal-advice ul{padding:0px;}
+.deal-advice ul  li {padding:25px 0px; background:url(../images/tuan_next.png) no-repeat 91% center ;border-bottom: 1px dashed rgba(0,0,0,.1);}
+.active{padding: 1.6em 0 0 8em;}
+#nav_1{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	float: left;
+	background: #EAEAEA;
+}
+#nav_1 li {
+	float: left;
+	text-align: center;
+
+}
+#nav_1 li a {
+	line-Height: 2em;
+	height: 2.8em;
+	line-height: 2.8em;
+}
+#cate1{ font-size:100%;}
+#cate2{ font-size:100%;}
+
+#nav_1 #cate1{width: 30%;}
+#nav_1 #cate2{width: 70%;}
+#nav li a{border: none;}
+.weixin{ text-align:center;}
+.weixin .liulang_num{float: left;margin-left: 27px;font-size: 14px;}
+.weixin .xiazai_num{margin-right: 27px;padding-right: 27px;float: right;font-size: 14px;}
+.blank 
+{
+	height: 10px;
+	line-height: 10px;
+	clear: both;
+	visibility: hidden;
+}
+.blank_1
+{
+	height: 16px;
+	line-height: 16px;
+	clear: both;
+	background-color:#efefef;
+	border-top:solid 2px #c2c2c2;
+	border-bottom:solid 2px #a11d58;
+}
+.starsBarBig {
+background: url(../images/star_bar.png) no-repeat 0 -79px;
+position: relative;
+}
+.starsBarBig .s {
+display: block;
+height: 20px;
+background: url(../images/star_bar.png) no-repeat 0 -48px;
+}
+
+.blank 
+{
+	height: 10px;
+	line-height: 10px;
+	clear: both;
+	visibility: hidden;
+}
+button.btn-block1 {
+	width: 45%;
+	line-height: 46px;
+	padding: 0;
+	margin: 10px 0;
+	font-size: 20px;
+	background: #f49231;
+	border: 1px solid #f49231;
+	color: #FFF;
+	margin-left:10px;
+	font-size:16px; font-family:'微软雅黑'
+}
+button.btn-block2 {
+	width: 45%;
+	line-height: 46px;
+	padding: 0;
+	margin: 10px 0;
+	font-size: 20px;
+	background: #a11d58;
+	border: 1px solid #a11d58;
+	color: #FFF;
+	margin-left:10px;
+	font-size:16px; font-family:'微软雅黑'
+}
+.biz-info1
+{
+	border-top: 1px dashed rgba(0,0,0,.1);
+	border-bottom: 1px dashed rgba(0,0,0,.1);
+}
+.touxiang ul li{ float:left; width:12%; margin-left:10px; margin-top:10px;}
+.touxiang ul li img{ width:100%;}
+.dl {
+display: block;
+min-height: 78px;
+position: relative;
+padding: 0px 8px 10px 20px;
+}
+.dl>img {
+left: 8px;
+position: absolute;
+padding: 1px;
+border: 1px #DBE5E7 solid;
+}
+.break-word {
+word-wrap: break-word;
+overflow: hidden;
+}
+.dl-brand {
+font-size: 14px;
+line-height: 15px;
+color: #000;
+font-weight: 700;
+margin-top: 5px;
+}
+.dl-title {
+line-height: 16px;
+color: #999;
+font-size: 13px;
+margin-top: 4px;
+}
+.collection{border-top: 1px dashed rgba(0,0,0,.1);}
+
+/*点评弹出框样式*/
+/*.black_overlay {
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: black;
+z-index: 1001;
+-moz-opacity: 0.8;
+opacity: .80;
+filter: alpha(opacity = 80);
+}
+
+.white_content {
+display: none;
+position: absolute;
+top: 0%;
+left: 0%;
+width: 100%;
+height: 100%;
+background-color: black;
+z-index: 1001;
+-moz-opacity: 0.8;
+opacity: .80;
+filter: alpha(opacity = 80);
+}*/
+
+.event_submit_form .event_submit_row {
+	padding: 10px 15px;
+	text-align:left;
+}
+.event_submit_form .tc{
+	text-align:left;
+	margin: 0px 15px 10px 15px;
+}
+ .adimg img {
+            width: 100%;
+        }
+ .black_overlay {
+    display: none;
+    position: absolute;
+    /*          top: 0%;
+     left: 0%;
+     width: 100%;
+     height: 100%;
+     background-color: black;
+     z-index: 1001;
+     -moz-opacity: 0.8;
+     opacity: .80;
+     filter: alpha(opacity = 80);*/
+}
+
+.white_content {
+    display: none;
+    position: absolute;
+    width: 96%;
+    height: 100%;
+    /**
+     border: 16px solid orange;
+     **/
+    /*   z-index: 1002;
+     overflow: auto;*/
+}
+
+.box-style h2 {
+    color: #333;
+    font-size: 16px;
+    /* padding: 0 5px 6px; */
+    text-align: left;
+}

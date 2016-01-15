@@ -1,0 +1,44 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/user_addr_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="body  address-edit">
+	{if !$data.item}
+	<div class="edit_block">
+		<a href='{wap_url a="index" r="add_addr#index" p="add=no&resulttype=$request.resulttype"}'>新增地址</a>
+	</div>
+	{else}
+	<div class="blank"></div>
+	{foreach from=$data.item item=user_addr_list key=k1}
+		<div>
+				<ul>
+					<div  {if $request.resulttype eq 'calc_cart'} onclick = "javascript:window.location.href='{wap_url a="index" r="calc_cart" p="first_calc=1"}'"  {/if}>
+						<li>姓名：{$user_addr_list.consignee}</li>
+						<li>电话号码：{$user_addr_list.phone}</li>
+						<li>省市：{$user_addr_list.delivery}</li>
+						<li>详细地址：{$user_addr_list.delivery_detail}</li>
+					
+					</div>	
+					
+					<div class="form-btn">
+					<a href="{wap_url a="index" r="edit_addr#index" p="id=$user_addr_list.id&resulttype=$request.resulttype"}">
+						<!--原来的
+							<button type="submit"  class="btn btn-block">编辑地址</button>
+							-->
+						<div class="buy">
+							<button  type="submit"  class="plank" >编辑地址</button>
+						</div>
+						</a>
+		        	</div>
+				</ul>
+		</div>
+		<div class="blank"></div>
+	{/foreach}
+	{/if}
+</div>
+
+ {include file="./inc/footer.html"} 

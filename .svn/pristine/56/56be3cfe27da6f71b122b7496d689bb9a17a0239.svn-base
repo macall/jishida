@@ -1,0 +1,224 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/user_addr_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="body p-10 address-edit">
+    <form  id="normal-add_addr-form" method="post" action="{wap_url a="index" r="add_addr" }" autocomplete="off" onsubmit="return check1(this)">
+        <dl class="form">
+            <dt>姓名</dt>
+            <dd><input name="consignee" id="consignee" type="text" class="input-common" placeholder="最少2个字" pattern=".{2,}" data-err="姓名必须大于2个字！" value="{$data.consignee.consignee}"></dd>
+            <dt>电话</dt>
+            <dd><input name="phone" id="phone" type="tel" class="input-common" placeholder="不少于7位" pattern="\d{3}[\d\*]{4,}" data-err="电话必须大于7位！" value="{$data.consignee.mobile}"></dd>
+            <dt>省市</dt>
+            <dd class="cf address-edit-pcd">
+            	<input type="hidden" name="region_lv1" value="1">
+                <div class="mg-1-3">
+                <select class="select-common" name="region_lv2" id="region_lv2">                                                                                               
+                       {foreach from=$data.consignee_data.region_lv2 item=lv2}
+							<option {if $lv2.selected eq 1}selected="selected"{/if} value="{$lv2.id}">{$lv2.name}</option>
+					   {/foreach}
+                </select>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                </div>
+                <div class="mg-1-3">
+                <select class="select-common" name="region_lv3" id="region_lv3">
+                        {foreach from=$data.consignee_data.region_lv3 item=lv3}
+							<option {if $lv3.selected eq 1}selected="selected"{/if} value="{$lv3.id}">{$lv3.name}</option>
+						{/foreach}
+                </select>
+                </div>
+                <div class="mg-1-3">
+                <select class="select-common" name="region_lv4" id="region_lv4">
+       
+                           {foreach from=$data.consignee_data.region_lv4 item=lv4}
+								<option {if $lv4.selected eq 1}selected="selected"{/if} value="{$lv4.id}">{$lv4.name}</option>
+						   {/foreach}
+                </select>
+                </div>
+            </dd>
+            <dt>地址</dt>
+            <dd><textarea name="delivery_detail" id="delivery_detail" class="text-common" placeholder="最少5个字,最多60个字,不能全部为数字" pattern="^.{5,60}$" data-err="请填写正确的地址信息！" >{$data.consignee.address}</textarea></dd>
+            <dt class="form-hide">&nbsp;</dt>
+        </dl>
+			<input type="hidden" name="aurl" id="aurl" value="{$data.aurl}"/>
+			<input type="hidden" value="{$data.consignee.id}" id="add_id">
+			<div class="edit_b">
+				<div class="edit_b_add">
+					<div class="buy">
+					<button  type="submit"  class="plank" >编辑</button>
+				    </div>
+				</div>
+			    <div class="edit_b_add">
+			    	<div class="buy">
+					<button  type="button"  name="Submit" class="plank" onclick="check({$data.consignee.id});">删除收货地址</button>
+				</div>
+			    </div>
+			</div>
+			<!--
+			<button type="submit"  class="btn btn-block1" >编辑</button>
+			<button type="button" name="Submit"  class="btn btn-block2" onclick="check({$data.consignee.id});" >删除收货地址</button>
+			-->
+       
+    </form>
+</div>
+
+<script type="text/javascript" src="./js/region.js"></script>	
+<script type="text/javascript">
+	$(document).ready(function(){
+		//load_select("1");
+		$("select[name='region_lv2']").bind("change",function(){
+			load_select("2");
+		});
+		$("select[name='region_lv3']").bind("change",function(){
+			load_select("3");
+		});	
+		$("select[name='region_lv4']").bind("change",function(){
+			load_select("4");
+		});	
+		
+	});
+	
+	function load_select(lv)
+	{
+		var name = "region_lv"+lv;
+		var next_name = "region_lv"+(parseInt(lv)+1);
+		var id = $("select[name='"+name+"']").val();
+		
+		if(lv==1)
+		var evalStr="regionConf.r"+1+".c";
+		if(lv==2)
+		var evalStr="regionConf.r"+1+".c.r"+id+".c";
+		if(lv==3)
+		var evalStr="regionConf.r"+1+".c.r"+$("select[name='region_lv2']").val()+".c.r"+id+".c";
+		
+		if(id==0)
+		{
+			//var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+		}
+		else
+		{
+			var regionConfs=eval(evalStr);
+			evalStr+=".";
+			var html = "";//"<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+			for(var key in regionConfs)
+			{
+				html+="<option value='"+eval(evalStr+key+".i")+"'>"+eval(evalStr+key+".n")+"</option>";
+			}
+		}
+		$("select[name='"+next_name+"']").html(html);
+		
+		if(lv == 4)
+		{
+
+		}
+		else
+		{
+			load_select(parseInt(lv)+1);
+		}	
+	}
+</script>
+<script type="text/javascript">
+function  check(c_id){        		
+  
+	var query = new Object();
+	query.id = "{$data.consignee.id}";
+	query.post_type = "json";
+	var ajaxurl ="{wap_url a="index" r="del_addr"}";
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			alert(data.info);
+			window.location.href="{wap_url a="index" r="user_addr_list#index" p="resulttype=$request.resulttype"}";
+		},error:function(){
+			alert("服务器提交错误");
+		}
+	});		
+	return false;	
+}
+function  check1(){
+	
+	var obj1=$("#consignee").val();
+		var obj2=$("#phone").val();
+		var obj3=$("#region_lv2").val();
+		var obj4=$("#region_lv3").val();
+		var obj5=$("#region_lv4").val();
+		var obj6=$("#delivery_detail").val();
+		//var obj7=$("#postcode").val();
+		var obj8=$("#add_id").val();
+		var obj9=$("#aurl").val();
+		
+		if(!obj1){
+		alert("请填写姓名");
+		return false;	
+			
+		}
+		if(!obj2){
+		alert("请填电话");
+		return false;	
+			
+		}
+		if(!obj3){
+		alert("请选择省份");
+		return false;	
+			
+		}	
+		if(!obj4){
+		alert("请选择省市");
+		return false;	
+			
+		}	
+		if(!obj5){
+		alert("请选择地区");
+		return false;	
+			
+		}	
+		if(!obj6){
+		alert("请填地址");
+		return false;	
+			
+		}	
+				
+		var query = new Object();
+		query.consignee = obj1;
+		query.phone = obj2;
+		query.region_lv1 = "1";
+		query.region_lv2 =obj3
+		query.region_lv3 = obj4;
+		query.region_lv4 = obj5;
+		query.delivery_detail = obj6;
+		//query.postcode = obj7;
+		query.id = obj8;
+		query.aurl = obj9;
+		query.post_type = "json";
+		var ajaxurl =$("#normal-add_addr-form").attr("action");
+		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"Post",
+			dataType:"json",
+			success:function(data){
+				if(data.return==1){ 
+					alert("保存成功,确定返回");
+					window.location.href="{wap_url a="index" r="user_addr_list#index" p="resulttype=$request.resulttype"}";
+				}else{
+					alert(data.info);
+				}
+			},error:function(){
+				alert("服务器提交错误");
+			}
+		});		
+		return false;	
+		
+		
+		
+		}
+
+</script>
+{include file="./inc/footer.html"} 
+

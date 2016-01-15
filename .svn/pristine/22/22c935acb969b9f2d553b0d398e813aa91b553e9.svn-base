@@ -1,0 +1,28 @@
+{include file="./inc/header.html"}
+<div class="criteria">
+   <ul class="search_criteria">
+   	     <li {if $data.status eq 0} class="this" {/if}  ref = 0 onclick = "javascript:location.href='{wap_url a="index" r="voucher#index" p="tag=0"}'">全部</li>
+   	     <li {if $data.status eq 2} class="this" {/if}　ref = 2 onclick = "javascript:location.href='{wap_url a="index" r="voucher#index" p="tag=2"}'">未使用</li>					   	     
+		 <li {if $data.status eq 1} class="this" {/if}　ref = 1 onclick = "javascript:location.href='{wap_url a="index" r="voucher#index" p="tag=1"}'">即将过期</li>
+		 <li {if $data.status eq 3} class="this" {/if}　ref = 3 onclick = "javascript:location.href='{wap_url a="index" r="voucher#index" p="tag=3"}'">已使用/失效</li>
+   </ul>
+</div>
+<section class="volume_list">
+    <ul>
+        {foreach from=$data.item item=voucher key=k1}
+		<li>
+		
+		<i>代金券名称：{$voucher.name}
+		面额：{function name="format_price" value=$voucher.money}<br />
+		代金券序列号：{$voucher.sn}
+		{if $voucher.password}<br />密码：{$voucher.password}{/if}<br />
+		{if $voucher.begin_time eq 0}无限{else}{function name="to_date" value=$voucher.begin_time}{/if} {if $voucher.end_time eq 0}{else}到 {function name="to_date" value=$voucher.end_time}{/if}<br />
+		已用次数/总次数:{$voucher.use_count}/{if $voucher.use_limit==0}无限{else}{$voucher.use_limit}{/if}</i>
+		{if $voucher.is_use==1}
+		<a href='javascript:location.href="{wap_url a="index" r="index#index" p="id=$voucher.order_id"}"'class="dl">使用</a>
+		{/if}
+		 </li>
+		{/foreach}
+    </ul>
+</section>
+{include file="./inc/footer.html"} 

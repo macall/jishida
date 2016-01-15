@@ -1,0 +1,31 @@
+<ul class="business_ul">
+ 	{foreach from=$data.item item=deal key=key}
+	<li class="tuan_li">
+ 	     <a href="{wap_url a="index" r="merchantitem#index" p="id=$deal.id"}">
+ 	     	<div class="list_item">
+ 	     		 <div><img src="{$deal.logo}" width="108" height="67"></div>	
+				 <div class="good_deta">
+				 	  <h4>{$deal.name}</h4>
+					  <p style="height:28px;overflow:hidden;">{if $deal.address}地址:{$deal.address}{/if}</p>
+					  <div class="grade">
+			  	             <span>评分:</span>
+				             <div class="five_star_orange" >
+					   	           <i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>
+					   	           <div class="five_star_grey" style="width:{$deal.width}%">
+					   	    	        <i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i>
+					   	           </div>
+					         </div>
+				             <b>{$deal.avg_point}</b>
+			            </div>
+				 </div>
+				 								
+		    </div>
+ 	     </a>
+ 	</li>
+	{/foreach}
+</ul> 
+{if $pages}
+	<div class="fy">
+		{$pages}
+	</div>
+{/if}

@@ -1,0 +1,92 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/change_password.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="wrap">
+
+	<div class="content">
+		<form id="form" method="post" action="{wap_url a="index" r="pwd"}" onsubmit="return check(this)">
+					<div class="change_block">
+					      <h3>{$data.user_name}</h3>
+						  <div class="input_b">
+						  	<div class="input_i">
+						  		 <i class="fa fa-lock"></i>
+						  	</div>
+							<div class="input_text">
+								<input type="text" placeholder="请输入原始密码" type="password" name="old_pwd" autocomplete="off"  id="old_pwd">
+							</div>
+						  </div>
+						  <div class="blank10"></div>
+						   <div class="input_b">
+						  	<div class="input_i">
+						  		 <i class="fa fa-lock"></i>
+						  	</div>
+							<div class="input_text">
+								<input type="text" placeholder="请输入新密码" type="password" name="newpassword" autocomplete="off" id="newpassword">
+							</div>
+						  </div>
+						  <div class="blank10"></div>
+						   <div class="input_b">
+						  	<div class="input_i">
+						  		 <i class="fa fa-lock"></i>
+						  	</div>
+							<div class="input_text">
+								<input type="text" placeholder="请再次输入新密码" type="password" name="newpassword2" autocomplete="off" id="newpassword2">
+							</div>
+						  </div>
+						 <div class="sure_b">
+						 	<button type="submit" >确认修改</button>
+				            
+				         </div>
+					</div>
+					</form>
+				</div>
+</div>				
+<script type="text/javascript">
+	function  check(){
+		var old_pwd=$("#old_pwd").val();
+		var obj2=$("#newpassword").val();
+		var obj3=$("#newpassword2").val();
+		if(!old_pwd){
+			alert("请填密码");
+			return false;		
+		}
+		if(!obj2){
+			alert("请填新的密码");
+			return false;		
+		}	
+		if(!obj3){
+			alert("请填确认新的密码");
+			return false;
+		}
+		if(obj2!=obj3){
+			alert("两次密码不一致");
+			return false;
+		}	
+		var query = new Object();
+		query.old_pwd = old_pwd;
+		query.newpassword = obj2;
+		query.post_type = "json";
+		var ajaxurl =$("#form").attr("action");
+		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				alert(data.info);
+				if(data.return==1){ 
+					window.location.href="{wap_url a="index" r="user_center#index"}";
+				}
+			}
+			,error:function(){
+				alert("服务器提交错误");
+			}
+		});	
+		return false;
+	}
+</script>	
+
+{include file="./inc/footer.html"} 

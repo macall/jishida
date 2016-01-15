@@ -1,0 +1,164 @@
+{include file="./inc/header.html"}
+<!-- 找回密码 开始 -->  
+ <section class="user_getpassword p10 tc">
+	<form id="user_getpwd_by_mobile" name="user_getpwd_by_mobile" action="{wap_url a="index" r="wx_do_register"}"  method="post">
+		<div class="ul_block">
+			 <div id="con_one_2">
+				<div class="inputtxt2">
+					<div class="first">
+						<input type="text"  value="" id="settings-mobile" name="mobile" placeholder="请输入手机号"  style=" width:100%; background:none;box-shadow:none; border:none; float:none;">
+					</div>
+				<div class="second">
+				    <input class="btn_phone" type="button"  id ="btn_send" onclick ="javascript:do_send()" value="发送验证码" >
+					
+				</div>
+				<div class="blank"></div>
+				</div>
+				<div class="inputtxt"> 
+				<div class="input_sr" style=" margin-left:10px;">
+					<input class="testing third" type="text" id="settings_mobile_code" name="code"  placeholder="请输入手机短信中的验证码">
+					</div>	 
+				</div>
+				<div class="btn_login">
+				<input type="hidden" name="wx_openid" value="{$wx_info.openid}" id="wx_openid" >
+				<input type="hidden" name="province" value="{$wx_info.province}" id="province">
+				<input type="hidden" name="city" value="{$wx_info.city}" id="city">
+				<input type="hidden" name="user_name" value="{$wx_info.nickname}" id="user_name">
+				<input type="hidden" name="sex" value="{$wx_info.sex}" id="sex">
+				<input type="button" value="立即绑定"  name="submit_form_up_pwd" id="btn_user_register" >
+				</div>
+		   </div>
+		</div>
+	</form>
+</section>
+ <!-- 找回密码 结束 --> 
+<script type="text/javascript">
+	var left_time_act = null;
+	var left_time = 0;
+	jQuery(function(){	
+		 $("#user_getpwd_by_mobile").find("input[name='submit_form_up_pwd']").bind("click",function(){
+				do_mobile_getpassword();
+		 });
+	});
+	//表单提交
+	function do_mobile_getpassword(){
+		var code_val=$.trim($("#settings_mobile_code").val());
+		var mobile=$.trim($("#settings-mobile").val());
+		
+		var wx_openid=$.trim($("#wx_openid").val());
+		var province=$.trim($("#province").val());
+		var city=$.trim($("#city").val());
+		var user_name=$.trim($("#user_name").val());
+		var sex=$.trim($("#sex").val());
+		if(mobile==""){
+			alert("请填写手机号码");
+			return false;	
+		}
+		
+		//alert(mobile.length);
+		if(mobile.length != 11){
+			alert("请填写正确的手机号码");
+			return false;	
+		}
+		if(code_val==""){
+			alert("验证码不能为空");
+ 			return false;
+		}
+
+		
+		var query = new Object();
+		var ajaxurl =$("#user_getpwd_by_mobile").attr("action");;
+		query.mobile=mobile;
+		query.code=code_val;
+		query.wx_openid=wx_openid;
+		query.user_name=user_name;
+		query.province=province;
+		query.city=city;
+		query.sex=sex;
+	
+		query.post_type = "json";
+		
+//		alert(ajaxurl);
+  		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"post",
+			dataType:"json",
+			success:function(data){
+ 		   		if(data.status==1){
+					alert(data.info);
+					window.location.href=APP_ROOT_ORA+"{wap_url a="index" r="index#index"}";
+ 				}else{
+					alert(data.info);
+				}
+		   },error:function(){
+				//alert("服务器提交错误");
+			}
+		});
+		
+	}
+
+	
+
+
+function left_time_func(){
+	clearTimeout(left_time_act);
+	if(left_time > 0){
+		$("#btn_send").val(left_time + "秒后重新发送" );
+		$("#btn_send").addClass("dis");
+		$("#btn_send").css({"color":"#999","border":"1px solid #999"});
+		left_time --;
+		left_time_act = setTimeout(left_time_func,1000);
+	}
+	else{
+		$("#btn_send").css({"color":"#fc8600","border":"1px solid #fc8600"});
+		$("#btn_send").removeClass("dis");
+		$("#btn_send").val("重新发送" );
+	}
+}	
+function  do_send(){
+	if($("#btn_send").hasClass("dis")) return false;
+	var mobile=$("#settings-mobile").val();
+	if(!mobile){
+		alert("请填写手机号码");
+		return false;	
+	}
+	if(mobile.length != 11){
+		alert("请填写正确的手机号码");
+		return false;	
+	}
+	var query = new Object();
+	query.mobile = mobile;
+	query.is_login = 1;
+	query.post_type = "json";
+	var ajaxurl = APP_ROOT_ORA+'{wap_url a="index" r="register_verify_phone"}';
+	//var ajaxurl = "http://devo2o.fanwe.net/wap//index.php?ctl=register_verify_phone&mobile=18850714798&is_login=1&post_type=json";
+	//var ajaxurl = APP_ROOT_ORA+"/wap/index.php?ctl=register_verify_phone&mobile='"+mobile+"'&is_login=1";
+//	alert(ajaxurl);
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type: "POST",
+		dataType: "json",
+		success:function(data){
+			if(data.status == 1){
+				left_time = 60;
+				left_time_func();
+				alert(data.info);
+				return false;
+			}else{
+				$("#btn_send").bind("click",function(){
+					do_send();
+				});
+				alert(data.info);
+				return false;
+			}
+		},error:function(o){
+			//alert(o.responseText);
+		}
+	});
+}
+	
+	
+</script> 
+{include file="./inc/footer.html"} 

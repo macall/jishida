@@ -1,0 +1,306 @@
+{if $is_ajax eq 1}
+{include file="./inc/order_total_price_item.html"}
+<?php die();?>
+{/if}
+{include file="./inc/header.html"}	
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/my_order_list.css";
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/cart_index.css";		
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+		<div class="collection-list">
+				<div class="bianma">
+					<ul>
+						<li class="first font-fc8">订单编号：{$data.sn}</li>
+						<li>
+							<span>订单总价：{$data.total_money_format}</span>
+							<span class="third">共{$data.num}件商品</span>
+						</li>
+						
+					</ul>
+				</div>
+				{foreach from=$data.orderGoods item=orderGoods_item }
+			        <div class="collection order_deta">
+			            <a href="#" class="dl">
+			                <img src="{$orderGoods_item.image}"  width="122" height="74" alt="图片载入中…">
+			                <ul>
+			                    <li class="dl-brand break-word" style="margin-top:0px;font-size: 14px;">{function name="msubstr" v=$orderGoods_item.name b=0 e=28}</li>
+			                    <li class="dl-title break-word">数量：{$orderGoods_item.num}</li>
+			                    <li class="dl-price">
+			                      	 单价：<span class="font-fc8">{$orderGoods_item.price_format}</span>
+			                    </li>
+								<li class="dl-price">
+			                      	小计：<span class="font-fc8">{$orderGoods_item.total_money_format}</span>
+			                    </li>
+			                </ul>
+			            </a>
+			        </div>
+				{/foreach}
+				
+		<form action="{wap_url a="index" r="done_order#index"}" method="POST" autocomplete="off" id="pay-form" class="pay-form" onsubmit="return pay_submit(this)">
+           {if $data.has_edit_delivery eq 1}
+           	 <div id="pay-methods-panel" class="pay-methods-panel">              
+				{if $data.deliveryAddr}
+                <div id="normal-fieldset" class="dl_one">
+			        <section class="items-common" style="border-bottom:none;">                     
+                    <span  class="item-common" style="display: block;">
+                     	 <span class="item-label" style="font-size: 12px;line-height: 15px;">配送地址：</span>  
+						 <div class="item-content" >
+						 	<ul>
+		                     	 <li><div style="margin-left:10px;">{$data.deliveryAddr.consignee}</div></li>
+		                     	 <li><div style="margin-left:10px;">{$data.deliveryAddr.phone}</div></li>
+								 <li><div style="margin-left:10px;">{$data.deliveryAddr.delivery}</div></li>
+								 <li><div style="margin-left:10px;">{$data.deliveryAddr.delivery_detail}</div></li>
+							</ul>
+						 </div>
+                    </span>
+					</section>
+					
+					{if $data.deliveryAddr.consignee}<input type="hidden" value="{$data.deliveryAddr.consignee}" name="consignee" id="consignee">{/if}
+					{if $data.deliveryAddr.region_lv1}<input type="hidden" value="{$data.deliveryAddr.region_lv1}" name="region_lv1">{/if}
+					{if $data.deliveryAddr.region_lv2}<input type="hidden" value="{$data.deliveryAddr.region_lv2}" name="region_lv2">{/if}
+					{if $data.deliveryAddr.region_lv3}<input type="hidden" value="{$data.deliveryAddr.region_lv3}" name="region_lv3">{/if}
+					{if $data.deliveryAddr.region_lv4}<input type="hidden" value="{$data.deliveryAddr.region_lv4}" name="region_lv4">{/if}
+					{if $data.deliveryAddr.delivery}<input type="hidden" value="{$data.deliveryAddr.delivery}" name="delivery" id="delivery">{/if}
+                	{if $data.deliveryAddr.delivery_detail}<input type="hidden" value="{$data.deliveryAddr.delivery_detail}" name="delivery_detail">{/if}
+					{if $data.deliveryAddr.phone}<input type="hidden" value="{$data.deliveryAddr.phone}" name="phone">{/if}
+					{if $data.deliveryAddr.postcode}<input type="hidden" value="{$data.deliveryAddr.postcode}" name="postcode" id="postcode">{/if}
+				</div>
+				{/if}
+                {if $data.order_parm.delivery_list }
+                <div id="normal-fieldset" class="dl_one">
+                   <p class="mj-title m-t10" style="font-size: 12px;line-height: 15px;">选择配送方式</p>
+                    <section class="items-common common-radio-box">
+                        {foreach from=$data.delivery_list item=delivery name=delivery} 
+                        <div class="item-common" {if $smarty.foreach.delivery.last }style="border-bottom:none;"{/if}>
+                            <label style=" font-size:12px; line-height:30px; height:30px;">                                
+                                 <input type="radio"{if $data.delivery_id eq $delivery.id} checked="checked"  {/if} {if $data.has_edit_delivery eq 0}  disabled="disabled" {/if} value="{$delivery.id}" name="delivery_id" id="delivery_id">{$delivery.name}
+                            </label>
+                        </div>{/foreach}
+                    </section>
+                </div>
+				{/if}
+			 </div>
+			 	
+			{/if}
+				
+			
+				<div id="normal-fieldset" class="dl_one line40">
+					留言信息:{if $data.has_edit_message eq 1} <textarea name="content" class="item-common items-common" style="width:100%;height: 65px;"">{$data.content}</textarea>{else}{$data.content}{/if}                	
+				</div>
+           
+            {if $data.order_parm.has_moblie eq 1}	
+				<div class="dingdan">
+					<ul>
+						
+						<li><a href="#">手机号码：{if $data.has_edit_moblie eq 1}<input type="text" name="send_mobile" id="send_mobile" style="padding:2px 0" value="{$data.send_mobile}">{else}{$data.send_mobile}{/if}</a></li>
+					</ul>
+				</div>
+			{/if}	
+				
+
+				
+				{if $data.order_parm.has_ecv eq 1}
+				<div id="normal-fieldset" class="normal-fieldset">
+					<h4 class="mj-title m-t10">优惠券录入</h4>
+                        <div class="item-common">
+                            <label>
+                             	   序号:<input type="text" name="ecv_sn" id="ecv_sn" value="" style="width:80%;border:1px solid #CCCAC6" {if $data.has_edit_ecv eq 1} readonly{/if}>
+                            </label>
+                        </div>
+                        
+						<div class="item-common">
+                            <label>
+                             	   密码:<input type="text" name="ecv_pwd" id="ecv_pwd" value="" style="width:80%;border:1px solid #CCCAC6" {if $data.has_edit_ecv eq 1} readonly{/if}>
+                            </label>
+                        </div>                        
+				</div>				
+				{/if}
+				
+				{if $data.has_pay eq 1}	
+				    {if $data.use_user_money}<input type="hidden" value="{$data.use_user_money}" name="use_user_money" id="use_user_money">{/if}
+					{if $data.pay_money}<input type="hidden" value="{$data.pay_money}" name="pay_money" id="pay_money">{/if}
+								
+								{if $data.order_parm.payment_list && $data.pay_money>0}
+				                <div id="normal-fieldset" class="normal-fieldset">
+									<h4 class="mj-title m-t10">选择支付方式</h4>
+				                    <section class="items-common common-radio-box">
+				                        {foreach from=$data.order_parm.payment_list item=payment name=payment} 
+				                        <div class="item-common" {if $smarty.foreach.payment.last }style="border-bottom:none;"{/if}>
+				                            <label>
+				                                {$payment.name}<input type="radio" value="{$payment.id}" name="payment_id" id="payment_id" {if $data.payment_id eq $payment.id} checked="checked"  {/if}>
+				                            </label>
+				                        </div>
+										{/foreach}
+				                    </section>
+				                </div>
+								{/if}										
+										
+				{/if}
+				<div class="bianma">
+					<ul id="J_pirce_total">
+						{include file="./inc/order_total_price_item.html"}
+					</ul>
+				</div>
+				
+				<div class="dingdan">
+					<ul>
+						<li>订单状态：{$data.status}</li>
+						<li>下单时间：{$data.create_time_format}</li>
+					</ul>
+				</div>
+				<!-- 
+				{if $data.pay_status eq 2}
+					<div class="form-btn" style="display:none;">
+						<a href="{url a="index" r="pay_order#index" p="id=$my_order_detail.id"}">
+							<button type="submit"  class="btn btn-block" >提交订单</button>
+						</a>
+			        </div>
+				{/if}
+				 -->
+				
+					<div class="form-btn" >
+						<input type="hidden" value="{$data.is_delivery}" name="is_delivery" id="is_delivery">
+						<input type="hidden" value="{$data.id}" name="id" id="id">
+						{if $data.has_pay eq 1}
+							<button type="submit" class="btn btn-block1" id="pay_cart_calc">
+			                    	确认支付
+			                </button>
+		                {/if}
+		                
+		                {if $data.has_cancel eq 1}
+							<!--button type="submit"  class="btn btn-block1" onclick="check({$data.id});" >取消订单</button-->
+							<input type="button"  class="btn-block1 plank" onclick="check({$data.id});" style="display: inline-block;width:45%;margin: 10px 0;font-size: 20px;background: @main_color;color: #FFF;margin-left: 10px;border-radius:0;border: 1px solid #c35700;border-radius: 4px;font-weight:normal;" value="取消订单">
+						{/if}
+					</div>
+				
+				</form>
+		 </div>
+
+<script type="text/javascript">
+	function  check(c_id){
+		var query = new Object();
+		query.id = "{$data.id}";
+		query.post_type = "json";
+		var ajaxurl ="{wap_url a="index" r="my_order_del"}";
+		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				alert(data.info);
+				window.location.href="{wap_url a="index" r="my_order_list#index"}";
+			}
+			,error:function(){
+				alert("服务器提交错误");
+			}
+		});	
+		return false;
+	}
+</script>
+<script type="text/javascript">
+	function cart_submit(){
+			var delivery_id=$("input[name='delivery_id']:checked").val();
+			var region_lv1=$("input[name='region_lv1']").val();
+			var region_lv2=$("input[name='region_lv2']").val();
+			var region_lv3=$("input[name='region_lv3']").val();
+			var region_lv4=$("input[name='region_lv4']").val();
+			var consignee=$("input[name='consignee']").val();
+			var content=$("input[name='content']").val();
+			var phone=$("input[name='phone']").val();
+			var delivery_detail=$("input[name='delivery_detail']").val();
+			var postcode=$("input[name='postcode']").val();
+			var payment_id=$("input[name='payment_id']:checked").val();
+			var send_mobile=$("input[name='send_mobile']").val();
+			var id=$("input[name='id']").val();
+			var query = new Object();
+			query.delivery_id=delivery_id;
+			query.region_lv1=region_lv1;
+			query.region_lv2=region_lv2;
+			query.region_lv3=region_lv3;
+			query.region_lv4=region_lv4;
+			query.consignee=consignee;
+			query.content=content;
+			query.delivery_id=delivery_id;
+			query.postcode=postcode;
+			query.payment_id=payment_id;
+			query.send_mobile=send_mobile;
+			query.id=id;
+			query.is_ajax=1;
+			
+			var ajaxurl = "{wap_url a="index" r="my_order_detail#index"}";//$("#pay-form").attr("rel");
+			$.ajax({
+				url:ajaxurl,
+				data:query,
+				type:"post",
+				dataType:"text",
+				success:function(data){
+					$("#J_pirce_total").html(data);
+				}
+				,error:function(){
+					alert("服务器提交错误");
+				}
+			});	
+		}
+		$("input[name='delivery_id']").click(function(){
+			cart_submit();
+		});
+		$("input[name='payment_id']").click(function(){
+			cart_submit();
+		});
+		function pay_submit(){
+			var delivery=$("#delivery").val();
+			var send_mobile=$("#send_mobile").val();
+			var payment_id=$("input[name='payment_id']:checked").val();
+			var consignee=$("#consignee").val();
+			var postcode=$("#postcode").val();
+			var delivery_id=$("input[name='delivery_id']:checked").val();
+			var pay_money=$("#pay_money").val();
+			var is_delivery=$("#is_delivery").val();
+		
+			if(is_delivery==1){
+				if(!delivery)
+				{
+					alert("请填写配送地址");
+					return false;	
+				}
+				
+				if(!consignee)
+				{
+					alert("请填写配送地址中的配送人");
+					return false;	
+				}
+				if(!postcode)
+				{
+					alert("请填写邮篇");
+					return false;	
+				}
+				if(!delivery_id)
+				{
+					alert("请填写配送方式");
+					return false;	
+				}
+			}
+			if(!send_mobile && {$data.order_parm.has_moblie}){ 
+				alert("请填写手机号码");
+				return false;
+			}
+			if(pay_money>0){
+				if(!payment_id)
+				{
+					alert("请选择支付方式");
+					return false;	
+				}
+			}
+			return true;	
+		}
+	</script>
+	
+	
+	
+{include file="./inc/footer.html"} 
+
+

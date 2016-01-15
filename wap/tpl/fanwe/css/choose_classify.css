@@ -1,0 +1,90 @@
+.choose_block{
+	padding: 0 10px;
+}
+
+.choose_block h3{
+	line-height:44PX;
+	color:#4b4b4b;
+	font-size:14px;
+}
+
+
+.table {
+min-height: .8rem;
+position: relative;
+overflow: hidden;
+z-index: 0;
+border: 1px solid #ddd8ce;
+border-radius: .06rem;
+
+background-color: #fff;
+}
+
+
+
+.table:before {
+content: '';
+position: absolute;
+width: 33.33%;
+left: 33.33%;
+height: 100%;
+border-left: 1px solid #ddd8ce;
+border-right: 1px solid #ddd8ce;
+}
+
+.table li {
+width: 33.33%;
+height:40px;
+line-height:40px;
+font-size: 14px;
+text-align: center;
+border-bottom: 1px solid #ddd8ce;
+margin-bottom: -1px;
+position: relative;
+z-index: 10;
+color:#4b4b4b;
+float:left;
+}
+
+a.react {
+display: block;
+color: inherit;
+
+}
+
+.table .cateStrong {
+color: #DD633C;
+
+}
+.box {
+border: 1px solid #ddd8ce;
+border-radius: .06rem;
+overflow: hidden;
+background-color: #FDFDFC;
+margin: 10px;
+line-height: 30px;
+padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

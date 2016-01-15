@@ -1,0 +1,43 @@
+<div class="biz_footer">
+	<div class="footer_box">
+	{function name="app_conf" v="SHOP_FOOTER"}
+		<!--  
+				<i class="icon icon-kefu"></i>
+				<div class="con_item">
+					<h3>商家咨询请致电</h3>
+					<div class="content">
+						400-888-8888
+						</br>
+						<span class="time-limit">周一到周日09:00-11:00</span>
+					</div>
+				</div>
+				<div class="con_item">
+					<h3>商家电话验证请致电</h3>
+					<div class="content">
+						400-888-6666
+						</br>
+						<span class="time-limit">周一到周日09:50-11:00</span>
+					</div>
+				</div>
+				<div class="con_item">
+					<h3>消费者咨询请致电</h3>
+					<div class="content">
+						400-888-8855
+						</br>
+						<span class="time-limit">周一到周日15:00-18:00</span>
+					</div>
+				</div>
+				<i class="icon icon-email"></i>
+				<div class="con_item">
+					<h3>廉政邮箱</h3>
+					<div class="content">
+						lianzheng@gmail.com
+					</div>
+				</div>
+		-->
+	</div>
+</div>
+<div class="blank"></div>
+<div id="go_top"></div>
+</body>
+</html>

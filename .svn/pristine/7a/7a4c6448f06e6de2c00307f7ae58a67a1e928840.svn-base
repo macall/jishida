@@ -1,0 +1,251 @@
+{include file="./inc/header_index.html"}
+<script type="text/javascript">
+var has_location = {$has_location};
+
+	 if(has_location == 0 && navigator.geolocation)
+	 {
+		 var geolocationOptions={timeout:10000,enableHighAccuracy:true,maximumAge:5000};
+		 
+		 navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, geolocationOptions);
+	}
+
+	function getPositionSuccess(p){  
+		has_location = 1;//定位成功; 
+	    m_latitude = p.coords.latitude//纬度
+	    m_longitude = p.coords.longitude;
+		userxypoint(m_latitude, m_longitude);
+	}
+	 
+	function getPositionError(error){  
+		switch(error.code){  
+		    case error.TIMEOUT:  
+		        alert("定位连接超时，请重试");  
+		        break;  
+		    case error.PERMISSION_DENIED:  
+		        alert("您拒绝了使用位置共享服务，查询已取消");  
+		        break;  
+		    default:
+		    	alert("定位失败");		       
+		}  
+	}	 
+	 //将坐标返回到服务端;
+	 function userxypoint(latitude,longitude){	 	
+			var query = new Object();
+			query.latitude = latitude;
+			query.longitude = longitude;
+			query.post_type = "json";
+			var ajaxurl = '{url a="index" r="userxypoint"}';
+			$.ajax({
+				url:ajaxurl,
+				data:query,
+				type:"post",
+				dataType:"json",
+				success:function(data){					
+				}
+				,error:function(){					
+				}
+			});		 		
+	} 	 
+</script>
+			<div class="wrap">
+				{if $data.advs}
+	            <div class="top">
+	                <div class="flash" id=containerFlashAnimation>
+	                    <section>
+	                        <div id="banner_box" class="box_swipe" style="visibility: visible;">
+	                            <ul style="list-style: none; transition: 500ms; -webkit-transition: 500ms;">
+	                                {foreach from="$data.advs" item="adv"}
+	                                <li style="vertical-align: top; width: 640px; display: table-cell;">
+	                                    <a href="{$adv.url}"><img src="{$adv.img}" alt="" border="0" style="width:100%;height:100px;"></a>
+	                                </li>
+									{/foreach}
+	                            </ul>
+	                            <ol>
+	                                {foreach from="$data.advs" item="adv" key="key"}
+	                                <li {if $key==0}class="on"{/if}>
+	                                </li>
+	                                {/foreach}
+	                            </ol>
+	                        </div>
+	                    </section>
+	                </div>
+	            </div>
+				{/if}
+				{if $data.indexs}
+				<div class="sort_nav">
+					  <div class="sort_list">
+					  	    <ul>
+								{foreach from="$data.indexs" item="indexs" key=key}
+								<li class="sort_li" >
+					  	    		<a href="{$indexs.url}">
+					  	    			
+                                        <span class="yuan" style="background-color:{$indexs.color}" ><i class="diyfont" style="color:#fff">{$indexs.icon_name}</i></span>
+										<span class="txt">{$indexs.name}</span>
+									</a>
+					  	    	</li>
+								{/foreach}
+					  	    </ul>
+					  </div>
+				</div>
+				{/if}
+				{if $data.supplier_list}
+				<div class="content">
+					<div class="blank8"></div>
+					<div class="list-view">
+						 <div class="list_title" style="position:relative;"><i class="fa fa-shopping-cart"></i>推荐商家 <a href="{url a="index" r="merchantlist#index"}" style="position:absolute;right:10px;color: #fc8600;top:0px;font-size:12px;line-height:23px;">更多></a></div>
+						 <ul class="sp_ul">
+						 	{foreach from=$data.supplier_list item=supplier_item name=supplier_item key=key}
+							{if $smarty.foreach.supplier_item.iteration lt 4}
+						 	<li class="sp_li">
+						 	    <a href="{wap_url a="index" r="merchantitem#index"  p="id=$supplier_item.id"}">
+						 	    	<img src="{$supplier_item.preview}" style="width:100%">
+									<div class="h">{function name="msubstr" v=$supplier_item.name b=0 e=5}</div>
+						 	    </a>
+						 	</li>
+							{/if}
+							{/foreach}
+						 </ul>
+					</div>
+					{/if}
+					
+			
+					
+					<div class="blank8"></div>
+					{if $data.event_list}
+					<div class="list-view">
+						 <div class="list_title" style="margin-bottom:10px;position:relative;"><i class="fa fa-clock-o"></i>推荐活动<a href="{url a="index" r="eventlist#index"}" style="position:absolute;right:10px;color: #fc8600;top:0px;font-size:12px;line-height:23px;">更多></a></div>
+						 <ul class="activity_ul">
+						 	{foreach from=$data.event_list item=event_item name=event_item}
+						 	<li class="activity_li">
+						 	    <a href="{wap_url a="index" r="eventdetail#index"  p="event_id=$event_item.id"}" class="li_box">
+						 	    	<img src="{$event_item.icon}" width="100%">
+									<div class="lucency">剩余时间：{$event_item.sheng_time_format}</div>
+						 	    </a>
+						 	</li>
+							{/foreach}
+						 </ul>
+					</div>
+					{/if}
+					<div class="blank8"></div>
+					{if $data.deal_list}
+					<div class="list-view">
+						 <div class="list_title"><i class="fa fa-shopping-cart"></i>推荐团购</div>
+						 <ul class="tuan_ul">
+						 	 {foreach from=$data.deal_list item=deal_item name=deal_item key=key}
+						 	<li class="tuan_li">
+						 	     <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$deal_item.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$deal_item.img}" width="140" height="85">
+											{if $deal_item.auto_order eq 1}<i class="tuan_ico order">免预约</i>{/if}
+											
+						 	     		 </div>
+										 <div class="info">
+										 	<h2>{if $deal_item.sub_name}{$deal_item.sub_name}{else}{$deal_item.name}{/if}</h2>
+											<h3>{$deal_item.brief}</h3>
+											<div class="tuan_price">
+						                         <p class="price">
+						                         	 <em>{$deal_item.current_price}<i>元</i></em>
+													 <del>{$deal_item.origin_price}元</del>
+												 </p>
+						                         <p class="bought"><i></i>已售{$deal_item.buy_count}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							
+						 </ul>
+						 <div class="see_more">
+						 	<a href="{wap_url a="index" r="tuanlist#index"}">查看全部团购</a>
+						 </div>
+					</div>
+					{/if}
+					<div class="blank8"></div>
+					{if $data.supplier_deal_list}
+					<div class="list-view">
+						 <div class="list_title"><i class="fa fa-suitcase"></i>推荐商品</div>
+						 <ul class="tuan_ul">
+						 	 {foreach from=$data.supplier_deal_list item=supplier_deal_item name=supplier_deal_item key=key}
+						 	<li class="tuan_li">
+						 	     <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$supplier_deal_item.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$supplier_deal_item.img}" width="140" height="85">
+											{if $supplier_deal_item.is_hot eq 1}<i class="tuan_ico hot">热</i>{/if}
+						 	     		 </div>
+										 <div class="info">
+										 	<h2>{if $supplier_deal_item.sub_name}{$supplier_deal_item.sub_name}{else}{$supplier_deal_item.name}{/if}</h2>
+											<h3>{$supplier_deal_item.brief}</h3>
+											<div class="tuan_price">
+						                         <p class="price">
+						                         	 <em>{$supplier_deal_item.current_price}<i>元</i></em>
+													 <del>{$supplier_deal_item.origin_price}元</del>
+												 </p>
+						                         <p class="bought"><i></i>已售{$supplier_deal_item.buy_count}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							
+						 </ul>
+						 <div class="see_more">
+						 	<a href="{wap_url a="index" r="goodslist#index"}">查看全部商品</a>
+						 </div>
+					</div>
+					{/if}
+      <div class="blank8"></div>
+	                   
+					{if $data.youhui_list}   
+					<div class="list-view">
+						 <div class="list_title"><i class="fa fa-money"></i>推荐优惠券</div>
+						 <ul class="youhui_ul">
+						 	{foreach from=$data.youhui_list item=youhui_item name=youhui_item}
+						 	<li class="tuan_li">
+						 	     <a href="{wap_url a="index" r="youhuiitem#index"  p="id=$youhui_item.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$youhui_item.image_1}" width="140" height="85">
+										</div>
+										 <div class="info">
+										 	<h2>{$youhui_item.title}</h2>
+											<h3>{$youhui_item.content}</h3>
+											<div class="tuan_price">
+						                         {if $youhui_item.api_address}<p>地址：{$youhui_item.api_address}</p>{/if}
+												 <p>发布时间：{$youhui_item.begin_time}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							</ul>
+						 <div class="see_more">
+						 	<a href="{wap_url a="index" r="youhuilist#index"}">查看全部优惠券</a>
+						 </div>
+					</div>
+					{/if}
+  					<div class="blank8"></div>
+   					{if $data.shop_cate_list}
+                 	<div class="list-view">
+						 <div class="list_title"><i class="fa fa-shopping-cart"></i>推荐商城</div>
+						 <ul class="ecshop_ul">
+						 	 {foreach from=$data.shop_cate_list item=shop_cate name=shop_item}
+						 	<li class="ecshop_li">
+						 	     <a href="{wap_url a="index" r="goodslist#index"  p="catalog_id=$shop_cate.id&&catename=$shop_cate.name"}">
+						 	     	<img src="{$shop_cate.cate_img}" width="100%">
+						 	     </a>
+						 	</li>
+							{/foreach}
+							</ul>
+						 
+					</div>
+					{/if}
+				 
+				</div>
+</div>						
+{include file="./inc/footer_index.html"}				
+			

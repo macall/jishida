@@ -1,0 +1,57 @@
+{include file="./inc/header.html"}
+<script type="text/javascript">
+	function  check(){
+		var obj2=$("#uname").val();
+		var query = new Object();
+		query.uname=obj2;
+		query.post_type = "json";
+		var ajaxurl ="{url a="index" r="receive_ecv"}";
+		$.ajax({
+			url:ajaxurl,
+			data:query,
+			type:"post",
+			dataType:"json",
+			success:function(obj){
+				alert(obj.info);
+				//window.location.href="{url a="index" r="ecvtype#index" p="id=$obj.id"}";
+				if(obj.status == 1){
+					$(".j_evc").addClass("btn-disabled");
+				}
+			}
+			,error:function(){
+				//alert("服务器提交错误");
+			}
+		});	
+		return false;
+	}
+</script>
+<style type="text/css">
+	.ecv_pic img{
+		width:100%;
+	}
+</style>
+<div class="wrap">
+<div class="content">
+					<div class="goods_abbr">
+						<div class="good_detail">
+							       <div class="good_pic ecv_pic">
+							       	    {$data.desc}
+							       </div>
+								   <div class="browse_num" style="padding-top:15px;">
+										 <div class="buy">
+										 	<div style="width: 100%;height: 33px;line-height: 33px;text-align: center;color: #fff;font-size: 14px;border-radius: 20px;background: #fc8600;display: block;border: none;font-weight: bolder;">
+											 	<input type="hidden" value="{$data.id}" id="add_id">
+												{if $data.uname}<input type="hidden" value="{$data.uname}" id="uname">{/if}
+											 	{if $is_login eq 1}
+													<input type="button" class="plank j_evc" value="领取"  onclick="javascript:check();" style="background: none;"/> 
+												{else}
+													<input type="button" class="plank" value="登陆后领取" onclick="location.href='{url a="index" r="login#index"}'" style="background: none;">
+												{/if}
+											</div>	
+					                     </div>
+								   </div>
+						  </div>						
+</div>				 
+</div>
+</div>
+{include file="./inc/footer.html"} 

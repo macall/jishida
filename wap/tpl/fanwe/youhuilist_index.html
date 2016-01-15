@@ -1,0 +1,89 @@
+{include file="./inc/header.html"}	
+<div class="wrap">
+	<div class="hide_list">
+					  <div class="abbr">
+					  	   <div class="first_list">
+					  	   	    <ul>
+					  	   	    	{foreach from=$data.bcate_list item=cate }
+									<li class="directory">{$cate.name}</li>
+									 {/foreach}
+					  	   	    </ul>
+					  	   </div>
+						   <div class="second_list">
+						  		{foreach from=$data.bcate_list item=cate name=cate}
+						   	    <ul>
+						   	    	{if $cate.id gt 0}
+						   	    	<li class="two_directory"><a href="{$cate.url}">全部</a></li>
+					  	   	    	{/if}
+									{foreach from=$cate.bcate_type item=blist}
+									<li class="two_directory"><a href="{$blist.url}">{$blist.name}</a></li>
+									{/foreach}
+					  	   	    </ul> 
+								{/foreach}
+						   	  
+						   </div>
+					  </div>
+					  <div class="abbr">
+					  	   <div class="first_list">
+					  	   	    <ul>
+					  	   	    	{foreach from=$data.quan_list item=quan key=key}
+									<li class="directory">{$quan.name}</li>
+									{/foreach}
+					  	   	    </ul>
+					  	   </div>
+						   <div class="second_list">
+						   	  {foreach from=$data.quan_list item=quan key=key}
+								<ul>
+								{if $key gt 0}
+					  	   	    	<li class="two_directory"><a href="{$quan.url}">全部</a></li>
+								{/if}	
+									{foreach from=$quan.quan_sub item=qlist}
+									<li class="two_directory"><a href="{$qlist.url}">{$qlist.name}</a></li>
+									{/foreach}
+									
+					  	   	    </ul>
+								{/foreach}
+						   </div>
+					  </div>
+					  
+				</div>
+				
+					 
+				 <div class="main_list">
+				 	   <ul class="mall-cate">
+				 	   	   <li>
+				 	   	   	    {if $request.catename}{$request.catename}{else}全部分类 {/if}<i class="fa fa-sort-desc"></i>
+				 	   	   </li>
+						   <li>
+				 	   	   	   {if $request.quanname}{$request.quanname}{else}全城 {/if}<i class="fa fa-sort-desc"></i>
+				 	   	   </li>
+				 	   </ul>
+				 </div>
+				<div class="content">
+					<div class="list-view">
+						 <ul class="youhui_ul">
+						 	{foreach from=$data.item item=youhuilist key=key}
+						 	<li class="tuan_li">
+						 	     <a href="{wap_url a="index" r="youhuiitem#index" p="id=$youhuilist.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$youhuilist.logo}" width="140" height="85">
+										</div>
+										 <div class="info">
+										 	<h2>{$youhuilist.title}</h2>
+											<h3>{$youhuilist.content}</h3>
+											<div class="tuan_price">
+						                         <p>地址：{$youhuilist.address}</p>
+												 
+												 <p>发布时间：{$youhuilist.begin_time_format}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+						</ul>
+						</div> 
+					</div>
+</div>
+{include file="./inc/footer.html"} 

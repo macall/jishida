@@ -1,0 +1,31 @@
+.subject .img{
+	text-align:center;
+		
+}
+
+.subject h2{
+	line-height:31px;
+	font-size:13px;
+	color:#272727;
+}
+
+.subject{
+	padding:0 10px;
+}
+
+.surplus_time{ 
+   text-align:right;
+   line-height:32px;
+   }
+
+.surplus_time span{
+	color:#afafaf;
+}
+
+.surplus_time font{
+	color:#fe8502;
+}
+
+.content .bor_top_none{
+	border-top:none;
+}

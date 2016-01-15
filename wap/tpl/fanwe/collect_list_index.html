@@ -1,0 +1,29 @@
+{include file="./inc/header.html"}
+<div class="content">
+	<div class="list-view bor_none">
+		 <ul class="tuan_ul">
+		 	{foreach from=$data.collect_list item='collect' key='key'}
+		 	<li class="tuan_li">
+		 	     <a href="{wap_url a="index" r="goodsdesc#index" p="id=$collect.deal_id"}">
+		 	     	<div class="list_item">
+		 	     		 <div class="pic">
+		 	     		 	<img src="{$collect.icon}" width="108" height="67">
+		 	     		 </div>
+						 <div class="info">
+						 	<h2>{$collect.sub_name}</h2>
+							<h3> {$collect.goods_brief}</h3>
+							<div class="tuan_price">
+		                         <p class="price">
+		                         	 <em>{$collect.current_price}<i>元</i></em>
+									 <del>{$collect.origin_price}元</del>
+								 </p>
+		                         <p class="bought"><i></i>已售{$collect.buy_count}</p>
+		                     </div>
+						 </div>
+		 	     	</div>
+		 	     </a>
+		 	</li>
+			{/foreach}
+		 </ul>
+	</div>
+{include file="./inc/footer.html"} 

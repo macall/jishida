@@ -1,0 +1,38 @@
+.main {
+            width: 100%;
+            min-width: 320px;
+            margin: 0 auto;
+            max-width: 640px;
+            font-size: 14px;
+        }
+        
+        .theme-pavilion {
+            padding: 0.2em;
+        }
+        
+        .p_type {
+            display:inline-flex;
+            width: 100%;
+        }
+        .f_l{
+        	float:left;
+        }
+        .theme-pavilion .tbl-cell {
+            width: 50%;
+            overflow: hidden;
+        }
+        
+        .theme-pavilion .tbl-cell a {
+            padding: 0.2em;
+        }
+        
+        .theme-pavilion a {
+            display: block;
+            border: none;
+        }
+        
+        .half-img {
+            width: 100%;
+            height: auto !important;
+            overflow: hidden;
+        }

@@ -1,0 +1,47 @@
+.good_deta{
+	-webkit-box-flex:1;
+	padding-left:10px;
+}
+
+.good_deta h4{
+	font-size:15px;
+	color:#262626;
+}
+
+.good_deta p{
+	font-size:12px;
+	color:#838383;
+	line-height:28px;
+}
+
+.good_deta .grade{
+	padding-top:0;
+}
+
+
+.good_deta .grade span{
+	font-size:12px;
+	height:20px;
+	line-height:20px;
+}
+
+
+
+
+.good_deta .grade .five_star_orange .orange{
+	font-size:12px;
+}
+
+
+
+
+.good_deta .grade .five_star_grey .grey {
+font-size: 12px;
+}
+
+.good_deta .grade .five_star_orange {
+width: 80px;
+}
+
+
+

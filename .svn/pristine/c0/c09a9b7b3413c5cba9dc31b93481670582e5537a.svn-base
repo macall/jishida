@@ -1,0 +1,56 @@
+{include file="./inc/header.html"}		
+			<div class="wrap">
+				<div class="hide_list">
+					  <div class="abbr">
+					  	   <div class="first_list">
+					  	   	    <ul>
+					  	   	    	<li class="two_directory"><a href="{wap_url a="index" r="eventlist#index"}">全部分类</a></li>
+									{foreach from=$data.bigcate_list item=cate}
+									<li class="directory"><a href="{wap_url a="index" r="eventlist#index"  p="cate_id=$cate.id&catename=$cate.name"}">{$cate.name}</a></li>
+									{/foreach}
+					  	   	    </ul>
+					  	   </div>  
+					  </div>
+				</div>
+				<div class="main_list">
+					 	   <ul class="mall-cate">
+					 	   	   <li>
+					 	   	   	    {if $request.catename}{$request.catename}{else}全部分类 {/if}<i class="fa fa-sort-desc"></i>
+					 	   	   </li>
+					 	   </ul>
+					 </div>
+				<div class="content">
+					<div class="list-view bor_none">
+						 <ul class="activity_ul">
+						 	{foreach from=$data.item item=eventlist}
+							
+						 	<li class="tuan_li">
+						 	     <a href="{wap_url a="index" r="eventdetail#index" p="event_id=$eventlist.id"}">
+						 	     	<div class="list_item">
+						 	     		 <div class="pic">
+						 	     		 	<img src="{$eventlist.icon}" width="140" height="85">
+						 	     		 </div>
+										 <div class="info">
+										 	<h2>{$eventlist.name}</h2>
+										
+											<div class="tuan_price">
+						                         <p>报名时间：{$eventlist.submit_begin_time} 至 {$eventlist.submit_end_time}</p>
+												 <p>活动时间：{$eventlist.event_begin_time} 至 {$eventlist.event_end_time}</p>
+												 <p class="enter_num">活动名额 {$eventlist.total_count} 人，  已有 {$eventlist.submit_count} 人 报名</p>
+												 
+												 <p>地址：{$eventlist.address}</p>
+						                     </div>
+										 </div>
+						 	     	</div>
+						 	     </a>
+						 	</li>
+							{/foreach}
+							
+						 </ul>
+						 
+					</div>
+				</div>
+				</div>
+{include file="./inc/footer.html"} 				
+				
+				

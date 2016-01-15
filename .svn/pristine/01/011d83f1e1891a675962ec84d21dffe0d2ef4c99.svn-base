@@ -1,0 +1,95 @@
+{include file="./inc/header_business.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/verification.css";	
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="wrap">
+	<div class="content">
+		
+	 <form id="biz_login">
+		<div class="verification">
+			<div class="p-10">
+				 <div class="biz_textarea" style=" display:none;"></div>
+				 
+				 <div class="inputtxt">
+				<div class="input_sr" style=" margin-left:10px;">
+					<input type="text" value=""  placeholder="请输入验证码"  id="coupon_pwd"/>
+				</div>	 
+				</div>
+				
+				 <div class=" flex_b">
+				 <input type="button" value="验证"  class="plank biz_cx" style=" background:none;"/>
+				 </div>
+			</div>
+		</div>
+	</form>
+	</div>
+    <script type="text/javascript">
+		$(function(){
+			$(".biz_cx").bind('click',function(){
+				var coupon_pwd=$("#coupon_pwd").val();
+				if(coupon_pwd){
+					var query = new Object();
+					query.coupon_pwd = coupon_pwd;
+					query.post_type = "json";
+					var ajaxurl = '{wap_url a="index" r="biz_verify"}';
+					$.ajax({
+						url:ajaxurl,
+						data:query,
+						type:"Post",
+						dataType:"json",
+						success:function(data){
+							//$(".biz_textarea").show();
+							//$(".biz_textarea").html(data.info);							
+							if(data.status==1){								
+								if (confirm(data.info + " 数量[" + data.max_num + "],确认需要消费吗?")){
+									do_use_coupon(coupon_pwd);
+								}
+							}else{								
+								alert(data.info);
+							}
+						}
+						,error:function(){
+							alert("服务器提交错误");
+						}
+					});	
+				}else{
+					alert("请输入验证码");
+				}
+			});
+		});
+                	
+        
+		function do_use_coupon(coupon_pwd){
+			
+			if(!coupon_pwd){
+				alert("请输入验证码");
+				return false;
+			}
+			   var query = new Object();					
+				query.coupon_pwd = coupon_pwd;
+				query.post_type = "json";
+				var ajaxurl = '{url a="index" r="biz_use_coupon"}';
+				$.ajax({
+					url:ajaxurl,
+					data:query,
+					type:"Post",
+					dataType:"json",
+					success:function(data){
+						alert(data.info);
+						if(data.status==1){
+							$("#coupon_pwd").val("");
+						}
+					}
+					,error:function(){
+						alert("服务器提交错误");
+					}
+				});					
+		};		
+		
+    </script>
+
+</div>
+<div class="blank"></div>
+{include file="./inc/footer.html"} 

@@ -1,0 +1,101 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/activity_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/comment_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="wrap">
+				<div class="content">
+					<div class="overall_merit">
+						<div class="left">
+							 <div class="total">
+							 	{$data.buy_dp_avg}
+							 </div>
+							 <div class="total_star">
+							 	<div class="tatal_num">
+							 		{$data.message_count}
+							 	</div>
+								<div class="five_star_orange">
+							   	    <i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>
+							   	    <div class="five_star_grey" style="width:{$data.buy_dp_width}%; left:2px;">
+							   	    	<i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i>
+							   	    </div>
+							   </div>
+							 </div>
+						</div>
+						<div class="right">
+							<ul class="critical">
+								<li>
+									<div class="people_num">{$data.star_5}</div>
+									<div class="percentage_block">
+										<div class="percentage" style=" width:{$data.star_dp_width_5}%;"></div>
+									</div>
+									<div class="star_num">5星</div>
+								</li>
+								<li>
+									<div class="people_num">{$data.star_4}</div>
+									<div class="percentage_block">
+										<div class="percentage" style=" width:{$data.star_dp_width_4}%;"></div>
+									</div>
+									<div class="star_num">4星</div>
+								</li>
+								<li>
+									<div class="people_num">{$data.star_3}</div>
+									<div class="percentage_block">
+										<div class="percentage" style=" width:{$data.star_dp_width_3}%;"></div>
+									</div>
+									<div class="star_num">3星</div>
+								</li>
+								<li>
+									<div class="people_num">{$data.star_2}</div>
+									<div class="percentage_block">
+										<div class="percentage" style=" width:{$data.star_dp_width_2}%;"></div>
+									</div>
+									<div class="star_num">2星</div>
+								</li>
+								<li>
+									<div class="people_num">{$data.star_1}</div>
+									<div class="percentage_block">
+										<div class="percentage" style=" width:{$data.star_dp_width_1}%;"></div>
+									</div>
+									<div class="star_num">1星</div>
+								</li>
+							</ul>
+						</div>
+					</div> 
+					<div>
+						<ul class="shop_comment_list">
+						{foreach from=$data.message_list item=message_list}
+						<li>
+							<div class="name">{$message_list.user_name}</div>
+							<div class="comment_star">
+								<div class="five_star_orange">
+								   	    <i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i><i class="fa fa-star orange"></i>
+								   	    <div class="five_star_grey" style="width:{$message_list.width}%;">
+								   	    	<i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i><i class="fa fa-star grey"></i>
+								   	    </div>
+							   </div>
+							   <span class="comment_time">{$message_list.create_time_format}</span>
+							</div>
+							<div class="comment_p">
+							{$message_list.content}
+							</div>
+							
+						</li>
+						{/foreach}
+						</ul>
+					</div>
+				
+					<div class="i_say">
+					
+						<input type="hidden" value="{$data.merchant_id}" id="merchant_id">
+						<input type="submit" class="plank" value="我要点评" onclick="javascrtpt:window.location.href='{wap_url a="index" r="supplier_comment_list#index" p="id=$data.merchant_id"}'" style="background:none;"/> 
+					
+					</div>
+					
+			
+	</div>
+	</div>
+{include file="./inc/footer.html"}	

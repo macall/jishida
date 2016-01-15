@@ -1,0 +1,198 @@
+{include file="./inc/header_tuan.html"} 
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+<div class="category">
+    <ul id="nav">
+        <li id="cate1" onclick="return click_c('nav_1')">
+            <a href="#">全部分类 ∨</a>
+            <ul id="nav_1" style="display:none">
+                <li>
+                    <a href="#">今日新单></a>
+                </li>
+                <li>
+                    <a href="#">美食></a>
+                </li>
+                <li>
+                    <a href="#">酒店></a>
+                </li>
+                <li>
+                    <a href="#">休闲娱乐></a>
+                </li>
+                <li>
+                    <a href="#">生活服务></a>
+                </li>
+                <li>
+                    <a href="#">丽人></a>
+                </li>
+                <li>
+                    <a href="#">旅游></a>
+                </li>
+                <li>
+                    <a href="#">购物></a>
+                </li>
+            </ul>
+        </li>
+        <li id="cate2" onclick="return click_b('nav_2')">
+            <a href="#">全城 ∨</a>
+            <ul id="nav_2" style="display:none">
+                <li>
+                    <a href="#">晋安区</a>
+                </li>
+                <li>
+                    <a href="#">鼓楼区</a>
+                </li>
+                <li>
+                    <a href="#">仓山区</a>
+                </li>
+                <li>
+                    <a href="#">台江区</a>
+                </li>
+                <li>
+                    <a href="#">马尾区</a>
+                </li>
+                <li>
+                    <a href="#">长乐市</a>
+                </li>
+                <li>
+                    <a href="#">福清市</a>
+                </li>
+                <li>
+                    <a href="#">闽侯县</a>
+                </li>
+                <li>
+                    <a href="#">闽清县</a>
+                </li>
+                <li>
+                    <a href="#">连江县</a>
+                </li>
+                <li>
+                    <a href="#">罗源县</a>
+                </li>
+                <li>
+                    <a href="#">平潭县</a>
+                </li>
+                <li>
+                    <a href="#">永泰县</a>
+                </li>
+            </ul>
+        </li>
+        <li id="cate3" onclick="return click_a('nav_3')">
+            <a href="#">默认排序∨</a>
+            <ul id="nav_3" style="display:none;">
+                <li>
+                    <a href="javascript:void(0);">离我最近</a>
+                </li>
+                <li>
+                    <a href="#">评价最高</a>
+                </li>
+                <li>
+                    <a href="#">最新发布</a>
+                </li>
+                <li>
+                    <a href="#">人气最高</a>
+                </li>
+                <li>
+                    <a href="#">价格最低</a>
+                </li>
+                <li>
+                    <a href="#">价格最高</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="details">
+<div id="ddss">
+    <div class="imgs">
+        <a class="dl" href=""><img alt="图片载入中…" src="./images/test.png">
+            </img></a>
+    </div>
+    <div class="word">
+        <ul>
+            <li>
+                <font style="font-size:1.5em;" color=#080808>
+                    <a href="#">中瑞国际影城</a>
+                </font>
+            </li>
+            <li>
+                <font style="font-size:0.9em;">
+                    【3店通用】电影票1张，可观看2D/3D，可升级ZMAX电影票
+                </font>
+            </li>
+            <li>
+                <font style="font-size:1.8em;" color=#a11d58>
+                    <strong> 26 </strong>
+                </font>元
+                <del>
+                    90元
+                </del>
+                <font style="font-size:1em;" color=#a11d58>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp已售6149 
+                </font>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="ddss">
+    <div class="imgs">
+        <a class="dl" href=""><img alt="图片载入中…" src="./images/test.png">
+            </img></a>
+    </div>
+    <div class="word">
+        <ul>
+            <li>
+                <font style="font-size:1.5em;" color=#080808>
+                    <a href="#">中瑞国际影城</a>
+                </font>
+            </li>
+            <li>
+                <font style="font-size:0.9em;">
+                    【3店通用】电影票1张，可观看2D/3D，可升级ZMAX电影票
+                </font>
+            </li>
+            <li>
+                <font style="font-size:1.8em;" color=#a11d58>
+                    <strong> 26 </strong>
+                </font>元
+                <del>
+                    90元
+                </del>
+                <font style="font-size:1em;" color=#a11d58>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp已售6149 
+                </font>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="ddss">
+    <div class="imgs">
+        <a class="dl" href=""><img alt="图片载入中…" src="./images/test.png">
+            </img></a>
+    </div>
+    <div class="word">
+        <ul>
+            <li>
+                <font style="font-size:1.5em;" color=#080808>
+                    <a href="#">中瑞国际影城</a>
+                </font>
+            </li>
+            <li>
+                <font style="font-size:0.9em;">
+                    【3店通用】电影票1张，可观看2D/3D，可升级ZMAX电影票
+                </font>
+            </li>
+            <li>
+                <font style="font-size:1.8em;" color=#a11d58>
+                    <strong> 26 </strong>
+                </font>元
+                <del>
+                    90元
+                </del>
+                <font style="font-size:1em;" color=#a11d58>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp已售6149 
+                </font>
+            </li>
+        </ul>
+    </div>
+</div>
+{include file="./inc/footer_tuan.html"} 
+

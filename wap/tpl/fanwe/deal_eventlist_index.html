@@ -1,0 +1,23 @@
+{include file="./inc/header.html"}
+<div class="wrap">
+	<div class="content">
+		{foreach from=$data.item item=eventlist name=eventlist}
+		<div class="list-view {if $smarty.foreach.eventlist.first}bor_top_none{/if}">
+			<a href="">
+			 <div class="subject">
+			 	   <h2>{$eventlist.name}</h2>
+				   <div class="img">
+				   	   	  <img src="{$eventlist.icon}" width="100%">
+				   	   </div>
+				   <div class="surplus_time">
+				   	    <span >剩余</span>
+						<font>{$eventlist.sheng_time_format}</font>
+				   </div>
+			 </div>
+			 </a>
+		</div>
+		<div class="blank8"></div>
+		{/foreach}
+		</div>
+		</div>
+{include file="./inc/footer.html"} 

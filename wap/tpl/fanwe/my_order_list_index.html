@@ -1,0 +1,137 @@
+{include file="./inc/header.html"}	
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/youhui_comment_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/my_order_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+		{if $request.pay_status eq 3}
+		<div>
+			{foreach from=$data.item item=my_order_list key=key}
+					
+					<div class="collection-list back-white" onclick = 'javascript:location.href="{url a="index" r="my_order_detail#index" p="id=$my_order_list.id"}"' >
+							<div class="bianma">
+								<ul>
+									<li class="first font-fc8">订单编号：{$my_order_list.sn}</li>
+									<li><span>订单总价：{$my_order_list.total_money_format}</span><span class="third">共{$my_order_list.num}件商品</span></li>
+									
+								</ul>
+							</div>
+							{foreach from=$my_order_list.orderGoods item=my_order_list_item key=key}
+						        <div class="collection">
+						            <a href="#" class="dl">
+						                <img src="{$my_order_list_item.image}"  width="122" height="74" alt="图片载入中…">
+						                <ul style="text-align: left;">
+						                    <li class="dl-brand break-word"  style="margin-top:0px;font-size: 14px; line-height:20px;">{function name="msubstr" v=$my_order_list_item.name b=0 e=28}</li>
+						                    <li class="dl-title break-word">数量：{$my_order_list_item.num}</li>
+						                    <li class="dl-price">
+						                      		   单价：<span class="font-fc8">{$my_order_list_item.price_format}</span>
+						                             
+						                    </li>
+											<li class="dl-price">
+						                      		小计：<span class="font-fc8">{$my_order_list_item.total_money_format}</span>
+						                    </li>
+						                </ul>
+						            </a>
+						        </div>
+							{/foreach}
+							<div class="dingdan">
+								<ul>
+									<li>订单状态：{$my_order_list.status}</li>
+									<li>下单时间：{$my_order_list.create_time_format}</li>
+									<li>订单详情</li>
+								</ul>
+							</div>
+					</div>
+					
+			{/foreach}
+			</div>
+		{/if}
+		{if $request.pay_status eq 2}
+		<div>
+			{foreach from=$data.item item=my_order_list key=key}
+					
+					<div class="collection-list back-white" onclick = 'javascript:location.href="{url a="index" r="my_order_detail#index" p="id=$my_order_list.id"}"' >
+							<div class="bianma">
+								<ul>
+									<li class="first font-fc8">订单编号：{$my_order_list.sn}</li>
+									<li><span>订单总价：{$my_order_list.total_money_format}</span><span class="third">共{$my_order_list.num}件商品</span></li>
+									
+								</ul>
+							</div>
+							{foreach from=$my_order_list.orderGoods item=my_order_list_item key=key}
+						        <div class="collection">
+						            <a href="#" class="dl">
+						                <img src="{$my_order_list_item.image}"  width="122" height="74" alt="图片载入中…">
+						                <ul style="text-align: left;">
+						                    <li class="dl-brand break-word"  style="margin-top:0px;font-size: 14px; line-height:20px;">{function name="msubstr" v=$my_order_list_item.name b=0 e=28}</li>
+						                    <li class="dl-title break-word">数量：{$my_order_list_item.num}</li>
+						                    <li class="dl-price">
+						                      		   单价：<span class="font-fc8">{$my_order_list_item.price_format}</span>
+						                             
+						                    </li>
+											<li class="dl-price">
+						                      		小计：<span class="font-fc8">{$my_order_list_item.total_money_format}</span>
+						                    </li>
+						                </ul>
+						            </a>
+						        </div>
+							{/foreach}
+							<div class="dingdan">
+								<ul>
+									<li>订单状态：{$my_order_list.status}</li>
+									<li>下单时间：{$my_order_list.create_time_format}</li>
+									<li>订单详情</li>
+								</ul>
+							</div>
+					</div>
+					
+			{/foreach}
+			</div>
+		{/if}
+		
+		{if $request.pay_status eq 0}
+		<div class="back-white">
+			{foreach from=$data.item item=my_order_list key=key}
+					<div class="collection-list" onclick = 'javascript:location.href="{url a="index" r="my_order_detail#index" p="id=$my_order_list.id"}"'>
+							<div class="bianma">
+								<ul>
+									<li>订单编号：{$my_order_list.sn}</li>
+									<li><span>订单总价：{$my_order_list.total_money_format}</span><span class="third">共{$my_order_list.num}件商品</span></li>
+									
+								</ul>
+							</div>
+							{foreach from=$my_order_list.orderGoods item=my_order_list_item key=key}
+						        <div class="collection">
+						            <a href="#" class="dl">
+						                <img src="{$my_order_list_item.image}"  width="122" height="74" alt="图片载入中…">
+						                <ul>
+						                    <li class="dl-brand break-word">{function name="msubstr" v=$my_order_list_item.name b=0 e=28}</li>
+						                    <li class="dl-title break-word">数量：{$my_order_list_item.num}</li>
+						                    <li class="dl-price">
+						                      	  单价：<span>{$my_order_list_item.price_format}</span>&nbsp;&nbsp;
+						                                                                            小计：<span>{$my_order_list_item.total_money_format}</span>
+						                    </li>
+						                </ul>
+						            </a>
+						        </div>
+							{/foreach}
+							
+							<div class="dingdan">
+								<ul>
+									<li>订单状态：{$my_order_list.status}</li>
+									<li>下单时间：{$my_order_list.create_time_format}</li>
+									<li>订单详情</li>
+								</ul>
+							</div>
+					</div>
+					
+					<div class="blank"></div>
+			{/foreach}
+		</div>	
+		{/if}
+		
+{include file="./inc/footer.html"} 
+
+
+

@@ -1,0 +1,308 @@
+header .right-box a span {
+display: block;
+background-size: auto 29px;
+height: 25px;
+padding: 4px 8px 0 8;
+margin-right: -0px;
+text-shadow: 0 0 1px #000;
+background-position: right 0;
+font-family: Test;
+font-size: 14px;
+background: -webkit-linear-gradient(top,#EB2555,#A04E65);
+border: 1px solid #B80F38;
+}
+
+ul, ol {
+padding-left: 0;
+list-style-type: none;
+}
+.dl {
+display: block;
+min-height: 78px;
+position: relative;
+padding: 10px 8px 10px 120px;
+border-bottom:1px dashed #e5e5e5;
+}
+.dl>img {
+width: 100px;
+left: 8px;
+position: absolute;
+padding: 1px;
+border: 1px #DBE5E7 solid;
+}
+.dl-brand {
+font-size: 13
+px;
+line-height: 15px;
+color:  #E96DCB;
+font-weight: 700;
+margin-top: 5px;
+}
+.break-word {
+word-wrap: break-word;
+overflow: hidden;
+}
+.dl-title {
+line-height: 16px;
+color: #999;
+font-size: 13px;
+margin-top: 4px;
+position: absolute;
+right: 10px;
+top: 10px;
+}
+.dl-price {
+position: absolute;
+right: 10px;
+bottom: 5px;
+font-size: 12px;
+color: #AAA;
+}
+.dl-price>strong {
+font-size: 18px;
+color: #a11d58;
+}
+strong {
+font-weight: 700;
+}
+.youxiao{
+position: absolute;
+right: 0;
+bottom: 1px;
+}
+Inherited from li.dl-price
+.dl-price {
+font-size: 12px;
+color: #AAA;
+}
+ul li{ line-height:20px;}
+
+.box-comments{
+padding: 8px;
+margin: 10px 0;
+background: #FFF;
+color: #333;
+border: 1px solid #CCC;
+border-radius: 5px;
+font: 14px/1.5 Arial,Helvetica,sans-serif;
+}
+
+.my_counter {
+width: 40px;
+
+overflow: hidden;
+color: #999;
+
+}
+
+.count_big {
+font-size: 17px;
+font-weight: bolder;
+color: #FE7000;
+}
+.blank {
+height: 30px;
+line-height: 10px;
+clear: both;
+visibility: hidden;
+}
+.title ul li {
+float: left;
+width: 20%;
+text-align: center;
+}
+/*详细页*/
+.message-list {
+padding: 10px;
+overflow: hidden;
+border: #f2f2f2 solid 1px;
+}
+.message-list .message-row {
+min-height: 60px;
+margin-bottom: 10px;
+padding: 10px;
+border-bottom: #f6f6f6 solid 1px;
+}
+table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+}
+
+tbody {
+display: table-row-group;
+vertical-align: middle;
+border-color: inherit;
+}
+
+tr {
+display: table-row;
+vertical-align: inherit;
+border-color: inherit;
+}
+
+.msg_row td {
+vertical-align: top;
+}
+
+.avatar_small {
+width: 50px;
+height: 50px;
+display: inline-block;
+}
+.message-list a {
+color: #f40;
+text-decoration: none;
+}
+.msg_row {
+width: 100%;
+}
+.f_r {
+float: right;
+}
+.blank5 {
+height: 5px;
+line-height: 5px;
+/* _margin: -3px 0; */
+clear: both;
+visibility: hidden;
+font-size: 0px;
+padding: 0px;
+margin: 0px;
+}
+.topic_title_row {
+color: #ff4605;
+font-weight: bolder;
+font-size: 12px;
+}
+
+
+.msg_row .item .text {
+font-size: 14px;
+}
+
+.long .text {
+width: 660px;
+overflow: hidden;
+}
+
+.blank {
+height: 10px;
+line-height: 10px;
+clear: both;
+visibility: hidden;
+}
+
+.toogle_topic_image_box {
+border: #ccc solid 1px;
+display: inline-block;
+padding: 3px;
+margin: 3px;
+background: #fff;
+width: 100%;
+}
+
+
+.f_r {
+float: right;
+}
+
+.msg_row_ico_reply {
+background: url(http://192.168.1.250/o2o/app/Tpl/fanwe/images/msg_row_ico_reply.gif) no-repeat;
+padding-left: 15px;
+margin-right: 5px;
+height: 15px;
+line-height: 15px;
+display: inline-block;
+vertical-align: baseline;
+}
+
+.msg_row_ico_fav {
+background: url(http://192.168.1.250/o2o/app/Tpl/fanwe/images/msg_row_ico_fav.gif) no-repeat;
+padding-left: 15px;
+margin-right: 5px;
+height: 15px;
+line-height: 15px;
+display: inline-block;
+vertical-align: baseline;
+}
+
+.msg_row_ico_relay {
+background: url(http://192.168.1.250/o2o/app/Tpl/fanwe/images/msg_row_ico_relay.gif) no-repeat;
+padding-left: 15px;
+margin-right: 5px;
+height: 15px;
+line-height: 15px;
+display: inline-block;
+vertical-align: baseline;
+}
+
+.blank1 {
+height: 1px;
+line-height: 1px;
+/* _margin: -3px 0; */
+clear: both;
+visibility: hidden;
+font-size: 0px;
+padding: 0px;
+margin: 0px;
+}
+.add_focus, .add_focus:hover {
+color: #774433;
+text-decoration: none;
+background: url(http://192.168.1.250/o2o/app/Tpl/fanwe/images/focus_ico.gif) no-repeat 4px 5px #fff;
+display: inline-block;
+height: 20px;
+line-height: 20px;
+padding-left: 18px;
+border: #d8d8d7 solid 1px;
+width: 44px;
+margin-top: 5px;
+font-size: 12px;
+}
+
+.remove_focus, .remove_focus:hover {
+color: #979797;
+text-decoration: none;
+display: inline-block;
+height: 20px;
+line-height: 20px;
+text-align: center;
+border: #d8d8d7 solid 1px;
+width: 62px;
+margin-top: 5px;
+background: #fff;
+font-size: 12px;
+}
+
+.toogle_topic_image_box img {
+width: 100%;
+}
+.box-comments {
+padding: 8px;
+margin: 10px 0;
+background: #FFF;
+color: #333;
+border: 1px solid #CCC;
+border-radius: 5px;
+font: 14px/1.5 Arial,Helvetica,sans-serif;
+}
+
+.box-comments .title h3 {
+display: inline-block;
+}
+
+.more-comments, .more-deals {
+display: block;
+position: relative;
+line-height: 2em;
+padding-left: .7em;
+border-top: 1px dashed #ccc;
+padding-top: .4em;
+}
+.comment {
+padding: 0 11px 10px;
+border-top: 1px dashed #CCC;
+position: relative;
+}

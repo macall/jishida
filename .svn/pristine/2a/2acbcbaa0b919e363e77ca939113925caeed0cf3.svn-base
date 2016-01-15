@@ -1,0 +1,48 @@
+/*indexs_more_index.html*/
+.main {
+	width: 100%;
+	min-width: 320px;
+	margin: 0 auto;
+	max-width: 640px;
+	font-size: 14px;
+	min-height: 550px;
+	background:@box_color;
+	}
+	.cate_tab ul li{
+	width: 33.3%;
+	vertical-align: top;
+	float:left;
+	text-align:center;
+	}
+	.cate_tab a {
+	color: #666;
+	display: block;
+	margin: 0.5em auto;
+	text-align: center;
+	height: 100%;
+	border: 1px solid #ccc;
+	/* border-bottom: 1px solid #fff; */
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	background: #fff;
+	}
+	.cf:after {
+	display: block;
+	height: 0px;
+	visibility: hidden;
+	clear: both;
+	overflow: hidden;
+	content: '';
+	}
+	.cate_tab li span{
+	font-family: "微软雅黑";
+	color: #575757;
+	font-size: 12px;
+	}
+	.cate_tab li i{
+	color: #fff;
+	font-size: 30px;
+	line-height: 60px;
+	}
+	

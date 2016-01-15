@@ -1,0 +1,3 @@
+<?php
+//000000000300a:2:{i:0;a:6:{s:2:"id";s:2:"20";s:4:"name";s:10:"WAP广告2";s:3:"img";s:60:"http://www.jsd.cm/public/attachment/sjmapi/5451eb7862ae7.jpg";s:4:"type";s:2:"11";s:4:"data";a:1:{s:7:"cate_id";s:0:"";}s:3:"url";s:56:"http://www.jsd.cm/wap/index.php?ctl=tuanlist&catalog_id=";}i:1;a:6:{s:2:"id";s:2:"19";s:4:"name";s:10:"WAP广告1";s:3:"img";s:60:"http://www.jsd.cm/public/attachment/sjmapi/5451eb7862ae7.jpg";s:4:"type";s:2:"12";s:4:"data";a:1:{s:7:"cate_id";s:0:"";}s:3:"url";s:57:"http://www.jsd.cm/wap/index.php?ctl=goodslist&catalog_id=";}}
+?>
