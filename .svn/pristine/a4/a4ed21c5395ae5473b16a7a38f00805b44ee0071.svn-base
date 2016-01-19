@@ -1,2 +1,0 @@
-rewrite ^(.*)/biz([/]*)([^\.&]*)$  biz.php?rewrite_param=$3;
-rewrite ^(.*)/([^\.&]*)$  index.php?rewrite_param=$2;

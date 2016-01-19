@@ -3,13 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/WWW/jishida/admin/Lib/Action/JsdTechAction.class.php</file>
-            <file>file:/D:/WWW/jishida/system/authorization.php</file>
-            <file>file:/D:/WWW/jishida/system/config.php</file>
-            <file>file:/D:/WWW/jishida/admin/Lib/Action/CommonAction.class.php</file>
-            <file>file:/D:/WWW/jishida/admin/Tpl/default/JsdTech/add.html</file>
+            <file>file:/D:/WWW/jishida/app/Tpl/main/fanwe/js/page_js/review.js</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/pay_order_index.html</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/inc/login.html</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/calc_cart_index.html</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/pay_order.action.php</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/charge_money_index.html</file>
             <file>file:/D:/WWW/jishida/public/db_config.php</file>
-            <file>file:/D:/WWW/jishida/admin/Conf/config.php</file>
+            <file>file:/D:/WWW/jishida/app/Tpl/main/fanwe/uc/uc_money_incharge.html</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/my_order_detail.action.php</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/incharge_done.action.php</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/charge_money.action.php</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/add_addr_index.html</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/review_index.html</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/add_addr.action.php</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/my_order_detail_index.html</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/review.action.php</file>
+            <file>file:/D:/WWW/jishida/app/Tpl/main/fanwe/uc/uc_order_index.html</file>
+            <file>file:/D:/WWW/jishida/wap/tpl/fanwe/user_center_index.html</file>
+            <file>file:/D:/WWW/jishida/system/model/deal.php</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/register_verify_phone.action.php</file>
+            <file>file:/D:/WWW/jishida/system/model/cart.php</file>
+            <file>file:/D:/WWW/jishida/system/model/review.php</file>
+            <file>file:/D:/WWW/jishida/app/Lib/main/paymentModule.class.php</file>
+            <file>file:/D:/WWW/jishida/app/Lib/main/uc_orderModule.class.php</file>
+            <file>file:/D:/WWW/jishida/wap/index.php</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/user_center.action.php</file>
+            <file>file:/D:/WWW/jishida/app/Lib/main/reviewModule.class.php</file>
+            <file>file:/D:/WWW/jishida/app/Lib/main/uc_moneyModule.class.php</file>
+            <file>file:/D:/WWW/jishida/app/Tpl/main/fanwe/review.html</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/done_cart.action.php</file>
+            <file>file:/D:/WWW/jishida/sjmapi/lib/functions.php</file>
         </group>
     </open-files>
 </project-private>
