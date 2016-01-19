@@ -58,7 +58,8 @@ function get_muser_avatar($id,$type)
 	if(file_exists($avatar_check_file))	
 	return $avatar_file;
 	else
-	return "../public/avatar/noavatar_".$type.".gif";
+//	return "../public/avatar/noavatar_".$type.".gif";
+        return "/public/avatar/noavatar_".$type.".gif";
 }
 //显示错误
 function showErr($msg,$ajax=0,$jump='',$stay=0)

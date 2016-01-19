@@ -934,8 +934,11 @@ function get_order_goods($order_info)
 	$data['money'] = $order_info['total_price'] - $order_info['pay_amount'];
 	$data['total_money_format'] = format_price($order_info['total_price']);
 	$data['money_format'] = format_price($data['money']);
+        $data['order_status'] = $order_info['order_status'];
 	$data['status'] = "";
-
+        $data['delivery_status_code'] = $order_info['delivery_status'];
+        $data['pay_status'] = $order_info['pay_status'];
+        
 	if($order_info['pay_status']==0)
 	$data['status'].="未付款";
 	elseif($order_info['pay_status']==1)

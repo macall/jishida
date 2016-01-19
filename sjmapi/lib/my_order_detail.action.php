@@ -76,10 +76,19 @@ class my_order_detail{
 				$goods_list = $GLOBALS['db']->getAll("select * from ".$order_item_table_name." where order_id = ".$order_id);
 				$ids = array();
 				$cart_ids = array();
-				foreach($goods_list as $cart_goods)
+                                $root['dp_able'] = 0;
+                                
+                                foreach($goods_list as $cart_goods)
 				{
 					array_push($ids,$cart_goods['deal_id']);
 					array_push($cart_ids,$cart_goods['id']);
+                                        
+                                        if(empty($cart_goods['dp_id'])){
+                                            if(($root['pay_status'] == 2) && ($root['order_status'] == 1) && ($root['delivery_status_code'] == 2 || $root['delivery_status_code'] == 5 )){
+                                                $root['dp_able'] = 1;
+                                                $root['dp_deal_id'] = $cart_goods['id'];
+                                            }
+                                        }
 					
 				}
 				$ids_str = implode(",",$ids);

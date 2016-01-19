@@ -342,12 +342,17 @@ if($request_param['post_type']!='json'){
 	}else{//否则
 		
 		$request_data=$GLOBALS['transport']->request($request_url,$request_param);
+//                                $str = '';
+//                foreach ($request_param as $key => $value) {
+//                    $str .= $key . '=' .$value . '&';
+//                }
+//                var_dump($request_url.'?'.$str);
 	}
 
 	$data=$request_data['body'];
 
 	$data=json_decode(base64_decode($data),1);
-	//print_r($data);exit;
+//	print_r($data);exit;
 	if ($request_param['is_debug'] == 1){
 		print_r($data);exit;
 	}
