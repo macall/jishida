@@ -64,6 +64,16 @@
 <body>
 <link rel="stylesheet" href="css/head.css" type="text/css">
 <!--header-->
+{if $data.user.service_type_id eq 3}
+<section class="order_data_box">
+    <section class="top_data truolky">
+        <ul>
+            <li class="return"><a href="javascript:history.back(-1)">返回</a> </li>
+            <li class="phone">名下技师</li>
+        </ul>
+    </section>
+</section>
+{else}
 <section class="order_data_box">
     <section class="top_data">
         <img src="images/bj_3.png">
@@ -73,4 +83,5 @@
         </ul>
     </section>
 </section>
+{/if}
 <!--header end-->	

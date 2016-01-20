@@ -1,0 +1,53 @@
+{include file="./inc/header.html"}
+<section class="ziliao ziliao_3">
+    <p>技师资料</p>
+    <ul>
+        <li class="shangmian">
+            <img src="{$data.tech.user_avatar}">
+            <span class="zjong fl">
+                <p>{$data.tech.user_name}  {$data.tech.sex}  </p>
+                <p>
+                    {foreach item=level from=$data.tech.tech_level}
+                        <img src="images/xing.png">
+                    {/foreach}
+                </p>
+                <!--<p>注册位置：{$data.tech.addr}</p>-->
+            </span>
+            <span class="fr right">
+                <img src="images/chakan.png">
+                <p>{$data.order_count}单</p>
+            </span>
+        </li>
+
+        <li class="telte_2">
+            <span>手机</span>
+            <i>{$data.tech.mobile}</i>
+        </li>
+        <li class="telte_2">
+            <span>邮箱 </span>
+            <i>{$data.tech.email}</i>
+        </li>
+        <li class="telte_2">
+            <span>地址</span>
+            <i>{$data.tech.addr}</i>
+        </li>
+        <li class="telte_2">
+            <span>生日</span>
+            <i>{$data.tech.byear}年{$data.tech.bmonth}月{$data.tech.bday}日</i>
+        </li>
+        <li class="telte_2">
+            <span>称呼</span>
+            <i>{$data.tech.user_name}</i>
+        </li>
+        <li class="telte_2">
+            <span>本月出单</span>
+            <i>{$data.month_order_count}</i>
+        </li>
+        <li class="telte_2">
+            <span>上月出单</span>
+            <i>{$data.last_month_order_count}</i>
+        </li>
+    </ul>
+</section>
+<!--footer-->
+{include file="./inc/footer.html"} 

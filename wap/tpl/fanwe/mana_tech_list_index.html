@@ -1,0 +1,31 @@
+{include file="./inc/header.html"}
+<section class="name_box">
+    <ul>
+        {foreach from=$data.tech_list item=tech key=key}
+        <li class="addjia">
+            <img src="{$tech.user_avatar}">
+                <span class="fl data">
+                    <p>{$tech.user_name}
+                        {foreach item=level from=$tech.tech_level}
+                            <img src="images/xing.png">
+                        {/foreach}
+                    </p>
+                    <p>注册位置：{$tech.addr}</p>
+                    <!--<p>4.5公里</p>-->
+                </span>
+                <span class="fr rig">
+                    {if $tech.technician_time_status eq 1}
+                    <p>离线中</p>
+                    {elseif $tech.technician_time_status eq 2}
+                    <p>在线中</p>
+                    {else}
+                    <p>交易中</p>
+                    {/if}
+                    <a href="{wap_url a="index" r="mana_tech_detail#index"  p="tech_id=$tech.id"}">查看资料</a>
+                </span>
+        </li>
+        {/foreach}
+    </ul>
+</section>
+<!--footer-->
+{include file="./inc/footer.html"} 
