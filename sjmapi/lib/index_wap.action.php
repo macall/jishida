@@ -121,7 +121,7 @@ class index_wap
 	
 			$now = get_gmtime();
 				//buy_type 0普通团购;2在线订购;3秒杀抢团
-				$sql = "select id,name,auto_order,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count ".
+				$sql = "select id,name,auto_order,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count,service_time ".
 						",ypoint,xpoint, 0 as distance "
 						." from ".DB_PREFIX."deal where buy_type = 0 and publish_wait = 0 and is_shop=0 and is_recommend=1  and is_effect=1 and buy_status!=2 and begin_time<".$now." and (end_time = 0 or end_time > ".$now.") ";
 				
@@ -162,7 +162,7 @@ class index_wap
 		{
 			
 			//buy_type = 0 普通商品;1积分商品
-			$sql = "select id,name,is_hot,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count from ".DB_PREFIX."deal where buy_type = 0 and is_shop=1 and is_recommend=1  and is_effect=1  ";
+			$sql = "select id,name,is_hot,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count,service_time from ".DB_PREFIX."deal where buy_type = 0 and is_shop=1 and is_recommend=1  and is_effect=1  ";
 			
 			
 			$sql .= ' order by sort desc limit 10';
@@ -188,7 +188,7 @@ class index_wap
 			if($allgoodslist === false)
 			{
 				//buy_type = 0 普通商品;1积分商品
-				$sql = "select id,name,is_hot,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count,description from ".DB_PREFIX."deal where buy_type = 0 and is_shop=1 and is_recommend=1  and is_effect=1  ";										
+				$sql = "select id,name,is_hot,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count,description,service_time from ".DB_PREFIX."deal where buy_type = 0 and is_shop=1 and is_recommend=1  and is_effect=1  ";										
 
 				$sql .= ' order by sort desc limit 10';
 				$allgoodslist=$GLOBALS['db']->getAll($sql);
@@ -203,8 +203,25 @@ class index_wap
 				}
 				$GLOBALS['cache']->set("goodslist_".intval($city_id),$allgoodslist,300);
 			}
-			
 			$root['allgoodslistallgoodslist'] = $indexs_supplier_deal;
+			
+			
+			//10个商品
+			//buy_type = 0 普通商品;1积分商品
+			$sql = "select id,name,is_hot,sub_name,brief,cate_id,supplier_id,current_price,origin_price,img,begin_time,end_time,buy_type,buy_count,description,service_time from ".DB_PREFIX."deal where buy_type = 0 and is_shop=1 and is_effect=1  ";										
+
+			$sql .= ' order by sort desc limit 10';
+			$allgoodslist=$GLOBALS['db']->getAll($sql);
+			
+			foreach($allgoodslist as $k=>$v){
+				//$allgoodslist[$k]['img']=get_abs_img_root(make_img($v['img'],310,262,1));
+				$allgoodslist[$k]['img']=get_abs_img_root(make_img($v['img'],108,85,1));
+				$allgoodslist[$k]['current_price']=round($v['current_price'],2);
+				$allgoodslist[$k]['origin_price']=round($v['origin_price'],2);
+				if (empty($v['brief']))
+					$allgoodslist[$k]['brief'] = $v['name'];
+			}
+			$root['allgoodslist'] = $allgoodslist;
 
 		//推荐活动
 		$indexs_event = $GLOBALS['cache']->get("WAP_INDEX_EVENT_".intval($city_id));
@@ -319,6 +336,12 @@ class index_wap
 		$root['cate_type_list'] = $cate_type_list;
 		
 		$root['page_title'] = $GLOBALS['m_config']['program_title'];
+                
+                
+                $user = $GLOBALS['user_info'];
+                if($user){
+                    $root['user'] = $user;
+                }
 		output($root);
 	}
 }

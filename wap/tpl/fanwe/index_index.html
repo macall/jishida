@@ -15,22 +15,29 @@
     <ul>
         <li class="title">技师达</li>
         <li class="coordinates"><a href="{wap_url a="index" r="index2#index"}">{if $data.city_name}{$data.city_name}{else}全国{/if}<i class="fa fa-angle-down"></i></a></li>
-        <li class="rightlogin">{if $user_info}<a href="index.php?ctl=user_center">{$user_info.user_name}</a>{else}<a href="index.php?ctl=register">注册</a>|<a href="index.php?ctl=login">登录</a>{/if} </li>
+        <li class="rightlogin">{if $user_info}<a href="index.php?ctl=user_center">{$user_info.user_name}</a>{else}<a href="index.php?ctl=register">注册</a> <a href="index.php?ctl=login">登录</a>{/if} </li>
     </ul>
 </header>
 <!--banner-->
 <section class="banner">
     <div id="mySwipe" class="swipe">
         <div class="swipe-wrap" >
-            <div data-index="0"> <a href=""><img src="images/banle.jpg" ></a></div>
+            {if $data.advs}
+            {foreach from="$data.advs" item="adv" key=key}
+            <div data-index="{$key}"> <a href="{$adv.url}"><img src="{$adv.img}" ></a></div>
+            {/foreach}
+            {/if}
+<!--            <div data-index="0"> <a href=""><img src="images/banle.jpg" ></a></div>
             <div data-index="1"> <a href=""><img src="images/banle.jpg"></a></div>
-            <div data-index="2"> <a href=""><img src="images/banle.jpg"></a></div>
+            <div data-index="2"> <a href=""><img src="images/banle.jpg"></a></div>-->
         </div>
     </div>
     <ul class="position" id="position">
+		{if $data.advs}
+        {foreach from="$data.advs" item="adv" key=key}
         <li class=""></li>
-        <li class=""></li>
-        <li class=""></li>
+		{/foreach}
+        {/if}
     </ul>
 </section>
 <!--content-->
@@ -44,13 +51,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="technician.html">
+                    <a href="index.php?ctl=tech_list">
                         <img src="images/technician.png">
                         <p>预约技师</p>
                     </a>
                 </li>
                 <li>
-                    <a href="Personal.html">
+                    <a href="index.php?ctl=my_order_list&pay_status=3">
                         <img src="images/personal.png">
                         <p>我的按摩</p>
                     </a>
@@ -78,7 +85,7 @@
         </section>
         <section class="Choose_box">
             <section class="Choose">
-				{foreach from=$data.allgoodslistallgoodslist item=supplier_deal_item name=supplier_deal_item key=key}
+				{foreach from=$data.allgoodslist item=supplier_deal_item name=supplier_deal_item key=key}
 				 <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$supplier_deal_item.id"}"><ul>
                     <li>
                     	<img src="{$supplier_deal_item.img}" width="140" height="85">
@@ -88,7 +95,7 @@
 						</P>
 						<P>
 							<i class="fl secon">销量：{$supplier_deal_item.buy_count}</i>
-							<i class="fr secon">40分钟</i>
+							<i class="fr secon">{$supplier_deal_item.service_time}分钟</i>
 						</P>
 						<P>
 							<i class="fl secon">{$supplier_deal_item.name}</i>

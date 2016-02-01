@@ -3,7 +3,7 @@
 class cache_dp_info_auto_cache extends auto_cache{
 	public function load($param)
 	{
-		$param = array("deal_id"=>$param['deal_id'],"youhui_id"=>$param['youhui_id'],"event_id"=>$param['event_id'],"location_id"=>$param['location_id']); //重新定义缓存的有效参数，过滤非法参数
+		$param = array("deal_id"=>$param['deal_id'],"youhui_id"=>$param['youhui_id'],"event_id"=>$param['event_id'],"location_id"=>$param['location_id'],"tech_id"=>$param['tech_id']); //重新定义缓存的有效参数，过滤非法参数
 		$key = $this->build_key(__CLASS__,$param);
 		$GLOBALS['cache']->set_dir(APP_ROOT_PATH."public/runtime/data/".__CLASS__."/");
 		$dp_data = $GLOBALS['cache']->get($key);
@@ -14,6 +14,7 @@ class cache_dp_info_auto_cache extends auto_cache{
 			$param['youhui_id'] = intval($GLOBALS['db']->getOne("select id from ".DB_PREFIX."youhui where id = ".intval($param['youhui_id'])));
 			$param['event_id'] = intval($GLOBALS['db']->getOne("select id from ".DB_PREFIX."event where id = ".intval($param['event_id'])));
 			$param['location_id'] = intval($GLOBALS['db']->getOne("select id from ".DB_PREFIX."supplier_location where id = ".intval($param['location_id'])));
+			$param['tech_id'] = intval($GLOBALS['db']->getOne("select id from ".DB_PREFIX."user where id = ".intval($param['tech_id'])));
 			$key = $this->build_key(__CLASS__,$param);
 			$GLOBALS['cache']->set_dir(APP_ROOT_PATH."public/runtime/data/".__CLASS__."/");
 			$result = $GLOBALS['cache']->get($key);
@@ -23,7 +24,7 @@ class cache_dp_info_auto_cache extends auto_cache{
 			$youhui_id = intval($param['youhui_id']);
 			$event_id = intval($param['event_id']);
 			$location_id = intval($param['location_id']);
-			
+			$tech_id = intval($param['tech_id']);
 			
 			if($deal_id>0)
 			{
@@ -60,7 +61,7 @@ class cache_dp_info_auto_cache extends auto_cache{
 					where  l.category_id = ".$item_data['cate_id']." group by g.id";
 					$dp_data['tag_group'] = $GLOBALS['db']->getAll($sql);
 				}
-				
+				print_r($item_data);
 				
 			}
 			elseif($youhui_id>0)
@@ -105,6 +106,26 @@ class cache_dp_info_auto_cache extends auto_cache{
 					".DB_PREFIX."supplier_location_dp_tag_result as r on r.group_id = g.id and r.supplier_location_id = ".$item_data['id']."
 					where  l.category_id = ".$item_data['deal_cate_id']." group by g.id";
 				$dp_data['tag_group'] = $GLOBALS['db']->getAll($sql);
+			}
+			elseif($tech_id>0)
+			{
+				$item_data = load_auto_cache("tech",array("id"=>$tech_id));
+				$item_data['dp_count']=0;
+				$item_data['dp_count_1']=0;
+				$item_data['dp_count_2']=0;
+				$item_data['dp_count_3']=0;
+				$item_data['dp_count_4']=0;
+				$item_data['dp_count_5']=0;
+				$sql="select * from ".DB_PREFIX."supplier_location_dp where tech_id=".$tech_id." ";				
+				$dp_data = $GLOBALS['db']->getAll($sql);
+				if(!empty($dp_data)){
+					foreach($dp_data as $k=>$v){
+						$item_data['dp_count']+=1;
+						$item_data['dp_all_count']+=$v['point'];
+						$item_data['dp_count_'.$v['point']]+=1;
+					}
+				}
+				$item_data['avg_point']=$item_data['dp_all_count']/$item_data['dp_count'];
 			}
 			
 			

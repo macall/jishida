@@ -1,0 +1,120 @@
+{include file="./inc/header.html"}
+<section class="order_namr" >
+    {foreach from=$data.list item=order}
+    <ul>
+        <p>技师：{$data.tech_name}</p>
+        <li>
+            <a href="{wap_url a="index" r="mana_user_detail#index"  p="m_user_id=$order.user_id"}">
+            <span>客户：</span>
+            <i>{$order.user_name}</i>
+            </a>
+        </li>
+        <li>
+            <span>联系电话：</span>
+            <i>{$order.user_mobile}</i>
+        </li>
+        <li class="yangshi">
+            <span>服务项目：</span>
+            {foreach from=$order.deals item=goods}
+            <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$goods.id"}"><em>{$goods.sub_name}</em></a>
+            {/foreach}
+        </li>
+        <li>
+            <span> 服务进度： </span>
+            <i>
+                {foreach name="deal_loop" from=$order.deal_order_item item=deal}
+                {if $order.pay_status neq 2}{*未支付完成不显示任何状态*}
+                --
+                {elseif $order.order_status eq 1}{*结单的订单显示说明，如有点评显示点评*}
+                订单已完结
+                {if $deal.dp_id eq 0 and $deal.consume_count gt 0}{*有消费的产品*}
+                <a href="{url x="index" r="review" p="order_item_id=$deal.id"}" target="_blank">我要点评</a>
+                {elseif  $deal.dp_id gt 0}
+                <h1>已点评</h1>
+                {/if}
+                {else}										
+                {if $deal.delivery_status eq 5}	{*无需发货，判断是否显示发券*}									
+                {if $deal.is_coupon eq 1}
+                <a href="{url x="index" r="uc_coupon" p="did=$deal.id"}">查看团购券</a>
+                {else}
+                --
+                {/if}
+                {else}{*显示发货*}
+                {if $deal.delivery_status eq 0}
+                未发货
+                {elseif $deal.delivery_status eq 1}
+                <h1>已发货</h1>
+                <br />
+                <a  {if app_conf("KUAIDI_TYPE") eq 1}ajax="true" href="javascript:void(0);" action="{url x="index" r="uc_order#check_delivery" p="id=$deal.id"}"{else}href="{url x="index" r="uc_order#check_delivery" p="id=$deal.id"}" target="_blank"{/if} rel="{$deal.id}" class="check_delivery">查看物流</a>
+                <br />
+                {if $deal.is_arrival eq 0}{*未收货*}
+                {if $deal.refund_status neq 2}
+                <a href="javascript:void(0);" action="{url x="index" r="uc_order#verify_delivery" p="id=$deal.id"}" class="verify_delivery">确认收货</a>
+                <br />
+                <a href="javascript:void(0);" action="{url x="index" r="uc_order#refuse_delivery" p="id=$deal.id"}" class="refuse_delivery">没收到货</a>
+                {/if}
+                {elseif $deal.is_arrival eq 2}
+                <h1>维权中</h1>
+                {else}
+                <h1>已收货</h1>
+                {*已收货可点评*}
+                {if $deal.dp_id eq 0}
+                <br />
+                <a href="{url x="index" r="review" p="order_item_id=$deal.id"}" target="_blank">我要点评</a>
+                {elseif  $deal.dp_id gt 0}
+                <br />
+                <h1>已点评</h1>
+                {/if}
+                {*已收货可点评*}
+                {/if}
+                {/if}
+                {/if}											
+                {/if}
+                {if $deal.refund_status gt 0}
+                <br />
+                {if $deal.refund_status eq 1}
+                <h1>退款中</h1>
+                {elseif $deal.refund_status eq 2}
+                <h1>已退款</h1>
+                {else}
+                <h1>拒绝退款</h1>
+                {/if}
+                {/if}
+                {/foreach}
+            </i>
+        </li>
+
+        <li class="banb">
+            <span>客户评价：</span>
+            <i>
+                {if $order.user_comment}
+                {$order.user_comment}
+                {else}
+                无
+                {/if}
+            </i>
+        </li>
+        <li style="padding:3px 0">
+            <span></span>
+            <b>
+                {foreach item=point from=$order.points}
+                <img src="images/xing.png">
+                {/foreach}
+            </b>
+        </li>
+        <li>
+            <span>投诉：</span>
+            {if $order.complain}
+            (有) <a href='{wap_url a="index" r="mana_complain_detail#index"  p="complain_id=$order.complain.id"}'>查看投诉</a>
+            {else}
+            <i>无</i>
+            {/if}
+        </li>
+        <li>
+            <span></span>
+            <a href="{wap_url a="index" r="mana_order_detail#index"  p="order_id=$order.id"}">订单详情</a>
+        </li>
+    </ul>
+    {/foreach}
+</section>
+{include file="./inc/footer.html"} 

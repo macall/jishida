@@ -7,16 +7,11 @@
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
 
 <div class="body  address-edit">
-	{if !$data.item}
-	<div class="edit_block">
-		<a href='{wap_url a="index" r="add_addr#index" p="add=no&resulttype=$request.resulttype"}'>新增地址</a>
-	</div>
-	{else}
 	<div class="blank"></div>
 	{foreach from=$data.item item=user_addr_list key=k1}
 		<div>
 				<ul>
-					<div  {if $request.resulttype eq 'calc_cart'} onclick = "javascript:window.location.href='{wap_url a="index" r="calc_cart" p="first_calc=1"}'"  {/if}>
+					<div  {if $request.resulttype eq 'calc_cart'} onclick = "javascript:setDefaultAddr({$user_addr_list.id})"  {/if}>
 						<li>姓名：{$user_addr_list.consignee}</li>
 						<li>电话号码：{$user_addr_list.phone}</li>
 						<li>省市：{$user_addr_list.delivery}</li>
@@ -38,7 +33,31 @@
 		</div>
 		<div class="blank"></div>
 	{/foreach}
-	{/if}
+	<div class="edit_block">
+		<a href='{wap_url a="index" r="add_addr#index" p="add=no&resulttype=$request.resulttype"}'>新增地址</a>
+	</div>
 </div>
-
+<script>
+function setDefaultAddr($id){
+	var query = new Object();
+	query.id = $id;
+	query.post_type = "json";
+	var ajaxurl ="{wap_url a="index" r="user_choseaddr#index"}";
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"Post",
+		dataType:"json",
+		success:function(data){
+			if(data.return==1){
+				window.location.href="{wap_url a="index" r="calc_cart#index" p="first_calc=1"}";
+			}else{
+				alert(data.info);
+			}
+		},error:function(){
+			alert("服务器提交错误");
+		}
+	});
+}
+</script>
  {include file="./inc/footer.html"} 

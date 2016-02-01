@@ -145,6 +145,7 @@ function do_postcart($request_param){
 			$attr_value=array();
 			$attr_value=$request_param['attr_value'];
 			$goods_id = $request_param['id'];
+			$tech_id = $request_param['tech_id'];
 			$attr_id_a = $attr[0];
 			$attr_value_a = trim($attr_value[0]);
 			$attr_id_b = $attr[1];
@@ -158,10 +159,12 @@ function do_postcart($request_param){
 			}
 			if (isset($session_cart_data[$id])){
 				$session_cart_data[$id]['num'] ++;
+				$session_cart_data[$id]['tech_id']  = $tech_id;
 			}else{
 				$tmp = array();
 				$tmp["id"]  = $id;
 				$tmp["goods_id"]  = $goods_id;
+				$tmp["tech_id"]  = $tech_id;
 				$tmp["attr_id_a"] = $attr_id_a;
 				$tmp['attr_id_b'] = $attr_id_b;
 				$tmp["attr_value_a"] = $attr_value_a;

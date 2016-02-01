@@ -492,7 +492,7 @@ function getGoodsArray($item){
 	
 	$goods['any_refund']=$item['any_refund'];
 	$goods['expire_refund']=$item['expire_refund'];
-	$goods['server_time']=$item['server_time'];//服务时间
+	$goods['service_time']=$item['service_time'];//服务时间
 	//标签列表
 	//支持随时退款
 	$ext_label = array();
@@ -739,6 +739,9 @@ function insertCartData($user_id,$session_id,$cartdata)
 			$cart_item['return_total_money'] = $deal_info['return_money'] * $cart_item['number'];
 			$cart_item['buy_type']	=	$deal_info['buy_type'];
 			$cart_item['supplier_id']	=	$deal_info['supplier_id'];
+			$cart_item['service_time']	=	$deal_info['service_time'];
+			$cart_item['icon']	=	$deal_info['icon'];
+			$cart_item['tech_id']	=$cart['tech_id'];
 			$cart_item['attr_str'] = $attr_name_str;
 			$cart_list[] = $cart_item;
 		//end
@@ -754,13 +757,16 @@ function insertCartData($user_id,$session_id,$cartdata)
 
 
 
-function getUserAddr($user_id,$all){
+function getUserAddr($user_id,$all,$is_default=0){
 	$sql = "select uc.*, r1.name as r1_name, r2.name as r2_name, r3.name as r3_name, r4.name as r4_name from ".DB_PREFIX."user_consignee uc ".
 		   "left outer join ".DB_PREFIX."delivery_region as r1 on r1.id = uc.region_lv1 ".
 		   "left outer join ".DB_PREFIX."delivery_region as r2 on r2.id = uc.region_lv2 ".
 		   "left outer join ".DB_PREFIX."delivery_region as r3 on r3.id = uc.region_lv3 ".
 		   "left outer join ".DB_PREFIX."delivery_region as r4 on r4.id = uc.region_lv4 ".
 		   "where uc.user_id = ".intval($user_id);
+	if($is_default==1){
+		$sql.="  and is_default=1 ";
+	}
 	if ($all){
 		$list = $GLOBALS['db']->getAll($sql);
 		$addr_list = array();
@@ -934,11 +940,13 @@ function get_order_goods($order_info)
 	$data['money'] = $order_info['total_price'] - $order_info['pay_amount'];
 	$data['total_money_format'] = format_price($order_info['total_price']);
 	$data['money_format'] = format_price($data['money']);
-        $data['order_status'] = $order_info['order_status'];
+    $data['order_status'] = $order_info['order_status'];
 	$data['status'] = "";
         $data['delivery_status_code'] = $order_info['delivery_status'];
         $data['pay_status'] = $order_info['pay_status'];
-        
+    $data['technician_id'] = $order_info['technician_id'];
+	$data['service_start_time'] = $order_info['service_start_time'];
+	$data['service_time'] = $order_info['service_time'];  
 	if($order_info['pay_status']==0)
 	$data['status'].="未付款";
 	elseif($order_info['pay_status']==1)
@@ -959,6 +967,7 @@ function get_order_goods($order_info)
 	
 	$data['num'] =  $GLOBALS['db']->getOne("select sum(number) from ".$order_item_table." where order_id = ".$order_info['id']);
 	$goods_list = $GLOBALS['db']->getAll("select * from ".$order_item_table." where order_id = ".$order_info['id']);
+	
 	foreach($goods_list as $order_goods)
 	{
 		$goods_item = array();
@@ -970,6 +979,119 @@ function get_order_goods($order_info)
 		$goods_item['price_format'] =format_price($order_goods['unit_price']);
 		$goods_item['total_money'] = $order_goods['total_price'];
 		$goods_item['total_money_format'] = format_price($order_goods['total_price']);
+		$goods_item['service_time'] = $order_goods['service_time'];
+		if(preg_match("/\[([^\]]+)\]/i",$order_goods['name'],$matches))
+		$goods_item['attr_content'] = $matches[1];
+		else
+		$goods_item['attr_content'] = "";
+		$image = $GLOBALS['db']->getOne("select img from ".DB_PREFIX."deal where id = ".$goods_item['goods_id']);
+
+		//$goods_item['image'] = get_abs_img_root(make_img($image,0));
+		$goods_item['image']=get_abs_img_root(get_spec_image($image,160,160,0));
+		$data['orderGoods'][] = $goods_item;
+	}
+	
+	$coupon_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_coupon where order_id = ".$order_info['id']);
+	foreach($coupon_list as $coupon)
+	{
+		$coupon_item = array();
+		$coupon_item['id'] = $coupon['id'];
+		$coupon_item['sn'] = $coupon['sn'];
+		$coupon_item['password'] = $coupon['password'];
+		if ($coupon['confirm_time'] == 0){
+			$coupon_item['status_format'] = '未消费';
+			if ($coupon['end_time'] == 0){
+				$coupon_item['status_format'] .= '(不限期)';
+			}else{
+				$coupon_item['status_format'] .= '('.to_date($coupon['end_time'],'Y-m-d').')';
+			}
+		}else{
+			$coupon_item['status_format'] = '已消费('.to_date($coupon['confirm_time'],'Y-m-d').')';
+		}
+		
+		$data['coupon_list'][] = $coupon_item;
+	}
+	
+	return $data;
+
+}
+
+function get_order_goods2($order_info)
+{
+
+	/**
+	id(int)		//订单ID
+	sn(string)	//订单序列号
+	create_time(int)		//下单时间
+	create_time_format(string)	//下单时间格式化
+	total_money(float)		//订单总金额
+	money(float)		//剩余应付金额
+	total_money_format(string)  //订单总金额格式化
+	money_format(string)		//剩余应付金额格式化
+	status(string)		//订单状态(包含 付款状态与配送状态的文字描述)
+	num(int)		//订单商品总量
+	orderGoods(Array<HashMap>)		//订单商品
+	HashMap结构，订单商品结构
+
+		id(int)		//订单商品数据表ID
+		goods_id(int)		//商品原ID
+		name(string)		//商品名称
+		num(int)			//商品数量
+		price(float)		//单价
+		price_format(string)		//格式化单价
+		total_money(float)	//商品总价
+		total_money_format(string)	//商品总价格式化
+		image(string)		//商品缩略图片
+		attr_content(string)	//商品属性描述
+	*/
+	$data['id'] = $order_info['id'];
+	$data['sn'] = $order_info['order_sn'];
+	$data['create_time'] = $order_info['create_time'];
+	$data['create_time_format'] = to_date($order_info['create_time']);
+	$data['total_money'] = $order_info['total_price'];
+	$data['money'] = $order_info['total_price'] - $order_info['pay_amount'];
+	$data['total_money_format'] = format_price($order_info['total_price']);
+	$data['money_format'] = format_price($data['money']);
+    $data['order_status'] = $order_info['order_status'];
+	$data['status'] = "";
+        $data['delivery_status_code'] = $order_info['delivery_status'];
+        $data['pay_status'] = $order_info['pay_status'];
+    $data['technician_id'] = $order_info['technician_id'];
+	$data['service_start_time'] = $order_info['service_start_time'];
+	$data['service_time'] = $order_info['service_time'];  
+	if($order_info['pay_status']==0)
+	$data['status'].="未付款";
+	elseif($order_info['pay_status']==1)
+	$data['status'].="部份付款";
+	else
+	$data['status'].="全部付款";
+
+	if($order_info['delivery_status']==0)
+	$data['delivery_status'].="未发货";
+	elseif($order_info['delivery_status']==2)
+	$data['status'].="已发货";
+	else
+	$data['status'].="";
+
+	
+	require_once APP_ROOT_PATH."system/model/deal_order.php";
+	$order_item_table = get_user_order_item_table_name($order_info['user_id']);
+	$order_item_table=DB_PREFIX."deal_order_item";
+	$data['num'] =  $GLOBALS['db']->getOne("select sum(number) from ".$order_item_table." where order_id = ".$order_info['id']);
+	$goods_list = $GLOBALS['db']->getAll("select * from ".$order_item_table." where order_id = ".$order_info['id']);
+	
+	foreach($goods_list as $order_goods)
+	{
+		$goods_item = array();
+		$goods_item['id'] = $order_goods['id'];
+		$goods_item['goods_id'] = $order_goods['deal_id'];
+		$goods_item['name'] = $order_goods['name'];
+		$goods_item['num'] = $order_goods['number'];
+		$goods_item['price'] = $order_goods['unit_price'];
+		$goods_item['price_format'] =format_price($order_goods['unit_price']);
+		$goods_item['total_money'] = $order_goods['total_price'];
+		$goods_item['total_money_format'] = format_price($order_goods['total_price']);
+		$goods_item['service_time'] = $order_goods['service_time'];
 		if(preg_match("/\[([^\]]+)\]/i",$order_goods['name'],$matches))
 		$goods_item['attr_content'] = $matches[1];
 		else
@@ -2002,7 +2124,7 @@ function get_collect_list($limit,$user_id)
 			//生成新用户
 			$user_data = array();
 			$user_data['mobile'] = $mobile;
-			$user_data['user_pwd'] = $pwd;
+			$user_data['user_pwd'] = md5($pwd);
 			$user_data['sex'] = $gender;
 			$rs_data = auto_create($user_data, 1);
 			if(!$rs_data['status'])

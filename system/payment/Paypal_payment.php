@@ -73,7 +73,7 @@ class Paypal_payment implements payment {
             "<input type='hidden' name='return' value='$data_return_url'>" .                    // 付款后页面
             "<input type='hidden' name='invoice' value='".$payment_notice['notice_sn']."'>" .                      // 订单号
             "<input type='hidden' name='charset' value='utf-8'>" .                              // 字符集
-            "<input type='hidden' name='no_shipping' value='1'>" .                              // 不要求客户提供收货地址
+            "<input type='hidden' name='no_shipping' value='1'>" .                              // 不要求客户提供预约地址
             "<input type='hidden' name='no_note' value=''>" .                                  // 付款说明
             "<input type='hidden' name='notify_url' value='$data_notify_url'>" .
             "<input type='hidden' name='rm' value='2'>" .

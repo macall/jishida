@@ -5,7 +5,7 @@ class add_addr{
 		$city_name =strim($GLOBALS['request']['city_name']);//城市名称
 		$root = array();
 		
-		$root['page_title'] = '编辑收货地址';
+		$root['page_title'] = '编辑预约地址';
 		
 		
 		//检查用户,用户密码

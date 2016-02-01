@@ -39,9 +39,9 @@
 	</tr>
 	<tr>
 		<td class="item_title">{%DEAL_SUB_NAME}:</td>
-		<td class="item_input"><input type="text" class="textbox require" name="sub_name" /> <span class='tip_span'>{%GOODS_SUB_NAME_TIP}</span></td>
+		<td class="item_input"><input type="text" class="textbox require" name="sub_name" /> <span class='tip_span'>必填项目,用于页面显示</span></td>
 	</tr>
-	<tr>
+        <tr style="display: none">
 		<td class="item_title">{%URL_UNAME}:</td>
 		<td class="item_input"><input type="text" class="textbox word-only" name="uname" /> </td>
 	</tr>
@@ -49,7 +49,7 @@
 		<td class="item_title">{%GOODS_BRIEF}:</td>
 		<td class="item_input"><textarea class="textarea" name="brief" ></textarea></td>
 	</tr>
-	<tr>
+	<tr style="display: none">
 		<td class="item_title">{%DEAL_BUY_TYPE}:</td>
 		<td class="item_input">
 			<select name="buy_type">
@@ -61,11 +61,11 @@
 	<tr>
 		<td class="item_title">服务时间:</td>
 		<td class="item_input">
-			<input type="text" class="textbox" name="server_time" value="0" />分钟
+			<input type="text" class="textbox" name="service_time" value="0" />分钟
 		</td>
 	</tr>
 
-	<tr class="buy_type_0">
+	<tr style="display: none" class="buy_type_0">
 		<td class="item_title">{%SUPPLIER_NAME}:</td>
 		<td class="item_input">
 			<span id="supplier_list">
@@ -80,7 +80,7 @@
 			<input type="button" name="supplier_key_btn" class="button" value="{%SEARCH}" />
 		</td>
 	</tr>
-	<tr id="supplier_location" class="buy_type_0">
+	<tr style="display: none" id="supplier_location" class="buy_type_0">
 		<td class="item_title">{%SUPPLIER_LOCATION}:</td>
 		<td class="item_input">
 			
@@ -88,7 +88,7 @@
 	</tr>
 	
 	
-	<tr>
+	<tr style="display: none">
 		<td class="item_title">{%BRAND_NAME}:</td>
 		<td class="item_input">
 		<select name="brand_id">
@@ -99,7 +99,7 @@
 		</select>
 		</td>
 	</tr>
-	<tr class="buy_type_0">
+	<tr style="display: none" class="buy_type_0">
 		<td class="item_title">{%DEAL_TAG}:</td>
 		<td class="item_input">
 			<php>
@@ -115,7 +115,7 @@
 		<td class="item_title">{%CATE_TREE}:</td>
 		<td class="item_input">		
 		<select name="shop_cate_id" class="require">
-			<option value="0">=={%NO_SELECT_CATE}==</option>
+			<!--<option value="0">=={%NO_SELECT_CATE}==</option>-->
 			<foreach name="shop_cate_tree" item="cate_item">
 				<option value="{$cate_item.id}">{$cate_item.title_show}</option>
 			</foreach>
@@ -210,7 +210,7 @@
 			</select>
 		</td>
 	</tr>-->
-	<tr>
+        <tr style="display: none">
 		<td class="item_title">{%BEGIN_TIME}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="begin_time" id="begin_time" value="" onfocus="this.blur(); return showCalendar('begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_begin_time');" />
@@ -218,7 +218,7 @@
 			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#begin_time').val('');" />				
 		</td>
 	</tr>
-	<tr>
+	<tr style="display: none">
 		<td class="item_title">{%END_TIME}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="end_time" id="end_time" value="" onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_end_time');" />
@@ -226,23 +226,23 @@
 			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#end_time').val('');" />
 		</td>
 	</tr>
-	<tr class="max_bought_row">
+	<tr  style="display: none" class="max_bought_row">
 		<td class="item_title">{%STOCK_NUM}:</td>
 		<td class="item_input">
-			<input type="text" class="textbox" name="max_bought" value="" />
+			<input type="text" class="textbox" name="max_bought" value="99999999" />
 		</td>
 	</tr>
-	<tr>
+	<tr style="display: none">
 		<td class="item_title">{%DEAL_USER_MIN_BOUGHT}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="user_min_bought" value="" />			
 		</td>
 	</tr>
-	<tr>
+	<tr style="display: none">
 		<td class="item_title">{%DEAL_USER_MAX_BOUGHT}:</td>
 		<td class="item_input"><input type="text" class="textbox" name="user_max_bought" value="" /></td>
 	</tr>
-	<tr class="buy_type_1">
+	<tr style="display: none" class="buy_type_1">
 		<td class="item_title">所需积分:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="deal_score" value="" />
@@ -252,7 +252,7 @@
 		<td class="item_title">{%DEAL_ORIGIN_PRICE}:</td>
 		<td class="item_input"><input type="text" class="textbox" name="origin_price" value="" /></td>
 	</tr>
-	<tr class="buy_type_0">
+	<tr  style="display: none" class="buy_type_0">
 		<td class="item_title">{%DEAL_BALANCE_PRICE}:</td>
 		<td class="item_input"><input type="text" class="textbox" name="balance_price" value="" /></td>
 	</tr>
@@ -260,21 +260,22 @@
 		<td class="item_title">{%GOODS_CURRENT_PRICE}:</td>
 		<td class="item_input"><input type="text" class="textbox" name="current_price" value="" /></td>
 	</tr>
-	<tr class="buy_type_0">
+<!--	<tr class="buy_type_0" style="display: none" >
 		<td class="item_title">{%DEAL_RETURN_MONEY}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="return_money" value="" />
 			<span class='tip_span'>[到货后返还给会员的现金]</span>
 		</td>
 	</tr>
-	<tr class="buy_type_0">
+	<tr class="buy_type_0" style="display: none">
 		<td class="item_title">{%DEAL_RETURN_SCORE}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="return_score" value="" />
 			<span class='tip_span'>[到货后返还给会员的积分]</span>
 		</td>
-	</tr>
-	
+	</tr>-->
+	<input type="hidden" class="textbox" name="return_money" value="" />
+        <input type="hidden" class="textbox" name="return_score" value="" />
 	<tr>
 		<td colspan=2 class="bottomTd"></td>
 	</tr>
@@ -380,17 +381,17 @@
 		</td>
 	</tr>-->
 	
-	<tr>
-		<td class="item_title">{%DEAL_IS_DELIVERY}:</td>
+        <tr style="display: none">
+		<td class="item_title">是否配送:</td>
 		<td class="item_input">
 			<select name="is_delivery">
 				<option value="0">{%IS_DELIVERY_0}</option>
-				<option value="1">{%IS_DELIVERY_1}</option>
+				<option value="1" selected="selected">{%IS_DELIVERY_1}</option>
 			</select>
 			<span class='tip_span'>[{%DEAL_IS_DELIVERY_TIP}]</span>
 		</td>
 	</tr>
-	<tr class="weight_row">
+	<tr style="display: none" class="weight_row">
 		<td class="item_title">{%DEAL_WEIGHT}:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="weight" value="" />
@@ -402,17 +403,17 @@
 		</td>
 	</tr>	
 	
-	<tr class="weight_row">
+	<tr style="display: none" class="weight_row">
 		<td class="item_title">{%OPEN_DELIVERY_FREE}:</td>
 		<td class="item_input">
 			<select name="free_delivery">
 				<option value="0">{%NO}</option>
-				<option value="1">{%YES}</option>			
+                                <option value="1" selected="selected">{%YES}</option>			
 			</select>
 		</td>
 	</tr>	
 	
-	<tr class="free_delivery">
+	<tr style="display: none"  class="free_delivery">
 		<td class="item_title">{%DELIVERY_FREE_CONF}:</td>
 		<td class="item_input">
 			<table class="no_border">
@@ -425,7 +426,7 @@
 		</td>
 	</tr>
 	
-	<tr class="weight_row">
+	<tr style="display: none" class="weight_row">
 		<td class="item_title">{%FORBID_DELIVERY}:</td>
 		<td class="item_input">
 			<foreach name="delivery_list" item="delivery_item">
@@ -436,7 +437,8 @@
 		</td>
 	</tr>
 	
-	<tr class="buy_type_0">
+	<!--<tr style="display: none" class="buy_type_0">-->
+            	<tr style="display: none">
 		<td class="item_title">{%DEAL_DEFINE_PAYMENT}:</td>
 		<td class="item_input">
 			<select name="define_payment">
@@ -447,7 +449,8 @@
 		</td>
 	</tr>
 	
-	<tr class="define_payment buy_type_0">
+	<!--<tr style="display: none" class="define_payment buy_type_0">-->
+            	<tr style="display: none">
 		<td class="item_title">{%DEAL_DEFINE_PAYMENT_LIST}:</td>
 		<td class="item_input">
 			<foreach name="payment_list" item="payment_item">
@@ -458,7 +461,7 @@
 		</td>
 	</tr>
 	
-	<tr class="buy_type_0">
+	<tr class="buy_type_0" style="display: none">
 		<td class="item_title">{%DEAL_ALLOW_PROMOTE}:</td>
 		<td class="item_input">
 			<select name="allow_promote">
@@ -468,7 +471,7 @@
 			<span class='tip_span'>[{%DEAL_ALLOW_PROMOTE_TIP}]</span>
 		</td>
 	</tr>
-	<tr class="buy_type_0">
+	<tr class="buy_type_0" style="display: none">
 		<td class="item_title">{%DEAL_ALLOW_REFERRAL}:</td>
 		<td class="item_input">
 			<select name="is_referral">
@@ -479,14 +482,15 @@
 		</td>
 	</tr>
 	
-	<tr  class="buy_type_0">
+	<tr style="display: none">
+            	<!--<tr  class="buy_type_0"  style="display: none">-->
 		<td class="item_title">{%DEAL_CART_TYPE}:</td>
 		<td class="item_input">
 			<select name="cart_type">
 				<option value="0">{%DEAL_CART_TYPE_0}</option>
 				<option value="1">{%DEAL_CART_TYPE_1}</option>
 				<option value="2">{%DEAL_CART_TYPE_2}</option>
-				<option value="3">{%DEAL_CART_TYPE_3}</option>
+                                <option value="3" selected="selected">{%DEAL_CART_TYPE_3}</option>
 			</select>
 		</td>
 	</tr>
@@ -500,13 +504,14 @@
 			</select>
 		</td>
 	</tr>-->
-	<tr id="filter_row"  class="buy_type_0">
+	<!--<tr id="filter_row"  class="buy_type_0"  style="display: none">-->
+            	<tr style="display: none">
 		<td class="item_title">{%FILTER_GROUP}:</td>
 		<td class="item_input">
 			<div id="filter"></div>
 		</td>
 	</tr>
-	<tr class="buy_type_0">
+	<tr style="display: none" class="buy_type_0">
 		<td class="item_title">{%GOODS_TYPE}:</td>
 		<td class="item_input">
 			<select name="deal_goods_type">
@@ -517,7 +522,7 @@
 			</select>
 		</td>
 	</tr>
-	<tr id="deal_attr_row">
+	<tr style="display: none" id="deal_attr_row">
 		<td class="item_title">{%GOODS_ATTR}:</td>
 		<td class="item_input">
 			<div id="deal_attr"></div>
@@ -525,7 +530,7 @@
 	</tr>
         <tr>
 
-		<td class="item_title">商品属性:</td>
+		<td class="item_title">服务属性:</td>
 		<td class="item_input">
                     <!--<div id="deal_attr">-->
                     <div>

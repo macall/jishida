@@ -1,0 +1,40 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/activity_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/comment_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<div class="wrap back-white">
+				<div class="content">
+					<section class="pingjia">
+						<p>对我的评价</p>
+						{foreach from=$data.message_list item=message_list}
+						<ul>
+							<li class="huuifu">
+								<P>{$message_list.user_name}</P>
+								<span>{$message_list.content}
+								 <i><img src="images/jianjio_1.png"></i>
+								</span>
+								<em>{$message_list.create_time_format}{if $message_list.reply_content eq ''}<a href="{wap_url a="index" r="tech_dp_reply#index"  p="id=$message_list.id"}">回复</a> </em>{/if}
+							</li>
+							{if $message_list.reply_content neq ''}
+							<li class="kefu">
+								<P>技师回复</P>
+								<span>{$message_list.reply_content}
+								 <i><img src="images/jianjio_2.png"></i>
+								</span>
+								<em>{$message_list.reply_time_format}</em>
+							</li>
+							{/if}
+						</ul>
+						{/foreach}
+					</section>
+					<div>
+						
+					</div>
+			
+	</div>
+	</div>
+{include file="./inc/footer.html"}	

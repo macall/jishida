@@ -2992,6 +2992,7 @@ function load_auto_cache($key,$param=array())
 {
 	require_once APP_ROOT_PATH."system/libs/auto_cache.php";
 	$file =  APP_ROOT_PATH."system/auto_cache/".APP_TYPE."/".$key.".auto_cache.php";
+	
 	if(!file_exists($file))
 	$file =  APP_ROOT_PATH."system/auto_cache/".$key.".auto_cache.php";
 	if(file_exists($file))

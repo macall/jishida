@@ -23,7 +23,7 @@
 				</div>
 				{foreach from=$data.orderGoods item=orderGoods_item }
 			        <div class="collection order_deta">
-			            <a href="#" class="dl">
+			            <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$orderGoods_item.goods_id"}" class="dl">
 			                <img src="{$orderGoods_item.image}"  width="122" height="74" alt="图片载入中…">
 			                <ul>
 			                    <li class="dl-brand break-word" style="margin-top:0px;font-size: 14px;">{function name="msubstr" v=$orderGoods_item.name b=0 e=28}</li>
@@ -148,6 +148,70 @@
 				<div class="dingdan">
 					<ul>
 						<li>订单状态：{$data.status}</li>
+                                                {if $data.complain_status eq 1}
+                                                    <li>投诉状态：已投诉(<a href="{wap_url a="index" r="user_complain_detail#index"  p="complain_id=$data.complain_id"}">查看投诉</a>)</li>
+                                                {else}
+                                                    <li>投诉状态：无(<a href="{wap_url a="index" r="user_complain_post#index"  p="order_id=$data.id"}">我要投诉</a>)</li>
+                                                {/if}
+                                                
+                                                {foreach from=$data.goods_list item=deal_order_item}
+                                                {if $data.pay_status eq 2}
+                                                    <li>
+                                                        退款状态：
+                                                        {if $data.refund_status eq 1}
+                                                        有退款申请
+                                                        {elseif $data.refund_status eq 2}
+                                                        已处理
+                                                        {else}
+                                                        <a onclick="show_refund_reason()" >我要退款</a>
+                                                        {/if}
+                                                    </li>
+                                                    <li id="refund_reason_box" style="display: none;height:auto;padding-top:10px;padding-bottom:10px;">
+                                                        <input type="hidden" id="deal_order_item_id" value="{$deal_order_item.id}">
+                                                        <span style="position:relative;top:-10px;vertical-align:top;">退款申请：</span><textarea id="refund_content" style="width:75%;height:80px;padding:5px;border:1px solid #eee;" placeholder="请输入退款申请的理由"></textarea>
+                                                        <input type="button" onclick="do_refund()" value="提交退款申请" style="position:relative; right:-8%;display: block;width: 40%;height: 30px;border-radius: 6px;text-align: center;background: red;font-size: 14px;color: #fff;margin: auto;">
+                                                    </li>
+                                                    <script>
+                                                        function show_refund_reason(){
+                                                            $("#refund_reason_box").show();
+                                                        }
+
+                                                        function do_refund(){
+                                                            var deal_order_item_id = $("#deal_order_item_id").val();
+                                                            var refund_content = $("#refund_content").val();
+
+                                                            if (!refund_content) {
+                                                                alert("请输入退款理由");
+                                                                return false;
+                                                            }
+                                                            var query = new Object();
+                                                            query.did = deal_order_item_id;
+                                                            query.content = refund_content;
+                                                            query.post_type = "json";
+                                                            var ajaxurl = "{wap_url a="index" r="do_refund#index"}";
+                                                            $.ajax({
+                                                                url: ajaxurl,
+                                                                data: query,
+                                                                type: "post",
+                                                                dataType: "json",
+                                                                success: function (data) {
+                                                                    alert(data.info);
+                                                                    if (data.status == 1) {
+                                                                        window.location.reload();
+                                                                    }
+                                                                }
+                                                                , error: function () {
+                                                                    alert("服务器提交错误");
+                                                                }
+                                                            });
+                                                            return false;
+                                                        }
+                                                    </script>
+                                                {/if}
+                                                {/foreach}
+												{if $data.delivery_status_2> 0}
+						<li>确认订单：{if $data.order_parm.has_delivery eq 1}已确认{else}<a href="javascript:verify_delivery({$data.order_item_info.id})">确认</a>{/if}</li>
+						{/if}
 						<li>下单时间：{$data.create_time_format}</li>
                                                 {if $data.dp_able}
                                                 <li><a href="##">我要点评</a></li>
@@ -300,6 +364,35 @@
 				}
 			}
 			return true;	
+		}
+		
+		function verify_delivery(order_item_id){			
+			var query = new Object();	
+			query.id = order_item_id;
+			query.post_type = "json";
+			var ajaxurl = '{wap_url a="index" r="verify_delivery"}';
+			//alert(ajaxurl);
+			
+			$.ajax({
+				url:ajaxurl,
+				data:query,
+				type:"Post",
+				dataType:"json",
+				success:function(data){
+					alert(data.info);					
+					if(data.status == 1){
+						left_time = 60;
+						left_time_func();
+						//location.replace(document.referrer);
+						//window.location.href = "{url a="index" r="index#index"}";
+					}else{
+						
+					}
+				}
+				,error:function(){
+					alert("服务器提交错误");
+				}
+			});
 		}
 	</script>
 	

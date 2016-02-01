@@ -38,7 +38,7 @@ class done_cart{
 			else
 			$region_id = $region4_id;
 			
-			$payment = intval($GLOBALS['request']['payment_id']);
+			$payment = $GLOBALS['request']['payment_id']?intval($GLOBALS['request']['payment_id']):17;
 			$account_money = floatval($GLOBALS['request']['use_user_money']);
 			$address = strim($GLOBALS['request']['delivery_detail']);
 			$consignee_mobile = strim($GLOBALS['request']['phone']);
@@ -50,7 +50,15 @@ class done_cart{
 			$send_mobile = strim($GLOBALS['request']['send_mobile']);			
 			
 			$delivery_id = intval($GLOBALS['request']['delivery_id']);	
-			
+                        $order_time = $GLOBALS['request']['order_time'];
+						$technician_id = $GLOBALS['request']['tech_id'];
+                        if(empty($order_time)){
+                            $root['status'] =0;
+                            $root['info'] = '请选择预约时间';
+                            output($root);
+                        }
+                        $order_time .= ':00';
+                        $order_time = strtotime($order_time);
 			//$delivery_id = intval($GLOBALS['m_config']['delivery_id']);
 
 
@@ -154,10 +162,41 @@ class done_cart{
 				}	
 				else
 				{
+                                    
+                                    //获取服务时间
+                                    foreach($goods_list as $k=>$v){
+                                        $order['service_time']	=	$v['service_time']; 
+                                    }
+                                    
+                                    //技师直约判断当前时间是否可约
+                                    if($technician_id){
+                                        $tech = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id=".$technician_id);
+                                        $start_time = $order_time-$tech['distance_time']*60;
+                                        $end_time = $order_time+$tech['distance_time']*60+$order['service_time'];
+                                        
+                                        $order_able_sql = "SELECT 
+                                                                * 
+                                                              FROM
+                                                                ".DB_PREFIX."deal_order DO 
+                                                              WHERE (
+                                                                  do.`order_time` + do.`service_time` * 60 BETWEEN ".$start_time." 
+                                                                  AND ".$end_time." 
+                                                                ) 
+                                                                OR (
+                                                                  do.`order_time` BETWEEN ".$start_time." 
+                                                                  AND ".$end_time."
+                                                                )";
+                                        $order_able = $GLOBALS['db']->getRow($order_able_sql);
+                                        if(!empty($order_able)){
+                                            $root['info'] = "当前时间已被预约，请重新选择时间";
+                                            $root['status'] = 0;
+                                            output($root);
+                                        }
+                                    }
 					
 					//验证成功
 					//开始生成订单
-					$now = get_gmtime();
+					$now = time();
 					$order['type'] = 0; //普通订单
 					$order['user_id'] = $user_id;
 					$order['user_name'] = $user['user_name'];
@@ -188,7 +227,10 @@ class done_cart{
 					$order['payment_id'] = $data['payment_info']['id'];
 					$order['payment_fee'] = $data['payment_fee'];					
 					$order['bank_id'] = 0;
-
+                                        $order['order_time'] = $order_time;
+					$order['technician_id'] = $technician_id==''?0:$technician_id;
+                                        
+                                        $order['order_end_time'] = $order_time+($order['service_time']*60);
 					//if($send_mobile!='')
 					//	$GLOBALS['db']->query("update ".DB_PREFIX."user set mobile = '".$send_mobile."' where id = ".$user_id);
 					
@@ -221,7 +263,8 @@ class done_cart{
 						$goods_item['return_total_money'] = $v['return_total_money'];
 						$goods_item['buy_type']	=	$v['buy_type']; 
 						$goods_item['attr_str']	=	$v['attr_str']; 
-						
+						$goods_item['deal_icon']	=	$v['icon'];
+						$goods_item['service_time']	=	$v['service_time']; 
 						$deal_info = load_auto_cache("cache_deal_cart",array("id"=>$v['deal_id']));
 						$goods_item['balance_unit_price'] = $deal_info['balance_price'];
 						$goods_item['balance_total_price'] = $deal_info['balance_price'] * $v['number'];

@@ -21,7 +21,7 @@
         var yearScroll=null,monthScroll=null,dayScroll=null;
         var HourScroll=null,MinuteScroll=null,SecondScroll=null;
         $.fn.date.defaultOptions = {
-            beginyear:2015,                 //日期--年--份开始
+            beginyear:2000,                 //日期--年--份开始
             endyear:2030,                   //日期--年--份结束
             beginmonth:1,                   //日期--月--份结束
             endmonth:12,                    //日期--月--份结束

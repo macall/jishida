@@ -101,7 +101,7 @@ class register_verify_phone{
 					$code = $smsSubscribe['code'];
 				}
 				
-				$message=$code."（".app_conf("SHOP_TITLE")."手机验证码,请完成验证）,如非本人操作,请勿略本短信【".app_conf("SHOP_TITLE")."】";
+				$message=$code."（".app_conf("SHOP_TITLE")."手机验证码,请完成验证）,如非本人操作,请忽略本短信【".app_conf("SHOP_TITLE")."】";
 				require_once APP_ROOT_PATH."system/utils/es_sms.php";
 				$sms = new sms_sender();
 				$send=$sms->sendSms($mobile_phone,$message);

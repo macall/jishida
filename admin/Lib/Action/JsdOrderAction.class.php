@@ -671,11 +671,130 @@ class JsdOrderAction extends CommonAction
     public function do_assign_tech(){
         $order_id = intval($_REQUEST['order_id']);
         $tech_id = intval($_REQUEST['tech_id']);
+        $service_time = intval($_REQUEST['service_time']);
+        $order_time = intval($_REQUEST['order_time']);
+        
+        //技师直约判断当前时间是否可约
+        if($tech_id){
+            $tech = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id=".$tech_id);
+            $start_time = $order_time-$tech['distance_time']*60;
+            $end_time = $order_time+$tech['distance_time']*60+$service_time;
+
+            $order_able_sql = "SELECT 
+                                    * 
+                                  FROM
+                                    ".DB_PREFIX."deal_order DO 
+                                  WHERE  do.technician_id=$tech_id and ((
+                                      do.`order_time` + do.`service_time` * 60 BETWEEN ".$start_time." 
+                                      AND ".$end_time." 
+                                    ) 
+                                    OR (
+                                      do.`order_time` BETWEEN ".$start_time." 
+                                      AND ".$end_time."
+                                    ))";
+            $model = new Model();
+            $order_able = $model->query($order_able_sql);
+            if(!empty($order_able)){
+                $this->ajaxReturn(0,"该技师当前时间已被分配,请重新选择技师",0);	
+            }
+        }
         
         $data = array(
             'id'=>$order_id,
             'technician_id'=>$tech_id,
-        );
+        );		
+		
+		
+		/*设置发货开始*/
+		$silent = intval($_REQUEST['silent']);
+		$order_id = intval($_REQUEST['order_id']);
+		$order_items=M("DealOrderItem")->where("order_id=".$order_id)->field("id")->findAll();
+		foreach($order_items as $k=>$v){
+			$order_deals[]=$v['id'];
+		}
+		$delivery_sn = $_REQUEST['delivery_sn'];
+		$express_id = intval($_REQUEST['express_id']);
+		$memo = $_REQUEST['memo'];
+		
+		if(!$order_deals)
+		{
+			if($silent==0)
+			$this->error(l("PLEASE_SELECT_DELIVERY_ITEM"));
+		}
+		else
+		{
+			$deal_names = array();
+			
+			foreach($order_deals as $order_deal_id)
+			{
+				$deal_info =$GLOBALS['db']->getRow("select d.*,doi.id as doiid from ".DB_PREFIX."deal as d left join ".DB_PREFIX."deal_order_item as doi on doi.deal_id = d.id where doi.id = ".$order_deal_id);
+				$deal_name = $deal_info['sub_name'];
+				array_push($deal_names,$deal_name);
+				$rs = make_delivery_notice($order_id,$order_deal_id,$delivery_sn,$memo,$express_id);
+				if($rs)
+				{
+					$GLOBALS['db']->query("update ".DB_PREFIX."deal_order_item set delivery_status = 1,is_arrival = 0 where id = ".$order_deal_id);
+					update_balance($order_deal_id,$deal_info['id']);
+				}
+			}
+			$deal_names = implode(",",$deal_names);
+			
+			//开始同步订单的发货状态
+			$order_deal_items = M("DealOrderItem")->where("order_id=".$order_id)->findAll();
+			foreach($order_deal_items as $k=>$v)
+			{
+				if(M("Deal")->where("id=".$v['deal_id'])->getField("is_delivery")==0) //无需发货的商品
+				{
+					unset($order_deal_items[$k]);
+				}		
+			}
+			
+			$delivery_deal_items = $order_deal_items;
+			foreach($delivery_deal_items as $k=>$v)
+			{
+				if($v['delivery_status']==0) //未发货去除
+				{
+					unset($delivery_deal_items[$k]);
+				}				 
+			}
+
+			if(count($delivery_deal_items)==0&&count($order_deal_items)!=0)
+			{
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set delivery_status = 0 where id = ".$order_id); //未发货
+			}
+			elseif(count($delivery_deal_items)>0&&count($order_deal_items)!=0&&count($delivery_deal_items)<count($order_deal_items))
+			{
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set delivery_status = 1 where id = ".$order_id); //部分发
+			}
+			else
+			{
+				$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set delivery_status = 2 where id = ".$order_id); //全部发
+			}		
+			M("DealOrder")->where("id=".$order_id)->setField("update_time",NOW_TIME);
+			M("DealOrder")->where("id=".$order_id)->setField("is_refuse_delivery",0);
+			
+			$refund_item_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_order_item where (refund_status = 1 or is_arrival = 2) and order_id = ".$order_id);
+			$coupon_item_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_coupon where refund_status = 1 and order_id = ".$order_id);
+			if($refund_item_count==0&&$coupon_item_count==0)
+			$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set refund_status = 0,is_refuse_delivery=0 where id = ".$order_id);
+				
+			
+			
+			
+			$msg = l("DELIVERY_SUCCESS");
+						
+			$this->assign("jumpUrl",U("DealOrder/view_order",array("id"=>$order_id)));		
+
+			//查询快递名
+			$express_name = M("Express")->where("id=".$express_id)->getField("name");
+			
+			require_once APP_ROOT_PATH."system/model/deal_order.php";
+			order_log(l("DELIVERY_SUCCESS").$express_name.$delivery_sn.$_REQUEST['memo'],$order_id);
+			update_order_cache($order_id);
+			distribute_order($order_id);
+		}
+		/*设置发货结束*/
+		
         
         $res = M('DealOrder')->save($data);
         if(!empty($res)){
@@ -702,7 +821,7 @@ class JsdOrderAction extends CommonAction
                 'technician_id'=>$tech_id
             );
             
-            $tech_order = M('DealOrder')->where($condition)->order('order_time asc')->findAll();
+            $tech_order = M('DealOrder')->where($condition)->order('order_time DESC')->findAll();
 //            
 //            
 //            echo M('DealOrder')->getLastSql();
@@ -726,6 +845,8 @@ class JsdOrderAction extends CommonAction
         $now_order_end = date('Y-m-d H:i',$order['order_end_time']);
         $deal_tech_list = M('DealTech')->where(array('deal_id'=>$order['deal_ids']))->findAll();
         
+        $this->assign("service_time", $order['service_time']);
+        $this->assign("order_time", $order['order_time']);
         $this->assign("order_id", $order_id);
         $this->assign("now_order", $now_order);
         $this->assign("now_order_end", $now_order_end);

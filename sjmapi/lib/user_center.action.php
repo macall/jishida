@@ -27,6 +27,9 @@ class user_center
 			$root['user_money_format'] = format_price($user_data['money']);//用户金额
 			$root['user_avatar'] = get_abs_img_root(get_muser_avatar($user_data['id'],"big"));
 		}
+                
+                $root['mana_page_title'] = '经理中心';
+                $root['user'] = $user_data;
 		$root['city_name']=$city_name;
 		output($root);
 	}

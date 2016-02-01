@@ -1,0 +1,41 @@
+{include file="./inc/header.html"}
+<section class="ziliao ziliao_3">
+    <p>客服资料</p>
+    <ul>
+        <li class="shangmian">
+            <img src="{$data.m_user.user_avatar}">
+            <span class="zjong fl">
+                <p>{$data.m_user.user_name}  {$data.m_user.sex}  </p>
+                <p>
+                {foreach item=level from=$data.m_user.tech_level}
+                    <img src="images/xing.png">
+                {/foreach}
+                </p>
+                <!--<p>位置：{$data.m_user.addr}</p>-->
+            </span>
+
+        </li>
+
+        <li class="telte_2">
+            <span>手机</span>
+            <i>{$data.m_user.mobile}</i>
+        </li>
+        <li class="telte_2">
+            <span>邮箱 </span>
+            <i>{$data.m_user.email}</i>
+        </li>
+        <li class="telte_2">
+            <span>地址</span>
+            <i>{$data.m_user.addr}</i>
+        </li>
+        <li class="telte_2">
+            <span>生日</span>
+            <i>{$data.m_user.byear}年{$data.m_user.bmonth}月{$data.m_user.bday}日</i>
+        </li>
+        <li class="telte_2">
+            <span>称呼</span>
+            <i>{$data.m_user.user_name}</i>
+        </li>
+    </ul>
+</section>
+{include file="./inc/footer.html"} 

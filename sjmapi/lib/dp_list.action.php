@@ -10,6 +10,7 @@ class dp_list{
 		$youhui_id = 0;
 		$location_id = 0;
 		$event_id = 0;	
+		$tech_id = 0;	
 		if($type=="deal")
 		{
 			$deal_id = $id;
@@ -38,6 +39,13 @@ class dp_list{
 			$event_info = get_event($event_id);
 			$relate_data_name = $event_info['name'];
 		}
+		elseif($type=="tech")
+		{
+			$tech_id = $id;
+			require_once APP_ROOT_PATH."system/model/tech.php";
+			$tech_info = get_tech($tech_id);
+			$relate_data_name = $tech_info['name'];
+		}
 
 		$page = intval($GLOBALS['request']['page']);/*分页*/
 		$city_name = strim($GLOBALS['request']['city_name']);//城市分类ID
@@ -57,7 +65,7 @@ class dp_list{
 // 		$message_re=m_get_message_list($limit," m.rel_table = 'deal' and m.rel_id=".$tuan_id." and m.is_buy = 1",0);/*购买评论*/
 		require_once APP_ROOT_PATH."system/model/review.php";
 		require_once APP_ROOT_PATH."system/model/user.php";
-		$message_re = get_dp_list($limit,$param=array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id,"tag"=>""),"","");
+		$message_re = get_dp_list($limit,$param=array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id,"tech_id"=>$tech_id,"tag"=>""),"","");
 		foreach($message_re['list'] as $k=>$v){
 			$message_re['list'][$k]['width']= ($v['point'] / 5) * 100;
 			$message_re['list'][$k]['create_time']=to_date($v['create_time']);
@@ -81,7 +89,7 @@ class dp_list{
 		
 		//$deal = get_deal($tuan_id);
 		
-		$dp_info = load_dp_info(array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id));
+		$dp_info = load_dp_info(array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id,"tech_id"=>$tech_id));
 		
 		$root['name'] = $relate_data_name;
 		//星级点评数
@@ -132,6 +140,9 @@ class dp_list{
 		
 			if($dp_status['status'])
 				$root['allow_dp'] = 1;
+			if($type=="tech"&&$user_id==$id){//技师本身不能给自己点评
+				$root['allow_dp'] = 0;
+			}
 		}
 		
 		

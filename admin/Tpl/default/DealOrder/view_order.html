@@ -88,8 +88,8 @@ function get_delivery_memo($deal_order_item_id)
 	<tr>
 		<td class="item_title">{%ORDER_SN}:</td>
 		<td class="item_input">{$order_info.order_sn}</td>
-		<td class="item_title">{%ORDER_CREATE_TIME}:</td>
-		<td class="item_input">{$order_info.create_time|to_date}</td>
+		<td class="item_title">下单时间:</td>
+		<td class="item_input">{$order_info.create_time}</td>
 	</tr>	
 	<tr>
 		<td class="item_title">{%ORDER_PAY_STATUS}:</td>
@@ -98,11 +98,25 @@ function get_delivery_memo($deal_order_item_id)
 				<input type="button" class="button" value="{%ADMIN_INCHARGE_ORDER}" onclick="location.href='__APP__?m=DealOrder&a=order_incharge&id={$order_info.id}';"  />
 			</if>
 		</td>
-		<td class="item_title">{%ORDER_DELIVERY_STATUS}:</td>
-		<td class="item_input">{$order_info.delivery_status|get_delivery_status=$order_info}</td>
+<!--		<td class="item_title">{%ORDER_DELIVERY_STATUS}:</td>
+		<td class="item_input">{$order_info.delivery_status|get_delivery_status=$order_info}</td>-->
+                <td class="item_title">技师:</td>
+		<td colspan=3>
+                    <PHP>
+                        if(!empty($tech_name)){
+                            echo $tech_name;
+                        }else{
+                            
+                    </PHP>
+                    <input type="button" class="button" value="指派技师" onclick="location.href='__APP__?m=JsdOrder&a=assign_tech&id={$order_info.id}';"  />
+                    <PHP>
+                    }
+                    </PHP>
+                </td>
 	</tr>
 	<tr>
-		<th colspan=4>{%PAYMENT_INFORMATION}</th>
+		<!--<th colspan=4>{%PAYMENT_INFORMATION}</th>-->
+                <th colspan=4>付款信息</th>
 	</tr>
 	<tr>
 		<td class="item_title">{%ORDER_TOTAL_PRICE}:</td>
@@ -130,40 +144,49 @@ function get_delivery_memo($deal_order_item_id)
 		<td class="item_input">{$order_info.payment_fee|format_price}</td>
 	</tr>
 	</if>
-	<if condition="$order_info['delivery_id'] gt 0">
+	
 	<tr>
-		<th colspan=4>{%ORDER_DELIVERY}</th>
+		<th colspan=4>预约信息</th>
 	</tr>
-	<tr>
+<!--	<tr>
 		<td class="item_title">{%ORDER_DELIVERY_METHOD}</td>
 		<td class="item_input">{$order_info.delivery_id|get_delivery_name}</td>
 		<td class="item_title">{%DELIVERY_FEE}:</td>
 		<td class="item_input">{$order_info.delivery_fee|format_price}</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%DELIVERY_REGION_INFO}:</td>
-		<td colspan=3>
-			{%REGION_LV1}：{$order_info.region_lv1|get_region_name}
-			{%REGION_LV2}：{$order_info.region_lv2|get_region_name}
-			{%REGION_LV3}：{$order_info.region_lv3|get_region_name}
-			{%REGION_LV4}：{$order_info.region_lv4|get_region_name}		
-		</td>
-	</tr>
-	<tr>
+	</tr>-->
+<!--	<tr>
 		<td class="item_title">{%DELIVERY_ADDRESS}:</td>
 		<td class="item_input">{$order_info.address}</td>
 		<td class="item_title">{%DELIVERY_ZIP}:</td>
 		<td class="item_input">{$order_info.zip}</td>
-	</tr>
+	</tr>-->
 	<tr>
-		<td class="item_title">{%DELIVERY_CONSIGNEE}:</td>
+		<td class="item_title">预约人:</td>
 		<td class="item_input">{$order_info.consignee}</td>
-		<td class="item_title">{%DELIVERY_MOBILE}:</td>
+		<td class="item_title">预约人手机:</td>
 		<td class="item_input">{$order_info.mobile}</td>
 	</tr>
-	</if>
 	<tr>
+		<td class="item_title">预约地址:</td>
+		<td class="item_input">
+			<!--{%REGION_LV1}：{$order_info.region_lv1|get_region_name}-->
+			<!--{%REGION_LV2}：{$order_info.region_lv2|get_region_name}--->
+			<!--{%REGION_LV3}：{$order_info.region_lv3|get_region_name}--->
+			<!--{%REGION_LV4}：{$order_info.region_lv4|get_region_name}-->
+                        {$order_info.region_lv2|get_region_name}-{$order_info.region_lv3|get_region_name}-{$order_info.region_lv4|get_region_name}-{$order_info.address}
+		</td>
+                <td class="item_title">预约时间:</td>
+		<td class="item_input">{$order_info.order_time}</td>
+	</tr>
+	<tr>
+		<td class="item_title">预约备注:</td>
+		<td colspan=3>
+			{$order_info.memo}
+		</td>
+	</tr>
+<!--	<tr>
 		<th colspan=4>{%EXT_INFO}</th>
+                <th colspan=4>额外信息</th>
 	</tr>
 	<tr>
 		<td class="item_title">消费返现:</td>
@@ -182,7 +205,7 @@ function get_delivery_memo($deal_order_item_id)
 		<td colspan=3>
 			{$order_info.memo}
 		</td>
-	</tr>
+	</tr>-->
 	<tr>
 		<td colspan=4 class="bottomTd"></td>
 	</tr>
@@ -194,27 +217,29 @@ function get_delivery_memo($deal_order_item_id)
 		<td colspan=6 class="topTd"></td>
 	</tr>
 	<tr>
-		<th colspan=6>{%ORDER_DEAL_GOODS}</th>
+		<!--<th colspan=6>{%ORDER_DEAL_GOODS}</th>-->
+                <th colspan=6>服务列表</th>
 	</tr>
 	<tr>
 		<th>{%ORDER_DEAL_GOODS_NAME}</th>
 		<th width=50>{%NUMBER}</th>
 		<th width=80>{%DEAL_TOTAL_PRICE}</th>
-		<th width=200>商家</th>
-		<th width=250>{%DELIVERY_OP}</th>
-		<th width=200>{%DELIVERY_MEMO}</th>
+		<!--<th width=200>商家</th>-->
+		<th width=250>操作</th>
+		<!--<th width=200>{%DELIVERY_MEMO}</th>-->
 	</tr>
 	<foreach name="order_deals" item="deal_item">
 	<tr>
-		<td>{$deal_item.name}</td>
+            <td style="width: 30%">{$deal_item.name}</td>
 		<td>{$deal_item.number}</td>
 		<td>{$deal_item.total_price|format_price}</td>
-		<td>
+                
+<!--		<td>
 			<a href='{:u("Supplier/index",array("id"=>$deal_item['supplier_id']))}'>{$deal_item.supplier_id|get_supplier_name}</a>
-		</td>
+		</td>-->
 		<td>
 		<if condition="$deal_item['is_delivery'] eq 0">
-			无需发货
+			<!--无需发货-->暂无
 		<else />
 			<if condition="$deal_item['delivery_status'] eq 0">				
 				<if condition="$deal_item['refund_status'] eq 1">
@@ -225,45 +250,45 @@ function get_delivery_memo($deal_order_item_id)
 					<if condition="$deal_item['refund_status'] eq 2">
 					已退款	
 					<else />
-					<input type="button" class="button" value="{%DELIVERY}" onclick="location.href='__APP__?m=DealOrder&a=delivery&id={$order_info.id}';"  />
+					<!--<input type="button" class="button" value="{%DELIVERY}" onclick="location.href='__APP__?m=DealOrder&a=delivery&id={$order_info.id}';"  />-->暂无
 					</if>
 				</if>
 			<else />				
-				  已发货
+				  已发单
 				 <br />
-				 {%DELIVERY_SN}：{$deal_item.id|get_delivery_sn}
-				 <br /><br />
-				 {$deal_item.id|get_delivery_arrival}
+				 <!--{%DELIVERY_SN}：{$deal_item.id|get_delivery_sn}-->
+				 <!--<br /><br />-->
+				 <!--{$deal_item.id|get_delivery_arrival}-->
 				 <if condition="$deal_item['is_arrival'] eq 2">
 				 	<br />
 					<if condition="$deal_item['buy_type'] eq 0">
 				 	<a href="javascript:void(0);" class="do_refund" action="{:u("DealOrder/refund",array("order_item_id"=>$deal_item['id']))}">退款审核</a> | 
 					</if>
-					<a href="javascript:void(0);" class="do_verify"  action="{:u("DealOrder/do_verify",array("order_item_id"=>$deal_item['id']))}">虚假维权，强制收货</a>
+					<a href="javascript:void(0);" class="do_verify"  action="{:u("DealOrder/do_verify",array("order_item_id"=>$deal_item['id']))}">虚假维权，强制确认</a>
 					<br /><br />
-					<input type="button" class="button" value="{%REDELIVERY}" onclick="location.href='__APP__?m=DealOrder&a=delivery&id={$order_info.id}';"  />	
+					<!--<input type="button" class="button" value="重新发单" onclick="location.href='__APP__?m=DealOrder&a=delivery&id={$order_info.id}';"  />-->	
 				 </if>
 				 <if condition="$deal_item['is_arrival'] eq 0">
 				 	<br />
 					<if condition="$deal_item['refund_status'] eq 2">
 						已退款
 					<else />					
-						<a href="javascript:void(0);" class="do_verify" action="{:u("DealOrder/do_verify",array("order_item_id"=>$deal_item['id']))}">长期不收货，强制收货</a>
+						<a href="javascript:void(0);" class="do_verify" action="{:u("DealOrder/do_verify",array("order_item_id"=>$deal_item['id']))}">长期不确认，强制确认</a>
 					</if>
 				 </if>
 							 
 			</if>
 		</if>
 		</td>
-		<td> {$deal_item.id|get_delivery_memo}</td>
+<!--		<td> {$deal_item.id|get_delivery_memo}</td>	-->
+            </foreach>
 	</tr>
-	</foreach>
 	<tr>
 		<td colspan=6 class="bottomTd"></td>
 	</tr>
 </table>
 
-<if condition="$coupon_list">
+<!--<if condition="$coupon_list">
 <div class="blank5"></div>
 	
 <table class="form" cellpadding=0 cellspacing=0>
@@ -333,7 +358,7 @@ function get_delivery_memo($deal_order_item_id)
 		<td colspan=10 class="bottomTd"></td>
 	</tr>
 </table>
-</if>
+</if>-->
 
 <div class="blank5"></div>
 

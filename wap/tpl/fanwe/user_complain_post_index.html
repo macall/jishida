@@ -1,0 +1,79 @@
+{include file="./inc/header.html"}	
+<section class="jiesu_order">
+    <ul>
+        <li><b class="fl">{$data.order.deal_name}</b><p class="fr">X{$data.order.number}</p></li>
+        <li><span class="fl"><i>{$data.order.service_time}分钟</i></span><em class="fr">¥{$data.order.total_price}</em></li>
+    </ul>
+</section>
+<section class="centemn">
+    <p>投诉内容</p>
+    <form>
+        <ul>
+            <li>
+                <textarea id="content"></textarea>
+            </li>
+            <p>*感谢您的投诉和建议，我们将在三个工作日内核实您投诉是否属实，如果您的反馈属实我们将对负者人做出严肃的处理，祝您生活愉快！</p>
+            <li>
+                <input style="text-align: center" type="button" value="提交投诉" onclick="form_submit()">
+            </li>
+        </ul>
+        <input type="hidden" id="user_id" value="{$data.order.user_id}"/>
+        <input type="hidden" id="tech_id" value="{$data.order.technician_id}"/>
+        <input type="hidden" id="order_id" value="{$data.order.order_id}"/>
+    </form>
+</section>
+
+<script>
+    function form_submit(){
+        var content = $("#content").val();
+        var user_id = $("#user_id").val();
+        var tech_id = $("#tech_id").val();
+        var order_id = $("#order_id").val();
+        
+        if(!content){
+            alert("请填写投诉内容");
+            return false;	
+	}
+        if(!user_id){
+            alert("投诉出错,当前无用户");
+            return false;	
+	}
+        if(!tech_id){
+            alert("投诉出错,当前无被投诉人");
+            return false;	
+	}
+        if(!order_id){
+            alert("投诉订单出错");
+            return false;	
+	}
+        
+        var query = new Object();
+        query.content = content;
+        query.user_id = user_id;
+        query.tech_id = tech_id;
+        query.order_id = order_id;
+        query.post_type = "json";
+        var ajaxurl = "{wap_url a="index" r="user_do_complain_post"}";
+        $.ajax({
+            url: ajaxurl,
+            data: query,
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1) {
+                    alert(data.info);
+                    window.location.href = "index.php?ctl=user_complain_detail&complain_id="+data.complain_id;
+                } else {
+                    alert(data.info);
+                }
+            }
+            , error: function () {
+                alert("服务器提交错误");
+            }
+        });
+        return false;
+    }
+</script>
+{include file="./inc/footer.html"} 
+
+

@@ -86,7 +86,7 @@ min-width: 50px;
    line-height:49px;
    }
 		
-		
+.logo_img .goback_a{text-align:left;position:absolute;left:10px;top:0;color:#FFF;}	
 .h_search a i{
    font-family: FontAwesome;
    color:@font_white;

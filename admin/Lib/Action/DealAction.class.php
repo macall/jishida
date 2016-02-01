@@ -2044,7 +2044,7 @@ class DealAction extends CommonAction{
 		{
 			$this->error(L("DEAL_MAX_BOUGHT_ERROR_TIP"));
 		}
-		if($data['server_time']<0)
+		if($data['service_time']<0)
 		{
 			$this->error("服务时间不能小于零");
 		}

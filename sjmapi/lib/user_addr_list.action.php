@@ -21,7 +21,7 @@ class user_addr_list{
 			$root['user_login_status'] = 0;		
 		}
 		$root['city_name']=$city_name;
-		$root['page_title'] = '收货地址';
+		$root['page_title'] = '预约地址';
 		output($root);
 	}
 }

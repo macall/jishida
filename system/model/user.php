@@ -244,6 +244,9 @@ define("LOGIN_STATUS_TEMP",2); //临时登录
 		if(isset($user_data['bday']))
 		$user['bday'] = intval($user_data['bday']);
 		
+		if(isset($user_data['distance_time']))
+		$user['distance_time'] = intval($user_data['distance_time']);
+		
 		if(isset($user_data['is_merchant']))
 		{
 			$user['is_merchant'] = intval($user_data['is_merchant']);

@@ -89,6 +89,20 @@ class CommonAction extends AuthAction{
 		} else {
 			$sort = $asc ? 'asc' : 'desc';
 		}
+                
+                //是否是支付列表
+                $is_payment_list = 0;
+                if(!empty($map['is_payment_list'])){
+                    $is_payment_list = $map['is_payment_list'];
+                    unset($map['is_payment_list']);
+                }
+                if($map['s_create_time'] && $map['e_create_time']){
+                    $map['create_time'] = array('between',array($map['s_create_time'],$map['e_create_time']));
+                    
+                    unset($map['s_create_time']);
+                    unset($map['e_create_time']);
+                }
+                
 		//取得满足条件的记录数
 		$count = $model->where ( $map )->count ( 'id' );
 
@@ -109,7 +123,25 @@ class CommonAction extends AuthAction{
                             $order = ! empty ( $sortBy ) ? $sortBy : $model->getPk ();
                         }
 			$voList = $model->where($map)->order( "`" . $order . "` " . $sort)->limit($p->firstRow . ',' . $p->listRows)->findAll ( );
-                        
+                        if(!empty($is_payment_list)){
+                            $should_pay_money = 0;
+                            $not_pay_money = 0;
+                            $paid_money = 0;
+                            
+                            foreach ($voList as $key => $val){
+                                if($val['is_paid'] == 1){
+                                    $paid_money += $val['money'];
+                                }else{
+                                    $not_pay_money += $val['money'];
+                                }
+                                
+                                $should_pay_money += $val['money'];
+                            }
+                            
+                            $this->assign ( 'should_pay_money', $should_pay_money );
+                            $this->assign ( 'not_pay_money', $not_pay_money );
+                            $this->assign ( 'paid_money', $paid_money );
+                        }
                          //如果是会员列表
                         if($map[DB_PREFIX . 'user.service_type_id'] == 1){
                             foreach ($voList as $key=>$value) {

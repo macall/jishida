@@ -1,0 +1,33 @@
+{include file="./inc/header.html"}
+<section class="order_data_box">
+    <section class="new_order">
+        <p>退款列表</p>
+        <ul class="xinji">
+            {foreach from=$data.refund_list item=refund}
+            <li>
+                <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$refund.deal_id"}">
+                <img style="height: 77px" src="{$refund.service_icon}">
+                </a>
+                <span>
+                    <p style="height: 20px;">服务名称：{$refund.service_name}</p>
+                </span>
+                <span>
+                    <p style="height: 20px;">订单详情：<a href="{wap_url a="index" r="my_order_detail#index"  p="id=$refund.order_id"}">{$refund.order_sn}</a></p>
+                </span>
+                <span>
+                    <p style="height: 20px;">订单状态：{if $refund.refund_status eq 1}退款申请已提交,请等待处理{elseif $refund.refund_status eq 2}已处理{/if}</p>
+                </span>
+                <span>
+                    <p style="height: 20px;">订单时间：{$refund.create_time}</p>
+                </span>
+            </li>
+            {foreachelse}
+            <li style="text-align: center">
+                <span style="color: red;font-size: 15px;">暂无退款</span>
+            </li>
+            {/foreach}
+        </ul>
+        
+    </section>
+</section>
+{include file="./inc/footer.html"} 

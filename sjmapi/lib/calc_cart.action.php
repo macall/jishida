@@ -101,7 +101,7 @@ class calc_cart{
 			//第一次计算,主要是处理一些初始化参数,比如：默认配送地址
 			
 			if ($GLOBALS['request']['first_calc']==1){
-				$delivery = getUserAddr($user_id,false);
+				$delivery = getUserAddr($user_id,false,1);
 				
 				$root['delivery'] = $delivery;
 				$delivery_region = array(
@@ -139,6 +139,7 @@ class calc_cart{
 			if($GLOBALS['request']['from']=="wap"){
 				//用户信息
 				$cartdata = unserialize(base64_decode($GLOBALS['request']['cartdata']));
+				
 				$user_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".$user_id);
 				$root['user_info']=$user_info;
 				$root['delivery_list'] = $GLOBALS['m_config']['delivery_list'];
@@ -147,7 +148,6 @@ class calc_cart{
 				$res = insertCartData($user_id,es_session::id(),$cartdata);
 			
 				$cart_info = $res['data'];
-			
 				foreach($cart_info as $k=>$v){
 					//查询数据库，获取商品信息
 					$deal =$GLOBALS['db']->getRow("select img,max_bought from ".DB_PREFIX."deal where id=".$v['deal_id']);
@@ -156,6 +156,9 @@ class calc_cart{
 					$cart_info[$k]['img']=get_abs_img_root($deal['img']);
 					$cart_info[$k]['max_bought']=$deal['max_bought'];
 					$cart_info[$k]['current_price']=round($v['unit_price'],2);
+					$cart_info[$k]['tech_id']=$v['tech_id'];
+					$tech_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".$v['tech_id']);
+					$cart_info[$k]['tech_name']=$tech_info['user_name'];
 				}
 				$root['cartinfo'] = $cart_info;
 			}else{

@@ -77,7 +77,7 @@ function load_dp_cfg($param)
  * 无商家ID时不同步计算商家的点评评分
  * 否则需同步商家评分
  */
-function check_dp_status($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"order_item_id"=>0,"youhui_log_id"=>0,"event_submit_id"=>0))
+function check_dp_status($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tech_id"=>0,"order_item_id"=>0,"youhui_log_id"=>0,"event_submit_id"=>0))
 {
 	$order_item_id = intval($param['order_item_id']);  //订单商品ID
 	$youhui_log_id = intval($param['youhui_log_id']);  //优惠券领取日志ID
@@ -85,9 +85,8 @@ function check_dp_status($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"even
 	$deal_id = intval($param['deal_id']);
 	$youhui_id = intval($param['youhui_id']);
 	$event_id = intval($param['event_id']);
-	$location_id = intval($param['location_id']);
-	
-	
+	$location_id = intval($param['location_id']);	
+	$tech_id = intval($param['tech_id']);
 	
 	if($deal_id>0)
 	{
@@ -232,6 +231,23 @@ function check_dp_status($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"even
 			$supplier_location_id = $location_id;
 			return array("status"=>true,"info"=>"","supplier_location_id"=>$supplier_location_id);
 		}
+	}elseif($tech_id>0){
+		$begin_time = to_timespan(to_date(NOW_TIME,"Y-m-d"),"Y-m-d");
+		$end_time = to_timespan(to_date(NOW_TIME,"Y-m-d"),"Y-m-d")+24*3600-1;
+
+		$sql = "select * from ".DB_PREFIX."supplier_location_dp ".
+				" where user_id = ".$user_id." and (create_time between ".$begin_time." and ".$end_time.") and tech_id = ".$tech_id." and deal_id = 0 and youhui_id = 0 and event_id = 0";
+
+		$rs = $GLOBALS['db']->getRow($sql);
+		if($rs)
+		{
+			return array("status"=>false,"info"=>"您今天已经对该技师发表过点评，谢谢参与");
+		}
+		else
+		{
+			$supplier_location_id = $location_id;
+			return array("status"=>true,"info"=>"","supplier_location_id"=>$supplier_location_id);
+		}
 	}
 	else
 	{
@@ -245,10 +261,10 @@ function check_dp_status($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"even
 /**
  * 加载指定类型的点评列表
  */
-function get_dp_list($limit,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tag"=>""),$where="",$orderby="")
+function get_dp_list($limit,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tech_id"=>0,"tag"=>""),$where="",$orderby="")
 {
 	if(empty($param))
-		$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tag"=>"");
+		$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tech_id"=>0,"tag"=>"");
 	
 	$condition = " 1=1 ";
 	
@@ -271,6 +287,10 @@ function get_dp_list($limit,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=
 	elseif($param['location_id']>0)
 	{
 		$condition.=" and supplier_location_id = ".$param['location_id']." ";
+	}
+	elseif($param['tech_id']>0)
+	{
+		$condition.=" and tech_id = ".$param['tech_id']." ";
 	}
 	
 	if($param['tag']!="")
@@ -312,6 +332,7 @@ function get_dp_list($limit,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=
 // 			);
 			$dp_list[$k]['content'] = nl2br($v['content']);
 			$dp_list[$k]['create_time_format'] = to_date($v['create_time'],"Y-m-d");
+			$dp_list[$k]['reply_time_format'] = to_date($v['reply_time'],"Y-m-d");
 			$dp_list[$k]['point_percent'] = $v['point']/5*100;
 		}
 	}
@@ -337,13 +358,13 @@ function get_dp_list($limit,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=
  * 
  * 返回 array("status"=>bool, "info"=>"消息","location_id"=>"门店的ID","deal_id"=>"","youhui_id"=>"","event_id"=>"");
  */
-function save_review($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"order_item_id"=>0,"youhui_log_id"=>0,"event_submit_id"=>0),$content,$dp_point,$dp_image=array(),$tag_group=array(),$point_group=array())
+function save_review($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id"=>0,"location_id"=>0,"tech_id"=>0,"order_item_id"=>0,"youhui_log_id"=>0,"event_submit_id"=>0),$content,$dp_point,$dp_image=array(),$tag_group=array(),$point_group=array())
 {
 	//获取参数
 	$order_item_id = intval($param['order_item_id']);  //订单商品ID
 	$youhui_log_id = intval($param['youhui_log_id']);  //优惠券领取日志ID
 	$event_submit_id = intval($param['event_submit_id']); //活动报名日志ID
-	
+	$tech_id = intval($param['tech_id']); //技师id
 	if($order_item_id>0)
 	{
 		$deal_id = intval($GLOBALS['db']->getOne("select deal_id from ".DB_PREFIX."deal_order_item where id = ".$order_item_id));
@@ -461,13 +482,25 @@ function save_review($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id
 		{
 			return array("status"=>false,"info"=>"你要点评的商家不存在");
 		}
+	}elseif($tech_id>0)
+	{
+		require_once APP_ROOT_PATH."system/model/tech.php";
+		$tech_info = get_tech($tech_id);
+		if($tech_info)
+		{
+			
+		}
+		else
+		{
+			return array("status"=>false,"info"=>"你要点评的技师不存在");
+		}
 	}
 	
-	if($deal_id==0&&$youhui_id==0&&$event_id==0&&$location_id==0)
+	if($deal_id==0&&$youhui_id==0&&$event_id==0&&$location_id==0&&$tech_id==0)
 	{
 		return array("status"=>false,"info"=>"非法的数据");
 	}
-	
+
 	
 	//点评入库
 	$supplier_info = $GLOBALS['db']->getRow("select name,id,new_dp_count_time,supplier_id from ".DB_PREFIX."supplier_location where id = ".intval($supplier_location_id));
@@ -485,6 +518,7 @@ function save_review($user_id,$param=array("deal_id"=>0,"youhui_id"=>0,"event_id
 	$dp_data['youhui_id'] = $youhui_id;
 	$dp_data['event_id'] = $event_id;
 	$dp_data['deal_id'] = $deal_id;
+	$dp_data['tech_id'] = $tech_id;
 	$dp_data['images_cache'] = serialize($dp_image);
 	$dp_data['supplier_id'] = $supplier_id;
 	$dp_data['status'] = 1;

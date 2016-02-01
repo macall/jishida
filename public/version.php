@@ -1,6 +1,6 @@
 <?php 
 return array(
-	'APP_NAME'	=>	'方维商业系统  fanwe.com ',
+	'APP_NAME'	=>	'技师达',
 	'APP_SUB_VER'	=>	2390,
 );
 ?>

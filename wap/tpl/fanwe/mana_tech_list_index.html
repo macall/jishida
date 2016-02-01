@@ -5,11 +5,12 @@
         <li class="addjia">
             <img src="{$tech.user_avatar}">
                 <span class="fl data">
-                    <p>{$tech.user_name}
+                    <p>
+                        {$tech.user_name}
                         {foreach item=level from=$tech.tech_level}
                             <img src="images/xing.png">
                         {/foreach}
-                    </p>
+                    </p> 
                     <p>注册位置：{$tech.addr}</p>
                     <!--<p>4.5公里</p>-->
                 </span>
@@ -21,7 +22,8 @@
                     {else}
                     <p>交易中</p>
                     {/if}
-                    <a href="{wap_url a="index" r="mana_tech_detail#index"  p="tech_id=$tech.id"}">查看资料</a>
+                    <dd style="margin:5px 0;"><a href="{wap_url a="index" r="mana_tech_detail#index"  p="tech_id=$tech.id"}">查看资料</a></dd>
+                    <dd><a href="{wap_url a="index" r="mana_tech_order_list#index"  p="tech_id=$tech.id"}">查看交易</a></dd>
                 </span>
         </li>
         {/foreach}

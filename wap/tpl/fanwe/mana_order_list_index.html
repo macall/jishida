@@ -1,0 +1,25 @@
+{include file="./inc/header.html"}
+<section class="order_data_box">
+    <section class="new_order">
+        <p>订单列表</p>
+        {foreach from=$data.order_list item=order}
+        <ul>
+            <li>
+                <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$order.deal_id"}"><img src="{$order.icon}"></a>
+                <span class="fl data">
+                    <p>{$order.deal_name}</p>
+                    <p>{$order.deal_price}元</p>
+                    <P>x{$order.number}</P>
+                </span>
+                <span class="fr rig">
+                    <p><a href="{wap_url a="index" r="mana_order_detail#index"  p="order_id=$order.order_id"}">订单详情</a></p>
+                </span>
+            </li>
+            <i>{$order.create_time}  共{$order.number}笔消费  合计：{$order.total_price}元</i>
+            <i style="float: right;color: red;">本单提成{$order.mana_fee}元</i><br>
+            <i style="float: right;{if $order.is_get_bonus eq 1}color: green;{else}color: red;{/if}">{if $order.is_get_bonus eq 1}提成已分发{else}提成未分发{/if}</i>
+        </ul>
+        {/foreach}
+    </section>
+</section>
+{include file="./inc/footer.html"} 

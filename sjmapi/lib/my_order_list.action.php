@@ -21,7 +21,7 @@ class my_order_list{
 				
 			}elseif($pay_status ==2)	
 				$pay_status_and=" and pay_status=2 ";
-			else
+			else    
 				$pay_status_and=" and pay_status  in(0,1) ";
 			//$nowPage = intval($GLOBALS['request']['page']); //当前分页
 			$nowPage = intval($GLOBALS['request']['page'])?intval($GLOBALS['request']['page']):1; //当前分页

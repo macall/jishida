@@ -1,13 +1,13 @@
 <?php
 
 class mana_tech_detail {
-
+ 
     public function index() {
         $city_name = strim($GLOBALS['request']['city_name']); //城市名称
         $root = array();
 
         $root['page_title'] = '技师详情';
-
+        $root['mana_page_title'] = '技师详情';
 
         //检查用户,用户密码
         $user = $GLOBALS['user_info'];

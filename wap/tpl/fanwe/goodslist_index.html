@@ -52,11 +52,18 @@
 					  	   </div>
 					  </div>
 				</div>
+				<!--<section class="quehuan">
+					<ul>
+						<li {if $data.marked_tag eq 1}class="no"{/if}><a href="index.php?ctl=goodslist&order_type=buy_count">销量</a> </li>
+						<li {if $data.marked_tag eq 2}class="no"{/if}><a href="index.php?ctl=goodslist&order_type=price_desc">价格</a> </li>
+						<li {if $data.marked_tag eq 3}class="no"{/if}><a href="index.php?ctl=goodslist&order_type=newest">最新发布</a> </li>
+					</ul>
+				</section>-->
 				<section class="quehuan">
 					<ul>
-						<li class="no"><a href="index.php?ctl=goodslist&order_type=buy_count">销量</a> </li>
-						<li><a href="index.php?ctl=goodslist&order_type=price_desc">价格</a> </li>
-						<li><a href="index.php?ctl=goodslist&order_type=newest">最新发布</a> </li>
+						{foreach from=$data.bcate_list item=bcate_list}
+							<li {if $bcate_list.marked_tag eq 1}class="no"{/if}><a href="index.php?ctl=goodslist&catalog_id={$bcate_list.id}">{$bcate_list.name}</a></li>
+						{/foreach}
 					</ul>
 				</section>
 				<div class="content">

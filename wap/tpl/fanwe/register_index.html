@@ -15,14 +15,14 @@
 <div class="wrap">
     <div class="comment_list_txt1">
         <div id="Tab1">
-            <div class="Menubox">
+            <div class="Menubox" style="display:none;">
                 <ul>
                     <li id="one1" onclick="setTab('one', 1, 7)"  class="hover" style=" border-right:1px solid #ccc;">账号注册</li>
                     <li id="one2" onclick="setTab('one', 2, 7)">手机注册</li>
                 </ul>
             </div>
             <div class="Contentbox">  
-                <div id="con_one_1" class="hover">
+                <div id="con_one_1" class="hover" style="display:none;">
                     <div class="comment_list_txt">
                         <form id="normal-register-form" action="{wap_url a="index" r="register"}" autocomplete="off" method="post" onsubmit="return check(this)">
 
@@ -57,36 +57,39 @@
                         </form>
                     </div>
                 </div>
-                <div id="con_one_2" style="display:none;">
+                <div id="con_one_2">
                     <div class="comment_list_txt">
-                        <form id="mb_rg" onsubmit="return mb_check(this)" method="post" action="{wap_url a="index" r="register_do_phone"}">
-                                <span>手机号</span>
-                                <input id="mobile" name="mobile" value="" holder="请输入手机号" />
-                                <br>
-                                <span>验证码</span>
-                                <input name="sms_verify" id="sms_verify" holder="请输入验证码" />
-                                <input type="Button"  id = "btn_send" onclick = "javascript:do_send()" value="发送验证码" >
-                                <br>
-                                <span>密码</span>
-                                <input type="password" name="password" id="mb_password" holder="请输入密码" />
-                                <br>
-                                <span>确认密码</span>
-                                <input type="password" name="password_confirm" id="mb_password_confirm" holder="请再次输入密码"/>
-                                <div class="inputtxt2 chk"> 
-                                    <span class="chk_sp1">选择性别:</span>
-                                    <input class="mt_sex" type="radio" name="mb_sex" value="1" /><span class="chk_sp2">男</span>
-                                    <input class="mt_sex" type="radio" name="mb_sex" value="0"/><span class="chk_sp2">女</span>
-                                </div>
-                                <div class="btn_login">
-                                    <input  type="submit"  name="Submit" class="mj-submit" value="立即注册" style="background: none;">
-                                </div>
-<!--                            <dl>
-                                <dt></dt>
-                                <dd>
-                                    <button class="ui-button f_l orange" rel="orange" type="submit"></button>
+						<form id="mb_rg" onsubmit="return mb_check(this)" method="post" action="{wap_url a="index" r="register_do_phone"}">
+                                <section class="register_biao">
+									<ul>
+										<li>
+											<span>手机号</span>
+											<input id="mobile" name="mobile" value="" holder="请输入手机号" />
+										</li>
+										<li>
+											<span>创建密码</span>
+											<input type="password" name="password" id="mb_password" holder="请输入密码" />
+										</li>
+										<li>
+											<span>确认密码</span>
+											<input type="password" name="password_confirm" id="mb_password_confirm" holder="请再次输入密码"/>
+										</li>
+										<li class="yuanx">
+											<span>短信验证码</span>
+											<input name="sms_verify" id="sms_verify" holder="请输入验证码" /><input type="Button"  id = "btn_send" onclick = "javascript:do_send()" value="发送验证码" >
+										</li>
+									</ul>
+                                                                        <div class="inputtxt2 chk"> 
+                                                                            <span class="chk_sp1">选择性别:</span>
+                                                                            <input class="mt_sex" type="radio" name="mb_sex" value="1" /><span class="chk_sp2">男</span>
+                                                                            <input class="mt_sex" type="radio" name="mb_sex" value="0"/><span class="chk_sp2">女</span>
+                                                                        </div>
+                                                                        <div class="btn_login">
+                                                                            <input  type="submit"  name="Submit" class="mj-submit" value="立即注册" style="background: none;">
+                                                                        </div>
+   								 </section>
+								
 
-                                </dd>
-                            </dl>-->
                         </form>
                     </div>
                 </div>

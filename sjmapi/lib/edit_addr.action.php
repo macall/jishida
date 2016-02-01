@@ -77,7 +77,7 @@ class edit_addr{
 			$root['user_login_status'] = 0;		
 		}	
 		$root['city_name']=$city_name;
-		$root['page_title'] = '编辑收货地址';	
+		$root['page_title'] = '编辑预约地址';	
 		output($root);
 	}
 }

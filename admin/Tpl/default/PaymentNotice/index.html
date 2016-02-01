@@ -1,6 +1,10 @@
 {// 引入标签库 }
 <tagLib name="html" />
 <include file="Public:header" />
+<load href='__TMPL__Common/js/conf.js' />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar/calendar.js' />
 <PHP>
 	function get_is_paid($status)
 	{
@@ -14,10 +18,13 @@
 <div class="main_title">{$main_title}</div>
 <div class="blank5"></div>
 <div class="search_row">
-	<form name="search" action="__APP__" method="get">	
+	<form name="search" action="__APP__" method="get">
 		{%ORDER_SN}：<input type="text" class="textbox" name="order_sn" value="{:strim($_REQUEST['order_sn'])}" />
 		{%PAYMENT_NOTICE_SN}：<input type="text" class="textbox" name="notice_sn" value="{:strim($_REQUEST['notice_sn'])}" />
 		会员名称：<input type="text" class="textbox" name="user_name" value="{:strim($_REQUEST['user_name'])}" />
+                查询日期：<input type="text" class="textbox" name="begin_time" id="begin_time" value="{:strim($_REQUEST['begin_time'])}" onfocus="this.blur(); return showCalendar('begin_time', '%Y-%m-%d', false, false, 'begin_time');" />
+                <input style="display: none" type="button" class="button" id="btn_begin_time" value="{%SELECT_TIME}" onclick="return showCalendar('begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_begin_time');" />	
+                <!--<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#begin_time').val('');" />-->	
 		{%PAYMENT_METHOD}：
 		<select name="payment_id">
 			<option value="0" <if condition="intval($_REQUEST['payment_id']) eq 0">selected="selected"</if>>{%ALL}</option>
@@ -27,7 +34,10 @@
 		</select>
 		<input type="hidden" value="PaymentNotice" name="m" />
 		<input type="hidden" value="index" name="a" />
-		<input type="submit" class="button" value="{%SEARCH}" />
+		<input type="submit" class="button" value="{%SEARCH}" /><br><br>
+                应付金额：¥{$should_pay_money}元<br>
+                未付金额：¥{$not_pay_money}元<br>
+                已付金额：¥{$paid_money}元
 	</form>
 </div>
 <div class="blank5"></div>
@@ -36,15 +46,15 @@
 	style="dataTable" 
 	name="payment_notice" 
 	datasource="list" 
-	show="id:{%ID}|50px,notice_sn:{%PAYMENT_NOTICE_SN},create_time|to_date:{%CREATE_TIME}
-	,pay_time|to_date:{%PAY_TIME}
-	,is_paid|get_is_paid:{%IS_PAID}
-	,order_id|get_order_sn_with_link:{%ORDER_SN}
-	,user_id|get_user_name:{%USER_NAME}
-	,payment_id|get_payment_name:{%PAYMENT_METHOD}
-	,money|format_price:{%PAYMENT_MONEY}
-	,outer_notice_sn:{%OUTER_NOTICE_SN}
-	,memo:{%PAYMENT_MEMO}" 
+	show="id:编号|50px,notice_sn:付款单号,create_time|to_date:创建时间
+	,pay_time|to_date:支付时间
+	,is_paid|get_is_paid:是否已支付
+	,order_id|get_order_sn_with_link:订单号
+	,user_id|get_user_name:会员名称
+	,payment_id|get_payment_name:收款方式
+	,money|format_price:付款单金额
+	,outer_notice_sn:支付平台交易号
+	,memo:付款单备注" 
 	actionlist="del:{%DEL}" /> 
 
 <div class="blank5"></div>

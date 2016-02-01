@@ -48,10 +48,28 @@ class postcart{
 		if($GLOBALS['request']['from']=='wap'){
 			
 			
+			
 			$cartdata = unserialize(base64_decode($GLOBALS['request']['cartdata']));
-
+			//print_r($cartdata);die;
+			//删除购物车中其他商品,开始
+			$session_cart_data=es_session::get("cart_data");
+			foreach($session_cart_data as $k=>$v){
+				if($v['goods_id']!=$GLOBALS['request']['id']){
+					unset($session_cart_data[$k]);
+					es_session::set("cart_data",$session_cart_data);
+				}
+			}
+			foreach($cartdata as $k=>$v){				
+				if($GLOBALS['request']['id']!=$v['goods_id']){
+					unset($cartdata[$k]);					
+				}		
+			}
+			//删除购物车中其他商品,结束
+			
+			
 			//file_put_contents(APP_ROOT_PATH."tmapi/log/postcart1".strftime("%Y%m%d%H%M%S",time()).".txt",print_r($cartdata,true));
 			$res = insertCartData($user_id,es_session::id(),$cartdata);	
+			
 			//file_put_contents(APP_ROOT_PATH."tmapi/log/postcart2".strftime("%Y%m%d%H%M%S",time()).".txt",print_r($res,true));
 				
 			$cart_info = $res['data'];
@@ -72,6 +90,7 @@ class postcart{
 				}
 				
 			}
+			
 			$root['postcart_info']=$cart_info;
 			
 			//统计所有的价格
@@ -85,7 +104,7 @@ class postcart{
 			$root['cartinfo'] = $GLOBALS['m_config']['yh'];	
 		}			
 
-		
+		$root['nowtime']=date("Y-m-d H:i",time()+36400);
 		output($root);
 	}
 }

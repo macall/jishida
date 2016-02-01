@@ -1,7 +1,9 @@
 {foreach from=$data.feeinfo item=feeinfo name=feeinfo}
+{if $feeinfo.item eq '积分变动'}
+{else}
 <div class="item-common" {if $smarty.foreach.feeinfo.last}style="border-bottom:none;"{/if}>
     <span class="item-label">{$feeinfo.item}:</span>
     <div class="item-content red">{$feeinfo.value}</div>
-	
 </div>
+{/if}
 {/foreach}

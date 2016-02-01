@@ -104,6 +104,16 @@ $m_config = getMConfig();//初始化手机端配置
 user_login();
 
 $user_info = es_session::get('user_info');
+if($class == 'index' && $act2 == 'index'){
+    if($user_info['service_type_id'] == 2){//技师
+        $class = 'tech_order_list';
+        $act2 == 'index';
+    }elseif($user_info['service_type_id'] == 3){
+        $class = 'mana_tech_list';
+        $act2 == 'index';
+    }
+}
+
 $request_param['session_id'] = es_session::id();
 require_once APP_ROOT_PATH.'system/utils/weixin.php';
 
@@ -346,7 +356,7 @@ if($request_param['post_type']!='json'){
 //                foreach ($request_param as $key => $value) {
 //                    $str .= $key . '=' .$value . '&';
 //                }
-//                var_dump($request_url.'?'.$str);
+//                print_r($request_url.'?'.$str);
 	}
 
 	$data=$request_data['body'];
@@ -384,6 +394,10 @@ if($request_param['post_type']!='json'){
 	}
 	
 	
+        //如果非法用户,则重定向到找回密码页面
+        if($class =='get_password_resetting' && ($data['get_password_resetting_no_user'] == 1 || $data['get_password_resetting_wrong_code'] == 1 )){
+               app_redirect(wap_url('index','get_password'));
+        }
 	
 	//$domain = app_conf("PUBLIC_DOMAIN_ROOT")==''?get_domain().APP_ROOT:app_conf("PUBLIC_DOMAIN_ROOT");
 	//echo $domain;exit;

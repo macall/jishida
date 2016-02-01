@@ -1,0 +1,31 @@
+{include file="./inc/header.html"}
+<section class="order_data_box">
+    <section class="new_order">
+        <p>投诉列表</p>
+        <ul class="xinji">
+            {foreach from=$data.complain_list item=complain}
+            <li style="position: relative;">
+                <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$complain.deal_id"}">
+                <img src="{$complain.service_icon}">
+                </a>
+                <span class="fl data">
+                    <p>{$complain.service_name}</p>
+                    <p>{$complain.price}元</p>
+                    <P>x{$complain.number}</P>
+                    <i style="position:relative;left:-40%;top:6px;">{$complain.order_create_time} 共{$complain.number}笔消费 合计：{$complain.total_price}元</i>
+                </span>
+                <span class="fr rig">
+                    <a style="position: absolute;top: 15%;right: 1%;" 
+                       href="{wap_url a="index" r="mana_complain_detail#index"  p="complain_id=$complain.complain_id"}">投诉详情</a>
+                </span>
+            </li>
+            {foreachelse}
+            <li style="text-align: center">
+                <span style="color: red;font-size: 15px;">暂无投诉</span>
+            </li>
+            {/foreach}
+        </ul>
+        
+    </section>
+</section>
+{include file="./inc/footer.html"} 

@@ -1,0 +1,123 @@
+{include file="./inc/header.html"}
+<section class="order_trding_box" >
+    <ul>
+        <p>订单跟踪</p>
+        <li>
+            <p>
+                <span>客户：</span>
+                <i>{$data.order.c_user.user_name}</i>
+            </p>
+            <p>
+                <span>联系电话：</span>
+                <i>{$data.order.c_user.mobile}</i>
+            </p>
+            <p>
+                <span>订单地址：</span>
+                <i> {$data.order.c_user.addr}</i>
+            </p>
+        </li>
+        <li>
+            <p>
+                <span>服务项目：</span>
+                {foreach from=$data.order.deals item=goods}
+                <a href="{wap_url a="index" r="goodsdesc#index"  p="id=$goods.id"}"><em>{$goods.sub_name}</em></a>
+                {/foreach}
+            </p>
+            <p class="jindu">
+                <span>服务进度：</span>
+               <i>
+
+                   <strong id="temp" max="{$data.order.endtime}"  value="{$data.order.starttime}"><img src="images/yuan.png"> <b id="cur"></b></strong>
+
+               </i>
+                <em>{$data.order.service_time}分钟</em>
+                <!--<b id="temp" max="2400"  max="0" value="1"></b>-->
+                <!--<b id="cur">0%</b>-->
+                <!--<i>2400</i>-->
+            </p>
+        </li>
+        <li class="banb2">
+            <p>
+                <span>客服评价：</span>
+                <i>
+                {if $data.order.user_comment}
+                {$order.user_comment}
+                {else}
+                暂无
+                {/if}</i>
+            </p>
+            <p>
+                <span>投诉：</span>
+                <i>无</i>
+            </p>
+        </li>
+    </ul>
+</section>
+<section class="ziliao">
+    <p>技师资料</p>
+    <ul>
+        <li class="shangmian">
+            <img src="images/show.png">
+            <span class="zjong fl">
+                <p>{$data.tech.user_name}  {$data.tech.sex}  </p>
+                <p>
+                {foreach item=level from=$data.tech.tech_level}
+                    <img src="images/xing.png">
+                {/foreach}
+                </p>
+                <!--<p>位置：{$data.tech.addr}</p>-->
+            </span>
+            <span class="fr right">
+                <img src="images/chakan.png">
+                <p>{$data.order_count}单</p>
+            </span>
+        </li>
+
+        <li class="telte_2">
+            <span>手机</span>
+            <i>{$data.tech.mobile}</i>
+        </li>
+        <li class="telte_2">
+            <span>邮箱 </span>
+            <i>{$data.tech.email}</i>
+        </li>
+        <li class="telte_2">
+            <span>地址</span>
+            <i>{$data.tech.addr}</i>
+        </li>
+        <li class="telte_2">
+            <span>生日</span>
+            <i>{$data.tech.byear}年{$data.tech.bmonth}月{$data.tech.bday}日</i>
+        </li>
+        <li class="telte_2">
+            <span>称呼</span>
+            <i>{$data.tech.user_name}</i>
+        </li>
+        <li class="telte_2">
+            <span>本月出单</span>
+            <i>{$data.month_order_count}</i>
+        </li>
+        <li class="telte_2">
+            <span>上月出单</span>
+            <i>{$data.last_month_order_count}</i>
+        </li>
+    </ul>
+</section>
+{include file="./inc/footer.html"} 
+<script>
+    $(function(){
+        var endTime = parseInt($("#temp").attr("max"));
+        var startTime = {$data.order.starttime};
+       setInterval(function(){
+           if(startTime<endTime){
+               startTime+=1;
+               $("#temp").attr("value",startTime);
+               var rate = Math.floor((startTime/endTime)*100);
+               $("#temp").css("width",rate+"%");
+               $("#cur").text(rate+"%");
+           }else{
+               clearInterval();
+           }
+       },1000);
+    });
+</script>

@@ -11,6 +11,94 @@ return array(
 			"set_effect"	=>	array("name"=>"设置生效","action"=>"set_effect"),			
 		)
 	),
+        "JsdUser"	=>	array(
+		"name"	=>	"会员", 
+		"node"	=>	array( 
+                    "index"	=>	array("name"=>"会员列表","action"=>"index"),
+                    "add"	=>	array("name"=>"会员增加","action"=>"add"),
+                    "edit"	=>	array("name"=>"会员编辑","action"=>"edit"),
+                    "export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
+                    "delete"	=>	array("name"=>"删除","action"=>"delete"),
+                    "foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+                    "insert"	=>	array("name"=>"执行增加","action"=>"insert"),
+                    "update"	=>	array("name"=>"执行更新","action"=>"update"),
+		)
+	),
+        "JsdTech"	=>	array(
+		"name"	=>	"技师", 
+		"node"	=>	array( 
+                    "index"	=>	array("name"=>"技师列表","action"=>"index"),
+                    "add"	=>	array("name"=>"技师增加","action"=>"add"),
+                    "edit"	=>	array("name"=>"技师编辑","action"=>"edit"),
+                    "export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
+                    "delete"	=>	array("name"=>"删除","action"=>"delete"),
+                    "foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+                    "insert"	=>	array("name"=>"执行增加","action"=>"insert"),
+                    "update"	=>	array("name"=>"执行更新","action"=>"update"),
+		)
+	),
+        "JsdManager"	=>	array(
+		"name"	=>	"经理", 
+		"node"	=>	array( 
+                    "index"	=>	array("name"=>"经理列表","action"=>"index"),
+                    "add"	=>	array("name"=>"经理增加","action"=>"add"),
+                    "edit"	=>	array("name"=>"经理编辑","action"=>"edit"),
+                    "export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
+                    "delete"	=>	array("name"=>"删除","action"=>"delete"),
+                    "foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+                    "insert"	=>	array("name"=>"执行增加","action"=>"insert"),
+                    "update"	=>	array("name"=>"执行更新","action"=>"update"),
+		)
+	),
+        "ServiceType"	=>	array(
+		"name"	=>	"会员类别", 
+		"node"	=>	array( 
+                    "index"	=>	array("name"=>"会员类别列表","action"=>"index"),
+                    "add"	=>	array("name"=>"会员类别增加","action"=>"add"),
+                    "edit"	=>	array("name"=>"会员类别编辑","action"=>"edit"),
+                    "foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+                    "insert"	=>	array("name"=>"执行增加","action"=>"insert"),
+                    "update"	=>	array("name"=>"执行更新","action"=>"update"),
+		)
+	),
+        "ServiceLevel"	=>	array(
+		"name"	=>	"技师星级", 
+		"node"	=>	array( 
+                    "index"	=>	array("name"=>"技师星级列表","action"=>"index"),
+                    "add"	=>	array("name"=>"技师星级增加","action"=>"add"),
+                    "edit"	=>	array("name"=>"技师星级编辑","action"=>"edit"),
+                    "foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+                    "insert"	=>	array("name"=>"执行增加","action"=>"insert"),
+                    "update"	=>	array("name"=>"执行更新","action"=>"update"),
+		)
+	),
+        "DealOrder"	=>	array(
+		"name"	=>	"订单模块", 
+		"node"	=>	array( 
+			"deal_index"	=>	array("name"=>"订单列表","action"=>"deal_index"),
+			"deal_trash"	=>	array("name"=>"历史订单","action"=>"deal_trash"),
+			"delete"	=>	array("name"=>"删除","action"=>"delete"),
+			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+//			"del_lottery"	=>	array("name"=>"删除抽奖号","action"=>"del_lottery"),
+//			"delivery"	=>	array("name"=>"订单发货","action"=>"delivery"),			
+//			"do_batch_delivery"	=>	array("name"=>"执行发货","action"=>"do_batch_delivery"),
+//			"do_delivery"	=>	array("name"=>"执行发货","action"=>"do_delivery"),
+			"do_incharge"	=>	array("name"=>"执行收款","action"=>"do_incharge"),
+			"export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
+			"incharge_index"	=>	array("name"=>"充值订单列表","action"=>"incharge_index"),
+			"incharge_trash"	=>	array("name"=>"历史充值订单","action"=>"incharge_trash"),
+//			"load_batch_delivery"	=>	array("name"=>"批量发货","action"=>"load_batch_delivery"),
+//			"lottery_index"	=>	array("name"=>"抽奖号列表","action"=>"lottery_index"),
+			"order_incharge"	=>	array("name"=>"订单收款","action"=>"order_incharge"),
+			"pay_incharge"	=>	array("name"=>"充值单管理员收款","action"=>"pay_incharge"),
+			"referer"	=>	array("name"=>"订单来路统计","action"=>"referer"),
+			"view_order"	=>	array("name"=>"查看订单","action"=>"view_order"),
+			"view_order_history"	=>	array("name"=>"查看历史订单","action"=>"view_order_history"),
+			"do_refund"	=>	array("name"=>"同步退款","action"=>"do_refund"),
+			"do_refuse"	=>	array("name"=>"拒绝退款","action"=>"do_refuse"),
+			"do_verify"	=>	array("name"=>"人工验证，收货","action"=>"do_verify"),
+		)
+	),
 	"Adv"	=>	array(
 		"name"	=>	"广告模块", 
 		"node"	=>	array( 
@@ -199,33 +287,6 @@ return array(
 			"index"	=>	array("name"=>"业务队列列表","action"=>"index"),
 			"send"	=>	array("name"=>"手动发送","action"=>"send"),
 			"show_content"	=>	array("name"=>"显示内容","action"=>"show_content"),
-		)
-	),
-	"DealOrder"	=>	array(
-		"name"	=>	"订单模块", 
-		"node"	=>	array( 
-			"deal_index"	=>	array("name"=>"订单列表","action"=>"deal_index"),
-			"deal_trash"	=>	array("name"=>"历史订单","action"=>"deal_trash"),
-			"delete"	=>	array("name"=>"删除","action"=>"delete"),
-			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-			"del_lottery"	=>	array("name"=>"删除抽奖号","action"=>"del_lottery"),
-			"delivery"	=>	array("name"=>"订单发货","action"=>"delivery"),			
-			"do_batch_delivery"	=>	array("name"=>"执行发货","action"=>"do_batch_delivery"),
-			"do_delivery"	=>	array("name"=>"执行发货","action"=>"do_delivery"),
-			"do_incharge"	=>	array("name"=>"执行收款","action"=>"do_incharge"),
-			"export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
-			"incharge_index"	=>	array("name"=>"充值订单列表","action"=>"incharge_index"),
-			"incharge_trash"	=>	array("name"=>"历史充值订单","action"=>"incharge_trash"),
-			"load_batch_delivery"	=>	array("name"=>"批量发货","action"=>"load_batch_delivery"),
-			"lottery_index"	=>	array("name"=>"抽奖号列表","action"=>"lottery_index"),
-			"order_incharge"	=>	array("name"=>"订单收款","action"=>"order_incharge"),
-			"pay_incharge"	=>	array("name"=>"充值单管理员收款","action"=>"pay_incharge"),
-			"referer"	=>	array("name"=>"订单来路统计","action"=>"referer"),
-			"view_order"	=>	array("name"=>"查看订单","action"=>"view_order"),
-			"view_order_history"	=>	array("name"=>"查看历史订单","action"=>"view_order_history"),
-			"do_refund"	=>	array("name"=>"同步退款","action"=>"do_refund"),
-			"do_refuse"	=>	array("name"=>"拒绝退款","action"=>"do_refuse"),
-			"do_verify"	=>	array("name"=>"人工验证，收货","action"=>"do_verify"),
 		)
 	),
 	"Delivery"	=>	array(
@@ -766,82 +827,82 @@ return array(
 //			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
 //		)
 //	),
-	"User"	=>	array(
-		"name"	=>	"会员", 
-		"node"	=>	array( 
-			"account_detail"	=>	array("name"=>"帐户详情","action"=>"account_detail"),
-			"delete"	=>	array("name"=>"删除","action"=>"delete"),
-			"edit"	=>	array("name"=>"编辑页面","action"=>"edit"),
-			"export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
-			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-			"foreverdelete_account_detail"	=>	array("name"=>"永久删除帐户详情","action"=>"foreverdelete_account_detail"),
-			"index"	=>	array("name"=>"会员列表","action"=>"index"),
-			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
-			"modify_account"	=>	array("name"=>"更新账户金额，积分，经验","action"=>"modify_account"),
-			"restore"	=>	array("name"=>"恢复","action"=>"restore"),
-			"set_effect"	=>	array("name"=>"设置生效","action"=>"set_effect"),
-			"trash"	=>	array("name"=>"会员回收站","action"=>"trash"),
-			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
-			"withdrawal_index"	=>	array("name"=>"会员提现列表","action"=>"withdrawal_index"),
-			"withdrawal_edit"	=>	array("name"=>"会员提现弹出框","action"=>"withdrawal_edit"),
-			"do_withdrawal"	=>	array("name"=>"会员提现审核","action"=>"do_withdrawal"),
-			"del_withdrawal"	=>	array("name"=>"会员提现记录删除","action"=>"del_withdrawal"),
-		)
-	),
-//	"UserField"	=>	array(
-//		"name"	=>	"会员字段", 
+//	"User"	=>	array(
+//		"name"	=>	"会员", 
 //		"node"	=>	array( 
-//			"index"	=>	array("name"=>"会员字段列表","action"=>"index"),
-//			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
-//			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
-//			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-//			"set_sort"	=>	array("name"=>"排序","action"=>"set_sort"),
-//		)
-//	),
-	"UserGroup"	=>	array(
-		"name"	=>	"会员组别", 
-		"node"	=>	array( 
-			"index"	=>	array("name"=>"会员组别列表","action"=>"index"),
-			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
-			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
-			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-		)
-	),
-	"UserLevel"	=>	array(
-		"name"	=>	"会员等级", 
-		"node"	=>	array( 
-			"index"	=>	array("name"=>"会员等级列表","action"=>"index"),
-			"insert"	=>	array("name"=>"添加提交","action"=>"insert"),
-			"update"	=>	array("name"=>"编辑提交","action"=>"update"),
-			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-		)
-	),
-//	"Vote"	=>	array(
-//		"name"	=>	"投票调查", 
-//		"node"	=>	array( 
-//			"add"	=>	array("name"=>"添加页面","action"=>"add"),
-//			"add_ask_row"	=>	array("name"=>"添加问题","action"=>"add_ask_row"),
-//			"do_vote_ask"	=>	array("name"=>"保存问卷","action"=>"do_vote_ask"),
+//			"account_detail"	=>	array("name"=>"帐户详情","action"=>"account_detail"),
+//			"delete"	=>	array("name"=>"删除","action"=>"delete"),
 //			"edit"	=>	array("name"=>"编辑页面","action"=>"edit"),
+//			"export_csv"	=>	array("name"=>"导出csv","action"=>"export_csv"),
 //			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-//			"index"	=>	array("name"=>"投票调查列表","action"=>"index"),
+////			"foreverdelete_account_detail"	=>	array("name"=>"永久删除帐户详情","action"=>"foreverdelete_account_detail"),
+//			"index"	=>	array("name"=>"会员列表","action"=>"index"),
 //			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
+//			"modify_account"	=>	array("name"=>"更新账户金额，积分，经验","action"=>"modify_account"),
+//			"restore"	=>	array("name"=>"恢复","action"=>"restore"),
 //			"set_effect"	=>	array("name"=>"设置生效","action"=>"set_effect"),
-//			"set_sort"	=>	array("name"=>"排序","action"=>"set_sort"),
+//			"trash"	=>	array("name"=>"会员回收站","action"=>"trash"),
 //			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
-//			"vote_ask"	=>	array("name"=>"编辑问卷","action"=>"vote_ask"),
-//			"vote_result"	=>	array("name"=>"查看结果","action"=>"vote_result"),
+//			"withdrawal_index"	=>	array("name"=>"会员提现列表","action"=>"withdrawal_index"),
+//			"withdrawal_edit"	=>	array("name"=>"会员提现弹出框","action"=>"withdrawal_edit"),
+//			"do_withdrawal"	=>	array("name"=>"会员提现审核","action"=>"do_withdrawal"),
+//			"del_withdrawal"	=>	array("name"=>"会员提现记录删除","action"=>"del_withdrawal"),
 //		)
 //	),
-	"WeightUnit"	=>	array(
-		"name"	=>	"重量单位", 
-		"node"	=>	array( 
-			"index"	=>	array("name"=>"重量列表","action"=>"index"),
-			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
-			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
-			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
-		)
-	),
+////	"UserField"	=>	array(
+////		"name"	=>	"会员字段", 
+////		"node"	=>	array( 
+////			"index"	=>	array("name"=>"会员字段列表","action"=>"index"),
+////			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
+////			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
+////			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+////			"set_sort"	=>	array("name"=>"排序","action"=>"set_sort"),
+////		)
+////	),
+//	"UserGroup"	=>	array(
+//		"name"	=>	"会员组别", 
+//		"node"	=>	array( 
+//			"index"	=>	array("name"=>"会员组别列表","action"=>"index"),
+//			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
+//			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
+//			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+//		)
+//	),
+//	"UserLevel"	=>	array(
+//		"name"	=>	"会员等级", 
+//		"node"	=>	array( 
+//			"index"	=>	array("name"=>"会员等级列表","action"=>"index"),
+//			"insert"	=>	array("name"=>"添加提交","action"=>"insert"),
+//			"update"	=>	array("name"=>"编辑提交","action"=>"update"),
+//			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+//		)
+//	),
+////	"Vote"	=>	array(
+////		"name"	=>	"投票调查", 
+////		"node"	=>	array( 
+////			"add"	=>	array("name"=>"添加页面","action"=>"add"),
+////			"add_ask_row"	=>	array("name"=>"添加问题","action"=>"add_ask_row"),
+////			"do_vote_ask"	=>	array("name"=>"保存问卷","action"=>"do_vote_ask"),
+////			"edit"	=>	array("name"=>"编辑页面","action"=>"edit"),
+////			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+////			"index"	=>	array("name"=>"投票调查列表","action"=>"index"),
+////			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
+////			"set_effect"	=>	array("name"=>"设置生效","action"=>"set_effect"),
+////			"set_sort"	=>	array("name"=>"排序","action"=>"set_sort"),
+////			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
+////			"vote_ask"	=>	array("name"=>"编辑问卷","action"=>"vote_ask"),
+////			"vote_result"	=>	array("name"=>"查看结果","action"=>"vote_result"),
+////		)
+////	),
+//	"WeightUnit"	=>	array(
+//		"name"	=>	"重量单位", 
+//		"node"	=>	array( 
+//			"index"	=>	array("name"=>"重量列表","action"=>"index"),
+//			"insert"	=>	array("name"=>"添加执行","action"=>"insert"),
+//			"update"	=>	array("name"=>"编辑执行","action"=>"update"),
+//			"foreverdelete"	=>	array("name"=>"永久删除","action"=>"foreverdelete"),
+//		)
+//	),
 	"Youhui"	=>	array(
 		"name"	=>	"优惠券", 
 		"node"	=>	array( 

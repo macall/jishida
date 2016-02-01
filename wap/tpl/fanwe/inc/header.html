@@ -60,28 +60,48 @@
 	<script src="js/myswipe.js"></script>
 	<script src="js/swipe.js"></script>
 	<script src="js/jqcery-mian.js"></script>
+        <script src="js/iscroll.js"></script>
+        <script src="js/date.js"></script>
 </head> 
 <body>
+<div class="header">	
+	<div class="c-hd">
+        <section class="logo_img"><a href="javascript:history.back(-1)" class="goback_a"><返回</a>
+			{if $data.user.service_type_id eq 3}
+				{if $data.mana_page_title}{$data.mana_page_title}{else}名下技师{/if}
+			{else}
+				{$data.page_title}
+			{/if}
+		
+		</section>
+        <section class="h_search"><!--这里是头部的隐藏列表，点击可操作-->
+			 <a href="javascript:void(0);"><i class="fa fa-list-ul"></i></a>
+	    </section>
+     </div>
+	 <div class="pull_down">
+	       <ul>
+	       	    {if $data.user.service_type_id eq 3}
+				
+				{else}
+				<li>
+	       	    	<a href="./">
+	       	    		<div class="menu">
+	       	    			<i class="fa fa-home"></i>
+							<span>首页</span>
+	       	    		</div>
+	       	    	</a>
+	       	    </li>
+				 <li>
+	       	    	<a href="{wap_url a="index" r="login#index"}">
+	       	    		<div class="menu">
+	       	    			<i class="fa fa-smile-o"></i>
+							<span>我的</span>
+	       	    		</div>
+	       	    	</a>
+	       	    </li>
+				{/if}
+	       </ul>
+	 </div>
+</div>
 <link rel="stylesheet" href="css/head.css" type="text/css">
-<!--header-->
-{if $data.user.service_type_id eq 3}
-<section class="order_data_box">
-    <section class="top_data truolky">
-        <ul>
-            <li class="return"><a href="javascript:history.back(-1)">返回</a> </li>
-            <li class="phone">名下技师</li>
-        </ul>
-    </section>
-</section>
-{else}
-<section class="order_data_box">
-    <section class="top_data">
-        <img src="images/bj_3.png">
-        <ul>
-            <li class="return"><a href="javascript:history.back(-1)">返回</a> </li>
-            <li class="phone">{if $user_info}<img src="{$user_info.user_avatar}" width="59" height="59"><i>{$user_info.user_name}{else}登录</i>{/if}</li>
-        </ul>
-    </section>
-</section>
-{/if}
 <!--header end-->	

@@ -25,10 +25,12 @@
 		<td class="item_title">所属城市:</td>
 		<td class="item_input">
 		<select name="city_id">
-			<option value="0" <if condition="$vo['city_id'] eq 0">selected="selected"</if>>全部显示</option>
+			<!--<option value="0" <if condition="$vo['city_id'] eq 0">selected="selected"</if>>全部显示</option>-->
+                        <option value="0" selected="selected">全部显示</option>
 			<foreach name="city_list" item="city_item">
-				<option value="{$city_item.id}" <if condition="$vo['city_id'] eq $city_item['id']">selected="selected"</if> <if condition="$city_item['pid'] eq 0">disabled="disabled"</if>>{$city_item.title_show}</option>
-			</foreach>
+				<!--<option value="{$city_item.id}" <if condition="$vo['city_id'] eq $city_item['id']">selected="selected"</if> <if condition="$city_item['pid'] eq 0">disabled="disabled"</if>>{$city_item.title_show}</option>-->
+                        <option value="{$city_item.id}" <if condition="$city_item['pid'] eq 0">disabled="disabled"</if>>{$city_item.title_show}</option>
+                        </foreach>
 		</select>
 		</td>
 	</tr>

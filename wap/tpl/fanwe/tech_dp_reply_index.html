@@ -1,0 +1,79 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/activity_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/comment_list.css";
+			
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$parse_pagecss"}" />
+
+<section class="pingjia">
+    <p>对我的评价</p>
+    <ul>
+        <li class="huuifu">
+            <P>{$data.user_name}</P>
+            <span>{$data.content}
+             <i><img src="images/jianjio_1.png"></i>
+            </span>
+            <em>{$data.create_time_format}</em>
+        </li>
+		{if $data.reply_time > 0}
+		<li class="kefu">
+            <P>技师回复</P>
+            <span>{$data.reply_content}
+             <i><img src="images/jianjio_2.png"></i>
+            </span>
+            <em>{$data.reply_time_format}</em>
+        </li>
+		{/if}
+    </ul>
+</section>
+{if $data.reply_time eq 0}
+<div class="comment_list_txt">
+	<input type="hidden" value="{$request.id}" id="id">
+	<input type="hidden" value="{$request.type}" id="type">
+	<input type="hidden" id = "point" value="5">
+	<textarea name="content" id="content" maxlength = 140 placeholder="点击输入您的回复，最多140字"></textarea>
+</div> 
+<div class="comment_commentary" onclick="add_comment()">回复</div>
+{/if}
+<script type="text/javascript">
+function  add_comment(){
+	var content=$("#content").val();
+	var point=$("#point").val();
+	var id=$("#id").val();
+	var type=$("#type").val();
+	if(!content){
+		alert("请填写回复内容");
+		return false;		
+	}
+	
+	var query = new Object();
+	query.id = id;
+	query.point = point;
+	query.type = type;
+	query.content = content;
+	query.post_type = "json";
+	var ajaxurl = '{wap_url a="index" r="tech_dp_reply"}';
+	$.ajax({
+		url:ajaxurl,
+		data:query,
+		type:"post",
+		dataType:"json",
+		success:function(data){
+			console.log(data)
+			if(data["status"]==1){ 
+				alert(data.info);
+				window.location.href="{wap_url a="index" r="tech_dp_list" p="type=tech&id=$data.tech_id"}";
+			}else{
+				alert(data.info);
+			}
+		}
+		,error:function(){
+			alert("服务器提交错误");
+		}
+	});	
+	return false;
+}
+
+</script>	
+{include file="./inc/footer.html"}	

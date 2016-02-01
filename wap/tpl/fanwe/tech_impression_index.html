@@ -1,0 +1,20 @@
+{include file="./inc/header.html"}
+<?php
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/activity_list.css";	
+		$this->_var['parse_pagecss'][] = $this->_var['TMPL_REAL']."/css/comment_list.css";
+			
+?>
+<section class="pingjia">
+    <p>大家对我的印象</p>
+    <ul>
+		{foreach from=$data.message_list item=message_list}
+		<li class="huuifu pingji">
+			<P>{$message_list.user_name}</P>
+			<span>{$message_list.content}
+			 <i><img src="images/jianjio_2.png"></i>
+			</span>
+		</li>
+		{/foreach}	    
+    </ul>
+</section>
+{include file="./inc/footer.html"}	

@@ -1,87 +1,48 @@
 {include file="./inc/header.html"}
-<style type="text/css">
-.order_data_box{display:none;}
-</style>
-<section class="content erccontent">
-    <section class="header_box servie">
-        <ul>
-            <li class="title ">点到按摩</li>
-            <li class="lfo"><a href="javascript:history.back(-1)">返回</a> </li>
-        </ul>
-    </section>
-    <section class="datajies">
-        <ul>
-            <li class="fl cu_q">
-                <b>{$data.goods_brief}</b><i>{$data.cur_price_format}</i>
-                <p>{$data.server_time}分钟</p>
-            </li>
-            <li class="fr cu_v">
-                <img src="images/chakan.png">
-                <p>{$data.buy_count}单</p>
-            </li>
-        </ul>
-    </section>
-    <section class="ernav">
-        <ul>
-            <li class="nou">服务内容</li>
-            <li>下单须知</li>
-            <li>客户评价</li>
-        </ul>
-        <section class= "rotation">
-            {$data.goods_desc}
-        </section>
-        <section class= "rotation" style="display:none">
-            {$data.notes}
-
-        </section>
-        <section class= "rotation" style="display:none">
-            <ul>
-			{foreach from=$data.message_list item=list key=key}
-				<li class="shangmian">
-                    <span>{$list.user_name}{$list.xing}</span>
-                    <p>
-                        <i><img src="images/jianjio_1.png"> </i>
-                        {$list.content}
-                    </p>
-                    <em>{$list.create_time_format}</em>
-                </li>
-				{/foreach}
-                {if $list.reply_content neq ''}
-                <li class="Customer">
-                    <span> </span>
-
-                    <p>
-                        <i><img src="images/jianjio_2.png"> </i>
-                        <b>回复 <strong>{$list.user_name}</strong></b>
-                        {$list.reply_content}
-                    </p>
-                    <section class="xiafang"><i class="fl">{$list.reply_time_format}</i></section>
-                </li>
-				{/if}
-            </ul>
-            <section class="botom_gd">
-                <ul>
-                    <li>
-                        <a href="{wap_url a="index" r="dp_list#index"  p="id=$data.goods_id&type=deal"}">查看更多评论</a>
-                    </li>
-                </ul>
-            </section>
-        </section>
-
-    </section>
-    <section class="bottom_1">
-        <ul>
-            <li class="fl">
-                <p>时长：{$data.server_time}分钟 </p>
-                <p>合计：{$data.cur_price_format}元</p>
-            </li>
-        </ul>
-    </section>
-</section>
 <div class="wrap">
     <form id="goods-form" action="{wap_url a="index" r="postcart#index" }"  method="post">
-	<input type="hidden" name="id" value="{$data.goods_id}">
-        <div class="content">
+        <div class="content" style="margin-top:0;">
+            <div class="goods_abbr">
+                <div class="good_detail">
+                    <div class="good_pic">
+                        <a><img src="{$data.image}" width="100%"></a>
+                    </div>
+                    <div class="goods_price">
+                        <div class="price">
+                            <b><span class="j_discount_price" rel="{$data.cur_price}">{$data.cur_price_format}</span></b>
+                            <del>
+                                {$data.ori_price_format}
+                            </del>
+                        </div>
+                        <input type="hidden" name="id" value="{$data.goods_id}">
+                    </div>
+                </div>
+                <div class="business_info">
+                    <div class="business_address">
+                        <h3>{$data.title}</h3>
+                        <span>{$data.goods_brief}</span>
+                    </div>
+                </div>
+                {if $data.any_refund eq 1 or $data.expire_refund eq 1} 
+                <div class="tuikuang">
+                    {if $data.any_refund eq 1}
+                    <div class="shuishi">
+                        <i class="tui">退</i>
+                        <span>支持随时退款</span>
+                    </div>
+                    {/if}
+                    {if $data.expire_refund eq 1}
+                    <div class="guoqi">
+                        <i class="fa fa-calendar f_l"></i>
+                        <span class="f_l">支持过期退款</span>
+                    </div>
+                    {/if}
+                </div>
+                {/if}
+                
+            </div>
+            <div class="blank8">
+            </div>
             <div class="list-view">
                 {if $data.attr.has_attr_1}
                 <div class="evaluate_title">
@@ -173,12 +134,74 @@
                     </script>
                 </div>
                 {/if}
+                <div class="see_more">
+                    <a href="{wap_url a="index" r="tuaninfo#index"  p="goods_id=$data.goods_id"}">查看图文详情</a>
+                </div>
             </div>
-            
+            <div class="blank8">
+            </div>
+            <div class="list-view">
+                <div class="evaluate_title">
+                    <div class="grade" style=" position:relative; height:44px;">
+                        <h6 style=" position:absolute; font-size:16px; line-height:16px; top:16px;">评价</h6>
+                        <div style=" position:absolute;left: 40px;top: 15px; line-height:20px;">
+                            <div class="five_star_orange">
+                                <i class="fa fa-star orange" style="margin:0px;"></i>
+                                <i class="fa fa-star orange" style="margin:0px;"></i>
+                                <i class="fa fa-star orange" style="margin:0px;"></i>
+                                <i class="fa fa-star orange" style="margin:0px;"></i>
+                                <i class="fa fa-star orange" style="margin:0px;"></i>
+                                <div class="five_star_grey" style="width:{$data.width}px;">
+                                    <i class="fa fa-star grey" style="margin:0px;"></i>
+                                    <i class="fa fa-star grey" style="margin:0px;"></i>
+                                    <i class="fa fa-star grey" style="margin:0px;"></i>
+                                    <i class="fa fa-star grey" style="margin:0px;"></i>
+                                    <i class="fa fa-star grey" style="margin:0px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <b style=" position:absolute;left: 150px; top:16px; line-height:20px; ">{$data.point}</b>
+                    </div>
+                </div>
+                <div class="assess_list">
+                    {foreach from=$data.message_list item=list key=key}
+                    <ul>
+                        <li>
+                            <div class="assess_detail">
+                                <div class="a_d_left">
+                                    <span class="s_d_name">{$list.user_name}</span>
+                                    <div class="five_star_orange">
+                                        <i class="fa fa-star orange" style="margin:0px;"></i>
+                                        <i class="fa fa-star orange" style="margin:0px;"></i>
+                                        <i class="fa fa-star orange" style="margin:0px;"></i>
+                                        <i class="fa fa-star orange" style="margin:0px;"></i>
+                                        <i class="fa fa-star orange" style="margin:0px;"></i>
+                                        <div class="five_star_grey" style="width:{$list.width}px;">
+                                            <i class="fa fa-star grey" style="margin:0px;"></i>
+                                            <i class="fa fa-star grey" style="margin:0px;"></i>
+                                            <i class="fa fa-star grey" style="margin:0px;"></i>
+                                            <i class="fa fa-star grey" style="margin:0px;"></i>
+                                            <i class="fa fa-star grey" style="margin:0px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="a_d_right">{$list.create_time_format}</span>
+                            </div>
+                            <p>
+                                {$list.content}
+                            </p>
+                        </li>
+                    </ul>
+                    {/foreach}
+                </div>
+                <div class="see_more">
+                    <a href="{wap_url a="index" r="dp_list#index"  p="id=$data.goods_id&type=deal"}"  class="evaluate_num"><span>查看全部评价</span></a>
+                </div>
+            </div>
             <div class="buy">
                 {if $data.left_num}<input type="hidden" id="J_left_number" name="left_number" value="{$data.left_num}">{/if}
                 <button id="J_post_cart" type="submit" name="Submit" class="plank">
-                  	  下一步
+                  	  立即购买
                 </button>
             </div>
         </div>

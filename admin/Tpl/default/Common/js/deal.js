@@ -159,36 +159,36 @@ function load_free_delivery()
 }
 
 //积分兑换和普通购买的切换
-function switch_buy_type()
-{
-	var buy_type = $("select[name='buy_type']").val();
-	if(buy_type==1)
-	{
-		$("select[name='define_payment']").val(0);
-		$("select[name='deal_goods_type']").val(0);
-		load_attr_html();
-		$(".buy_type_0").find(".textbox").val("");
-		$(".buy_type_0").hide();
-		$(".buy_type_1").show();
-	}
-	else
-	{
-		if(buy_type==2)
-		{
-			$("#price_title").html(LANG['DEAL_ORDER_PRICE']);
-		}
-		if(buy_type==3)
-		{
-			$("#price_title").html(LANG['DEAL_SECOND_PRICE']);
-		}
-		if(buy_type==0)
-		{
-			$("#price_title").html(LANG['DEAL_CURRENT_PRICE']);
-		}
-		$(".buy_type_0").show();
-		$(".buy_type_1").hide();
-	}
-}
+//function switch_buy_type()
+//{
+//	var buy_type = $("select[name='buy_type']").val();
+//	if(buy_type==1)
+//	{
+//		$("select[name='define_payment']").val(0);
+//		$("select[name='deal_goods_type']").val(0);
+//		load_attr_html();
+//		$(".buy_type_0").find(".textbox").val("");
+//		$(".buy_type_0").hide();
+//		$(".buy_type_1").show();
+//	}
+//	else
+//	{
+//		if(buy_type==2)
+//		{
+//			$("#price_title").html(LANG['DEAL_ORDER_PRICE']);
+//		}
+//		if(buy_type==3)
+//		{
+//			$("#price_title").html(LANG['DEAL_SECOND_PRICE']);
+//		}
+//		if(buy_type==0)
+//		{
+//			$("#price_title").html(LANG['DEAL_CURRENT_PRICE']);
+//		}
+//		$(".buy_type_0").show();
+//		$(".buy_type_1").hide();
+//	}
+//}
 
 function load_attr_html()
 {
@@ -240,7 +240,7 @@ function load_weight()
 		}
 		else
 		{
-			$(".weight_row").show();
+//			$(".weight_row").show();
 		}
 }
 

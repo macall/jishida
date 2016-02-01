@@ -13,6 +13,8 @@ class add_dp
 		$youhui_id = 0;
 		$location_id = 0;
 		$event_id = 0;
+		$tech_id=0;
+		
 		if($type=="deal")
 		{
 			$deal_id = $id;
@@ -36,8 +38,12 @@ class add_dp
 			$event_id = $id;
 			require_once APP_ROOT_PATH."system/model/event.php";
 			$relate_data = get_event($event_id);
+		}elseif($type=="tech")
+		{
+			$tech_id = $id;
+			require_once APP_ROOT_PATH."system/model/tech.php";
+			$relate_data = get_tech($tech_id);
 		}
-		
 		
 		//检查用户,用户密码
 		$user = $GLOBALS['user_info'];
@@ -73,6 +79,10 @@ class add_dp
 			{
 				$cfg = load_dp_cfg(array("cate_id"=>$relate_data['deal_cate_id']));
 			}
+			elseif($type=="tech")
+			{
+				
+			}
 			
 			$point_group = array();
 			foreach($cfg['point_group'] as $row)
@@ -104,8 +114,9 @@ class add_dp
 					}
 				}
 					
-	
-				$result = save_review($user_id,array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id), $content, $point, $dp_img,array(),$point_group);
+				if($content!=''){
+					$result = save_review($user_id,array("deal_id"=>$deal_id,"youhui_id"=>$youhui_id,"event_id"=>$event_id,"location_id"=>$location_id,"tech_id"=>$tech_id), $content, $point, $dp_img,array(),$point_group);
+				}
 
 				//$result = add_deal_dp($user_id, $content, $point, $deal_id);
 				$root['status'] = $result['status'];

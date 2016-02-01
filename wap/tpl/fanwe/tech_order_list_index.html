@@ -1,0 +1,23 @@
+{include file="./inc/header.html"}
+<section class="tenrte_order">
+    {foreach from=$data.item item=my_order_list key=key}
+	<ul>
+       <p> {if $my_order_list.service_start_time eq 0}新订单{else}已服务{/if}</p>
+		{foreach from=$my_order_list.orderGoods item=my_order_list_item key=key}
+        <li>
+            <img src="{$my_order_list_item.image}">
+			<span class="fl data">
+				<p>{function name="msubstr" v=$my_order_list_item.name b=0 e=28}</p>
+				<p>{$my_order_list_item.price_format}元</p>
+				<P>数量：{$my_order_list_item.num}</P>
+			</span>
+			<span class="fr rig">
+				<a href="{url a="index" r="tech_order_detail#index" p="id=$my_order_list.id"}">查看详情</a>
+			</span>
+        </li>
+		{/foreach}
+        <i>共{$my_order_list.num}笔消费  合计：{$my_order_list.total_money_format}元</i>
+    </ul>
+	{/foreach}
+</section>
+{include file="./inc/footer.html"} 

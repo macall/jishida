@@ -47,6 +47,7 @@ class my_order_detail{
 				$deliveryAddr['postcode'] = $order_info['zip'];//邮编
 			
 				$root['deliveryAddr'] = $deliveryAddr;
+				$root['delivery_status_2'] =$order_info['delivery_status'];
 				$root['content'] = $order_info['memo'];//订单备注
 				
 				$root['send_mobile'] = $user['mobile'];//团购券手机
@@ -77,7 +78,7 @@ class my_order_detail{
 				$ids = array();
 				$cart_ids = array();
                                 $root['dp_able'] = 0;
-                                
+                                $root['goods_list'] = $goods_list;
                                 foreach($goods_list as $cart_goods)
 				{
 					array_push($ids,$cart_goods['deal_id']);
@@ -305,6 +306,16 @@ class my_order_detail{
 					$root['couponlist'] = $couponlist;
 				}	
 				
+                                $root['complain_status'] = 0;
+                                $complain = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_order_complain WHERE order_id=".$order_id." AND user_id=".$user_id);
+                                if(!empty($complain)){
+                                    $root['complain_status'] = 1;
+                                    $root['complain_id'] = $complain['id'];
+                                }
+								
+				
+				$order_item_info = $GLOBALS['db']->getRow("SELECT * FROM ".DB_PREFIX."deal_order_item WHERE order_id=".$order_id." ");
+				$root['order_item_info']=$order_item_info;
 			}else{
 				$root['return'] = 0;
 				$root['info'] = "订单不存在.";
@@ -315,6 +326,7 @@ class my_order_detail{
 			$root['user_login_status'] = 0;		
 		}		
 		$root['pay_status'] = $order_info['pay_status'];
+                $root['refund_status'] = $order_info['refund_status'];
 		$root['page_title'] ='订单明细';
 		$root['city_name']=$city_name;
 		output($root);

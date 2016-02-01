@@ -1,0 +1,31 @@
+{include file="./inc/header.html"}
+<section class="tousu_box">
+    <ul>
+        <!--<p>投诉客户：<a style="font-size: 15px;color: #ff6401;" href="{wap_url a="index" r="mana_user_detail#index"  p="m_user_id=$data.complain.user_id"}">{$data.complain.user_name}</a></p>-->
+<!--        <li>
+            <span>联系电话：</span>
+            <i>{$data.complain.user_mobile}</i>
+        </li>
+        <li>
+            <span>联系地址：</span>
+            <i>{$data.complain.addr}</i>
+        </li>-->
+        <li>
+            <span>投诉订单：</span>
+            <i><a style="font-size: 15px;color: #ff6401;" href="{wap_url a="index" r="my_order_detail#index"  p="id=$data.complain.order_id"}">{$data.complain.order_sn}</a></i>
+        </li>
+        <li>
+            <span>被投诉人：</span>
+            <i><a style="font-size: 15px;color: #ff6401;" href="{wap_url a="index" r="tech_detail#index"  p="tech_id=$data.complain.tech_id"}">{$data.complain.tech_name}</a></i>
+        </li>
+        <li>
+            <span>投诉内容：</span>
+            <i>{$data.complain.complain_content}</i>
+        </li>
+        <li>
+            <span>投诉日期：</span>
+            <i>{$data.complain.complain_time}</i>
+        </li>
+    </ul>
+</section>
+{include file="./inc/footer.html"} 

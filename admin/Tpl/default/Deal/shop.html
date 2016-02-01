@@ -50,15 +50,15 @@
 	<form name="search" action="__APP__" method="get">	
 		{%GOODS_NAME}：<input type="text" class="textbox" name="name" value="{:strim($_REQUEST['name'])}" />
 
-		{%CATE_TREE}：
-		<select name="cate_id">
+		<!--{%CATE_TREE}：-->
+		<select style="display: none" name="cate_id">
 			<option value="0" <if condition="intval($_REQUEST['cate_id']) eq 0">selected="selected"</if>>{%NO_SELECT_CATE}</option>
 			<foreach name="cate_tree" item="cate_item">
 				<option value="{$cate_item.id}" <if condition="intval($_REQUEST['cate_id']) eq $cate_item['id']">selected="selected"</if>>{$cate_item.title_show}</option>
 			</foreach>
 		</select>
-		{%BRAND_LIST}：
-		<select name="brand_id">
+		<!--{%BRAND_LIST}：-->
+		<select style="display: none" name="brand_id">
 			<option value="0" <if condition="intval($_REQUEST['brand_id']) eq 0">selected="selected"</if>>{%NO_SELECT_BRAND}</option>
 			<foreach name="brand_list" item="brand_item">
 				<option value="{$brand_item.id}" <if condition="intval($_REQUEST['brand_id']) eq $brand_item['id']">selected="selected"</if>>{$brand_item.name}</option>

@@ -3,28 +3,27 @@
 		{$pages}
 	</div>
 {/if}
-<div   class="gotop" data-com="gotop">
-	<a   href="#">
+<div   class="gotop" data-com="gotop"><a   href="#">
 		<i>⇧</i>
 	</a>
 	</div>
 <link rel="stylesheet" type="text/css" href="css/footer.css" />
 <section style="width:100%; height:60px; "></section>
-{if $data.user.service_type_id eq 3}
+{if $user_info.service_type_id eq 3}
 <footer class="bottom_box">
     <section class="bottom">
         <ul>
-            <li class="footer_nav_1">
-                <a href="#">
+<!--            <li class="footer_nav_1">
+                <a href="index.php">
                     <img src="images/index.png">
                     <p>首页</p>
                 </a>
-            </li>
+            </li>-->
             <li class="footer_nav_2 rousu">
-                <a href="#">
+                <a href="index.php?ctl=mana_complain_list">
                     <img src="images/tous_nav.png">
                     <p>投诉</p>
-                    <i>1</i>
+                    <!--<i>1</i>-->
                 </a>
             </li>
             <li class="footer_nav_3">
@@ -34,9 +33,46 @@
                 </a>
             </li>
             <li class="footer_nav_4">
-                <a href="#">
+                <a href="index.php?ctl=mana_order_list">
                     <img src="images/order.png">
                     <p>订单</p>
+                </a>
+            </li>
+            <li class="footer_nav_5">
+                <a href="index.php?ctl=user_center">
+                    <img src="images/personal_nav.png">
+                    <p>我的</p>
+                </a>
+            </li>
+        </ul>
+    </section>
+</footer>
+{elseif $user_info.service_type_id eq 2}
+<footer class="bottom_box">
+    <section class="bottom">
+        <ul>
+<!--            <li class="footer_nav_1">
+                <a href="index.php">
+                    <img src="images/index.png">
+                    <p>首页</p>
+                </a>
+            </li>-->
+            <li class="footer_nav_2">
+                <a href="index.php?ctl=tech_impression">
+                    <img src="images/service_nav.png">
+                    <p>我的印象</p>
+                </a>
+            </li>
+            <li class="footer_nav_3">
+                <a href="index.php?ctl=tech_dp_list&id={$user_info.id}&type=tech">
+                    <img src="images/technician_nav.png">
+                    <p>我的评价</p>
+                </a>
+            </li>
+            <li class="footer_nav_4">
+                <a href="index.php?ctl=tech_order_list">
+                    <img src="images/order.png">
+                    <p>我的订单</p>
                 </a>
             </li>
             <li class="footer_nav_5">
@@ -65,7 +101,7 @@
                 </a>
             </li>
             <li class="footer_nav_3">
-                <a href="#">
+                <a href="index.php?ctl=tech_list">
                     <img src="images/technician_nav.png">
                     <p>技师</p>
                 </a>

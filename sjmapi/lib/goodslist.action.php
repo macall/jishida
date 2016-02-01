@@ -16,12 +16,27 @@ class goodslist{
 		if($cata_type_id > 0)
 			$catalog_id=$cata_type_id;
 		
+                if($order_type == 'buy_count'){
+                    $marked_tag = 1;
+                }elseif($order_type == 'price_desc'){
+                    $marked_tag = 2;
+                }elseif($order_type == 'newest'){
+                    $marked_tag = 3;
+                }else{
+                    $marked_tag = 1;
+                }
+                
+                $root['marked_tag'] = $marked_tag;
 		/*输出分类*/
 		$bcate_list = getShopcateList();
 		$url_param['quan_id'] = $quan_id;
 		$url_param['catalog_id'] = $catalog_id;
 		foreach($bcate_list as $k=>$v)
 		{
+                    if($catalog_id==$v['id'])
+                    {
+                            $bcate_list[$k]['marked_tag'] = 1;
+                    }
 			/*
 			if($catalog_id==$v['id'])
 			{

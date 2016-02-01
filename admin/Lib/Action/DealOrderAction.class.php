@@ -157,7 +157,10 @@ public function deal_index()
 		}
 		//取得满足条件的记录数
 		
-		
+		//分页查询数据
+                if ((isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'user_mobile') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'service_name') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'service_price') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'service_number') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'service_total_price') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'province_id') || (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'order_type')|| (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == 'payment_name')) {
+                    $order = DB_PREFIX . 'deal_order.id';
+                }
 		
 		$count = M("DealOrder")
 				->where($where)
@@ -179,7 +182,73 @@ public function deal_index()
 				->order( $order ." ". $sort)
 				->limit($p->firstRow . ',' . $p->listRows)->findAll ( );
 			
+                        foreach ($voList as $key => $value) {
+                            if(!empty($value['payment_id'])){
+                                $payment = M("Payment")->where(array('id' => $value['payment_id']))->find();
+                                $value['payment_name'] = $payment['name'];
+                            }
+                            
+                            $user = M("User")->where(array('id' => $value['user_id']))->find();
+                            $value['user_mobile'] = $user['mobile'];
+                            $value['create_time'] = date('Y-m-d H:i:s',$value['create_time']);
+                            //服务基本信息
+                            $deal = M("Deal")->where(array('id' => $value['deal_ids']))->find();
+                            $value['service_name'] = $deal['sub_name'];
 
+                            //服务详情
+                            $order_item = M("DealOrderItem")->where(array('order_id' => $value['id']))->find();
+                            $value['service_number'] = $order_item['number'];
+                            $value['service_price'] = $order_item['unit_price'];
+                            $value['service_total_price'] = $order_item['number'] * $order_item['unit_price'];
+
+                            //拼接服务地址
+                            $nation = M('DeliveryRegion')->where(array('id' => $value['region_lv1']))->find();
+                            $province = M('DeliveryRegion')->where(array('id' => $value['region_lv2']))->find();
+                            $city = M('DeliveryRegion')->where(array('id' => $value['region_lv3']))->find();
+                            $district = M('DeliveryRegion')->where(array('id' => $value['region_lv4']))->find();
+                            $addr = $nation['name'] . ' ' . $province['name'] . ' ' . $city['name'] . ' ' . $district['name'] . ' ' . $value['address'];
+                            $value['province_id'] = $addr;
+
+                            $value['order_time'] = date('Y-m-d H:i', $value['order_time']);
+
+                            $tech = M('User')->where(array('id' => $value['technician_id']))->find();
+                            //预约类型 1：技师直约 2：预约服务
+                            if ($value['order_type'] == 1 && !empty($tech)) {
+                                $value['order_type'] = '技师直约（' . $tech['user_name'] . '）';
+                            } elseif ($value['order_type'] == 2) {
+                                $value['order_type'] = "<span style='font-size:14px;color:red'>平台指派（未指派）</span>";
+                                if (!empty($tech)) {
+                                    $value['order_type'] = '平台指派（' . $tech['user_name'] . '）';
+                                }
+                            } else {
+                                $value['order_type'] = '无信息';
+                            }
+
+                            $voList[$key] = $value;
+                        }
+                        $voList = $this->_order_by($voList, 'user_mobile', 1);
+                        $voList = $this->_order_by($voList, 'user_mobile', 0);
+
+                        $voList = $this->_order_by($voList, 'service_name', 1);
+                        $voList = $this->_order_by($voList, 'service_name', 0);
+
+                        $voList = $this->_order_by($voList, 'service_price', 1);
+                        $voList = $this->_order_by($voList, 'service_price', 0);
+
+                        $voList = $this->_order_by($voList, 'service_number', 1);
+                        $voList = $this->_order_by($voList, 'service_number', 0);
+
+                        $voList = $this->_order_by($voList, 'service_total_price', 1);
+                        $voList = $this->_order_by($voList, 'service_total_price', 0);
+
+                        $voList = $this->_order_by($voList, 'province_id', 1);
+                        $voList = $this->_order_by($voList, 'province_id', 0);
+
+                        $voList = $this->_order_by($voList, 'order_type', 1);
+                        $voList = $this->_order_by($voList, 'order_type', 0);
+                        
+                        $voList = $this->_order_by($voList, 'payment_name', 1);
+                        $voList = $this->_order_by($voList, 'payment_name', 0);
 			//分页跳转的时候保证查询条件
 			foreach ( $map as $key => $val ) {
 				if (! is_array ( $val )) {
@@ -659,11 +728,21 @@ public function deal_index()
 		{
 			$this->error(l("INVALID_ORDER"));
 		}
-		$order_deal_items = M("DealOrderItem")->where("order_id=".$order_info['id'])->findAll();
+                
+                $tech = M('User')->where(array('id' => $order_info['technician_id']))->find();
+                $this->assign("tech_name",$tech['user_name']);
+                
+                $order_deal_items = M("DealOrderItem")->where("order_id=" . $order_info['id'])->findAll();
+                $order_info['create_time'] = date('Y-m-d H:i:s', $order_info['create_time']);
+                $order_info['order_time'] = date('Y-m-d H:i', $order_info['order_time']);
+                
+                
 		foreach($order_deal_items as $k=>$v)
 		{
 			$order_deal_items[$k]['is_delivery'] = M("Deal")->where("id=".$v['deal_id'])->getField("is_delivery");
+                        $order_deal_items[$k]['tech_name'] = $tech['user_name'];
 		}
+                
 		$this->assign("order_deals",$order_deal_items);
 		$this->assign("order_info",$order_info);
 		
@@ -1522,5 +1601,23 @@ public function deal_index()
 		
 		
 	}
+        
+        private function _order_by($voList, $order_data, $sort_num) 
+        {
+            if (isset($_REQUEST ['_order']) && $_REQUEST ['_order'] == $order_data && isset($_REQUEST ['_sort']) && $_REQUEST ['_sort'] == $sort_num) {
+                $obj_list = array();
+                foreach ($voList as $value) {
+                    $obj_list[] = $value[$order_data];
+                }
+                if ($sort_num == 1) {
+                    $sort_flag = SORT_ASC;
+                } else {
+                    $sort_flag = SORT_DESC;
+                }
+                array_multisort($obj_list, $sort_flag, $voList);
+            }
+
+            return $voList;
+        }
 }
 ?>
