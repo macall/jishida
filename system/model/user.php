@@ -232,6 +232,10 @@ define("LOGIN_STATUS_TEMP",2); //临时登录
 		$user['addr_detail'] = $user_data['addr_detail'];
                 if(isset($user_data['technician_certif']))
 		$user['technician_certif'] = $user_data['technician_certif'];
+                if(isset($user_data['tech_commission_fee_percent']))
+		$user['tech_commission_fee_percent'] = intval($user_data['tech_commission_fee_percent']);
+                if(isset($user_data['manager_commission_fee_percent']))
+		$user['manager_commission_fee_percent'] = intval($user_data['manager_commission_fee_percent']);
                 if(isset($user_data['manage_area']))
 		$user['manage_area'] = $user_data['manage_area'];
 		if(isset($user_data['sex']))
