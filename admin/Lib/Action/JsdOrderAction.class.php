@@ -678,13 +678,14 @@ class JsdOrderAction extends CommonAction
         if($tech_id){
             $tech = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id=".$tech_id);
             $start_time = $order_time-$tech['distance_time']*60;
-            $end_time = $order_time+$tech['distance_time']*60+$service_time;
+            $end_time = $order_time+$tech['distance_time']*60+$service_time*60;
 
             $order_able_sql = "SELECT 
                                     * 
                                   FROM
                                     ".DB_PREFIX."deal_order DO 
-                                  WHERE  do.technician_id=$tech_id and ((
+                                  WHERE  do.technician_id=$tech_id 
+                                    and order_status = 0 and is_delete = 0 and extra_status = 0 and after_sale = 0 and refund_status = 0 and ((
                                       do.`order_time` + do.`service_time` * 60 BETWEEN ".$start_time." 
                                       AND ".$end_time." 
                                     ) 
@@ -701,6 +702,7 @@ class JsdOrderAction extends CommonAction
         
         $data = array(
             'id'=>$order_id,
+            'update_time'=>  time(),
             'technician_id'=>$tech_id,
         );		
 		

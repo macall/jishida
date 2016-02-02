@@ -2,6 +2,42 @@
 <tagLib name="html" />
 <include file="Public:header" />
 <PHP>
+        function get_tech_commission_fee_status($is_get_bonus_tech,$order_info)
+        {
+            if($order_info['order_status']==0 || $order_info['pay_status']!=2 )//订单未完结
+            {
+                $str = '提成暂时不能发放';
+            }else{
+                if($is_get_bonus_tech == 1){
+                    $str = '提成已发放';
+                }else{
+                    $str = "<span><a href='javascript:send_commission_fee_to_tech(this,".$order_info["id"].")'>发放提成</a></span>";
+                    if($order_info['refund_status']==1 || $order_info['refund_status']==2 ){
+                        $str .= "<span style='color: red'>(当前有退款)</span>";
+                    }
+                }
+            }
+            
+            return $str;
+        }
+        function get_mana_commission_fee_status($is_get_bonus,$order_info)
+        {
+            if($order_info['order_status']==0 || $order_info['pay_status']!=2 )//订单未完结
+            {
+                $str = '提成暂时不能发放';
+            }else{
+                if($is_get_bonus == 1){
+                    $str = '提成已发放';
+                }else{
+                    $str = "<span><a href='javascript:send_commission_fee_to_mana(this,".$order_info["id"].")'>发放提成</a></span>";
+                    if($order_info['refund_status']==1 || $order_info['refund_status']==2 ){
+                        $str .= "<span style='color: red'>(当前有退款)</span>";
+                    }
+                }
+            }
+            
+            return $str;
+        }
 	function get_refuse_status($status)
 	{
 		if($status)
@@ -115,6 +151,8 @@
 <div class="button_row">
 	<input type="button" class="button" value="{%DEL}" onclick="del();" />
 	<input type="submit" class="button" value="{%SEARCH}" />
+        <input type="button" class="button" value="发放技师提成" onclick="send_commission_fee_to_tech();" />
+        <input type="button" class="button" value="发放经理提成" onclick="send_commission_fee_to_mana();" />
 	<if condition="!$_REQUEST['referer']">
 	<input type="button" class="button" value="{%EXPORT}" onclick="export_csv();"  style="display: none"/>
 	</if>
@@ -205,6 +243,8 @@
 		 ,create_time:下单时间
 		 ,pay_status|get_pay_status:支付状态
 		 ,refund_status|get_refund_status:退款申请
+                 ,is_get_bonus_tech|get_tech_commission_fee_status=$deal_order:技师提成
+                 ,is_get_bonus|get_mana_commission_fee_status=$deal_order:经理提成
 		 ,order_status|get_order_status=$deal_order:订单状态"	 
 	actionlist="id|get_handle=$deal_order" /> 
 

@@ -666,7 +666,51 @@ public function deal_index()
 				$this->error (l("INVALID_OPERATION"),$ajax);
 		}		
 	}
-	
+        
+    //发放提成给技师
+    public function send_commission_fee_to_tech() 
+    {
+        $ajax = intval($_REQUEST['ajax']);
+        $id = $_REQUEST ['id'];
+        if (isset($id)) {
+            $condition = array('id' => array('in', explode(',', $id)));
+            
+            $data['is_get_bonus_tech'] = 1;
+            $data['update_time'] = time();
+            
+            $res = M(MODULE_NAME)->where($condition)->save($data);
+            if($res){
+                save_log('ID为：'.$id . '的技师提成发放成功', 1);
+                $this->success('技师提成发放成功', $ajax);
+            }
+            $this->error('技师提成发放失败', $ajax);
+        } else {
+            $this->error('无效操作', $ajax);
+        }
+    }
+    
+    //发放提成给经理
+    public function send_commission_fee_to_mana() 
+    {
+        $ajax = intval($_REQUEST['ajax']);
+        $id = $_REQUEST ['id'];
+        if (isset($id)) {
+            $condition = array('id' => array('in', explode(',', $id)));
+            
+            $data['is_get_bonus'] = 1;
+            $data['update_time'] = time();
+            
+            $res = M(MODULE_NAME)->where($condition)->save($data);
+            if($res){
+                save_log('ID为：'.$id . '的经理提成发放成功', 1);
+                $this->success('经理提成发放成功', $ajax);
+            }
+            $this->error('经理提成发放失败', $ajax);
+        } else {
+            $this->error('无效操作', $ajax);
+        }
+    }
+
 // 	public function restore() {
 // 		//删除指定记录
 // 		$ajax = intval($_REQUEST['ajax']);

@@ -249,6 +249,61 @@ function set_sort(id,sort,domobj)
 	});
 });
 }
+function send_commission_fee_to_tech(obj,id){
+    if(!id)
+    {
+            idBox = $(".key:checked");
+            if(idBox.length == 0)
+            {
+                    alert('请选择需要发放提成的技师');
+                    return;
+            }
+            idArray = new Array();
+            $.each( idBox, function(i, n){
+                    idArray.push($(n).val());
+            });
+            id = idArray.join(",");
+    }
+    if(confirm('确定发放技师提成吗?'))
+	$.ajax({ 
+            url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=send_commission_fee_to_tech&id="+id, 
+            data: "ajax=1",
+            dataType: "json",
+            success: function(obj){
+                    $("#info").html(obj.info);
+                    if(obj.status==1)
+                    location.href=location.href;
+            }
+        });
+}
+
+function send_commission_fee_to_mana(obj,id){
+    if(!id)
+    {
+            idBox = $(".key:checked");
+            if(idBox.length == 0)
+            {
+                    alert('请选择需要发放提成的经理');
+                    return;
+            }
+            idArray = new Array();
+            $.each( idBox, function(i, n){
+                    idArray.push($(n).val());
+            });
+            id = idArray.join(",");
+    }
+    if(confirm('确定发放经理提成吗?'))
+	$.ajax({ 
+            url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=send_commission_fee_to_mana&id="+id, 
+            data: "ajax=1",
+            dataType: "json",
+            success: function(obj){
+                    $("#info").html(obj.info);
+                    if(obj.status==1)
+                    location.href=location.href;
+            }
+        });
+}
 
 //普通删除
 function del(id)
